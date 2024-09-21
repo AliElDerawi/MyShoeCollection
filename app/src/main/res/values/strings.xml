@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">ShoeStore</string>
+
+    <!--    Login String   -->
+
+    <string name="text_sign_in_now">Sign In Now</string>
+    <string name="text_one_step_right_service">You are one step away to get your proper service</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="text_login">Login</string>
+    <string name="text_create_account">Create Account</string>
+    <string name="text_msg_please_enter_email">Please enter email</string>
+    <string name="text_msg_please_enter_password">Please enter password</string>
+    <string name="text_msg_enter_valid_email_address">Please enter a valid email address</string>
+
+
+    <!--    Register String   -->
+    <string name="text_register_new_account">Register New Account</string>
+    <string name="text_msg_please_enter_info_to_register_account">Please enter the following information to register your account</string>
+    <string name="text_placeholder_email">ali@gmail.com</string>
+    <string name="text_confirm_password">Confirm Password</string>
+    <string name="text_msg_please_enter_confirm_password">Please enter confirm password</string>
+    <string name="text_msg_password_mismatch">Passwords aren\'t matched</string>
+
+
+    <!--    Welcome String   -->
+    <string name="text_next">Next</string>
+    <string name="text_welcome_title">Welcome to ShoeStore</string>
+    <string name="text_welcome_message">In this app you can save your favourite shoes and return to check them in anytime !</string>
+    <string name="text_skip">Skip</string>
+    <string name="text_instruction_title_01">Add Shoes</string>
+    <string name="text_instruction_content_01">You can add shoes to the store by clicking on the fab button in the shoes list screen.</string>
+    <string name="text_instruction_title_02">View Shoes</string>
+    <string name="text_instruction_content_02">You can view the shoes added to your bookmark by clicking on a shoe in the shoe list screen.</string>
+    <string name="text_instruction_03">Logout</string>
+    <string name="text_instruction_content_03">You can logout from the app by clicking on the logout button in shoe list menu.</string>
+    <string name="text_start">Start</string>
+    <string name="text_bookmarked_shoes">Bookmarked Shoes</string>
+    <string name="text_logout">Logout</string>
+    <string name="text_add_shoe_button">Add Shoe Button</string>
+    <string name="text_add_shoe_message">You can save your favorite shoes here!</string>
+    <string name="text_shoe_name">Shoe Name</string>
+    <string name="text_company">Company</string>
+    <string name="text_shoe_size">Shoe Size</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_save">Save</string>
+    <string name="text_msg_please_enter_shoe_name">Please enter shoe name</string>
+    <string name="text_msg_please_enter_shoe_company">Please enter shoe company</string>
+    <string name="please_enter_shoe_size">Please enter shoe size</string>
+    <string name="text_please_enter_shoe_description">Please enter shoe description</string>
+    <string name="text_msg_invalid_email_or_password">Invalid Email or Password</string>
+
+
+</resources>

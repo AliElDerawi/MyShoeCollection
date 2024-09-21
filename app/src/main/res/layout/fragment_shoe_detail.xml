@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="shoeDetailViewModel"
+            type="com.udacity.shoestore.features.shoeDetail.view.ShoeDetailViewModel" />
+
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_left_right">
+
+            <!--  I used constraintLayout, but LinearLayout could be use here, since there's no nested viewgroup      -->
+
+
+            <TextView
+                android:id="@+id/subTitle_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_view"
+                android:fontFamily="@font/cairo_semi_bold"
+                android:gravity="center"
+                android:lineSpacingMultiplier="0.7"
+                android:paddingStart="@dimen/margin_btnView"
+                android:paddingEnd="@dimen/margin_btnView"
+                android:text="@{shoeDetailViewModel.instructionMessage}"
+                android:textColor="@color/colorDark31"
+                android:theme="@style/BodyStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/text_add_shoe_message" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/email_cardView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_edittext_height"
+                android:layout_marginStart="@dimen/margin_btnView"
+                android:layout_marginTop="@dimen/margin_btnView"
+                android:layout_marginEnd="@dimen/margin_btnView"
+                app:cardCornerRadius="@dimen/dim_edittext_corner"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/subTitle_textView"
+                app:strokeColor="@color/colorUnSelectedEditText"
+                app:strokeWidth="1dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/email_textInputLayout"
+                        style="@style/CustomFontTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/text_shoe_name"
+                        android:textColorHint="@color/colorBlack"
+                        app:boxBackgroundColor="@color/colorTrans"
+                        app:boxCollapsedPaddingTop="7dp"
+                        app:boxCornerRadiusBottomEnd="0dp"
+                        app:boxCornerRadiusBottomStart="0dp"
+                        app:boxCornerRadiusTopEnd="0dp"
+                        app:boxCornerRadiusTopStart="0dp"
+                        app:boxStrokeColor="@color/colorTrans"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:counterOverflowTextColor="@color/colorBlack"
+                        app:hintTextAppearance="@style/TextInputLayoutHintText"
+                        app:hintTextColor="@color/colorBlack"
+                        app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
+                        app:placeholderTextColor="@color/colorDark31">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/shoe_name_textInputEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:onTextChanged="@{(text, start, before, count) -> shoeDetailViewModel.onNameTextChanged(text,start,before,count)}"
+                            android:textColor="@color/colorDark1C"
+                            android:textCursorDrawable="@color/colorDark31"
+                            android:textSize="@dimen/text_small"
+                            android:theme="@style/regularFont"
+                            tools:text="@string/text_placeholder_email"
+                            tools:textAlignment="viewStart" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </FrameLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/company_cardView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_edittext_height"
+                android:layout_marginStart="@dimen/margin_btnView"
+                android:layout_marginTop="@dimen/margin_btnView"
+                android:layout_marginEnd="@dimen/margin_btnView"
+                app:cardCornerRadius="@dimen/dim_edittext_corner"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/email_cardView"
+                app:strokeColor="@color/colorUnSelectedEditText"
+                app:strokeWidth="1dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/password_textInputLayout"
+                        style="@style/CustomFontTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/text_company"
+                        android:textColorHint="@color/colorBlack"
+                        app:boxBackgroundColor="@color/colorTrans"
+                        app:boxCollapsedPaddingTop="7dp"
+                        app:boxCornerRadiusBottomEnd="0dp"
+                        app:boxCornerRadiusBottomStart="0dp"
+                        app:boxCornerRadiusTopEnd="0dp"
+                        app:boxCornerRadiusTopStart="0dp"
+                        app:boxStrokeColor="@color/colorTrans"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:counterOverflowTextColor="@color/colorBlack"
+                        app:hintTextAppearance="@style/TextInputLayoutHintText"
+                        app:hintTextColor="@color/colorBlack"
+                        app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
+                        app:placeholderTextColor="@color/colorDark31">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/shoe_company_textInputEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+
+                            android:onTextChanged="@{(text, start, before, count) -> shoeDetailViewModel.onCompanyTextChanged(text,start,before,count)}"
+                            android:textColor="@color/colorDark1C"
+                            android:textCursorDrawable="@color/colorDark31"
+                            android:textSize="@dimen/text_small"
+                            android:theme="@style/regularFont"
+                            tools:text="@string/text_placeholder_email"
+                            tools:textAlignment="viewStart" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </FrameLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/shoe_size_cardView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_edittext_height"
+                android:layout_marginStart="@dimen/margin_btnView"
+                android:layout_marginTop="@dimen/margin_btnView"
+                android:layout_marginEnd="@dimen/margin_btnView"
+                app:cardCornerRadius="@dimen/dim_edittext_corner"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/company_cardView"
+                app:strokeColor="@color/colorUnSelectedEditText"
+                app:strokeWidth="1dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/shoe_size_textInputLayout"
+                        style="@style/CustomFontTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/text_shoe_size"
+                        android:textColorHint="@color/colorBlack"
+                        app:boxBackgroundColor="@color/colorTrans"
+                        app:boxCollapsedPaddingTop="7dp"
+                        app:boxCornerRadiusBottomEnd="0dp"
+                        app:boxCornerRadiusBottomStart="0dp"
+                        app:boxCornerRadiusTopEnd="0dp"
+                        app:boxCornerRadiusTopStart="0dp"
+                        app:boxStrokeColor="@color/colorTrans"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:counterOverflowTextColor="@color/colorBlack"
+                        app:hintTextAppearance="@style/TextInputLayoutHintText"
+                        app:hintTextColor="@color/colorBlack"
+                        app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
+                        app:placeholderTextColor="@color/colorDark31">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/shoe_size_textInputEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:onTextChanged="@{(text, start, before, count) -> shoeDetailViewModel.onSizeTextChanged(text,start,before,count)}"
+                            android:textColor="@color/colorDark1C"
+                            android:textCursorDrawable="@color/colorDark31"
+                            android:textSize="@dimen/text_small"
+                            android:theme="@style/regularFont"
+                            tools:text="@string/text_placeholder_email"
+                            tools:textAlignment="viewStart" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </FrameLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/description_cardView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_edittext_height"
+                android:layout_marginStart="@dimen/margin_btnView"
+                android:layout_marginTop="@dimen/margin_btnView"
+                android:layout_marginEnd="@dimen/margin_btnView"
+                app:cardCornerRadius="@dimen/dim_edittext_corner"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_size_cardView"
+                app:strokeColor="@color/colorUnSelectedEditText"
+                app:strokeWidth="1dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/description_textInputLayout"
+                        style="@style/CustomFontTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Description"
+                        android:textColorHint="@color/colorBlack"
+                        app:boxBackgroundColor="@color/colorTrans"
+                        app:boxCollapsedPaddingTop="7dp"
+                        app:boxCornerRadiusBottomEnd="0dp"
+                        app:boxCornerRadiusBottomStart="0dp"
+                        app:boxCornerRadiusTopEnd="0dp"
+                        app:boxCornerRadiusTopStart="0dp"
+                        app:boxStrokeColor="@color/colorTrans"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:counterOverflowTextColor="@color/colorBlack"
+                        app:hintTextAppearance="@style/TextInputLayoutHintText"
+                        app:hintTextColor="@color/colorBlack"
+                        app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
+                        app:placeholderTextColor="@color/colorDark31">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/shoe_description_textInputEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:imeOptions="actionDone"
+                            android:inputType="textMultiLine"
+                            android:onTextChanged="@{(text, start, before, count) -> shoeDetailViewModel.onDescriptionTextChanged(text,start,before,count)}"
+                            android:textColor="@color/colorDark1C"
+                            android:textCursorDrawable="@color/colorDark31"
+                            android:textSize="@dimen/text_small"
+                            android:theme="@style/regularFont"
+                            tools:text="@string/text_placeholder_email"
+                            tools:textAlignment="viewStart" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </FrameLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <Button
+                android:id="@+id/save_button"
+                style="@style/buttonStyleNew"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_button_height"
+                android:layout_marginStart="@dimen/margin_btnView"
+                android:layout_marginTop="@dimen/margin_left_right"
+                android:layout_marginEnd="@dimen/margin_btnView"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colorAccent"
+                android:elevation="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="@{() -> shoeDetailViewModel.onSaveClick()}"
+                android:text="@string/text_save"
+                android:textColor="@color/colorWhite"
+                app:cornerRadius="@dimen/dim_button_corner"
+                app:layout_constraintBottom_toTopOf="@+id/cancel_button"
+                app:layout_constraintTop_toBottomOf="@+id/description_cardView"
+                app:strokeWidth="0dp" />
+
+
+            <Button
+                android:id="@+id/cancel_button"
+                style="@style/buttonStyleNew"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_button_height"
+                android:layout_marginStart="@dimen/margin_btnView"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="@dimen/margin_btnView"
+                android:layout_marginBottom="@dimen/margin_left_right"
+                android:backgroundTint="@color/colorGrayF2"
+                android:elevation="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="@{() -> shoeDetailViewModel.onCancelClick()}"
+                android:text="@string/text_cancel"
+                android:textColor="@color/colorBlack"
+                app:cornerRadius="@dimen/dim_button_corner"
+                app:layout_constraintTop_toBottomOf="@+id/save_button"
+                app:strokeWidth="0dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</layout>

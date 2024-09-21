@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="welcomeFragment"
+            type="com.udacity.shoestore.features.welcome.view.WelcomeFragment" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constrainLayout_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".features.onBoarding.view.OnBoardingActivity">
+
+        <!--  constraintLayout should be use here, to prevent using relative layout or nested linearLayout to achieve view relation and positions   -->
+
+
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="false"
+            app:layout_constraintBottom_toTopOf="@+id/page_circle_progressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/margin_top_view"
+                android:paddingTop="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_top_view">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="276dp"
+                    app:srcCompat="@drawable/ic_shoe"
+                    app:tint="@color/colorAccent" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_left_right"
+                    android:text="@string/text_welcome_title"
+                    android:theme="@style/TitleStyle" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="0.7"
+                    android:text="@string/text_welcome_message"
+                    android:theme="@style/BodyStyle" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/page_circle_progressBar"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            app:cpb_background_progressbar_color="@color/colorUnSelectedAccent"
+            app:cpb_background_progressbar_width="1dp"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progress_max="1"
+            app:cpb_progressbar_color="@color/colorAccent"
+            app:cpb_progressbar_width="6dp"
+            app:cpb_round_border="false"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/next_cardView"
+            android:layout_width="93dp"
+            android:layout_height="93dp"
+            android:onClick="@{() -> welcomeFragment.onNextCardClick()}"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="52dp"
+            android:background="@color/colorAccent"
+            android:padding="0dp"
+            app:cardCornerRadius="46dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@+id/next_progress_textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/cairo_bold"
+                android:gravity="center"
+                android:text="@string/text_next"
+                android:textColor="@color/colorWhite"
+                android:theme="@style/BodyStyle" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

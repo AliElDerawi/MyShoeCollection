@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.udacity.shoestore.features.onBoarding.viewModel.InstructionsViewModel" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constrainLayout_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="32dp"
+        tools:context=".features.onBoarding.view.OnBoardingActivity">
+
+        <!--  constraintLayout should be use here, to prevent using relative layout or nested linearLayout to achieve view relation and positions   -->
+
+
+        <TextView
+            android:id="@+id/skip_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/cairo_bold"
+            android:padding="20dp"
+            android:text="@string/text_skip"
+            android:onClick="@{() -> viewModel.onSkipClick()}"
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrayB2"
+            android:textSize="15sp"
+            android:theme="@style/BodyStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/boarding_viewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/margin_top_view"
+            app:layout_constraintBottom_toTopOf="@+id/page_circleProgressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/skip_textView" />
+
+
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/boarding_screen_circleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_top_view"
+            app:ci_drawable="@drawable/ic_page_selected"
+            app:ci_drawable_unselected="@drawable/ic_page_unselected"
+            app:layout_constraintBottom_toTopOf="@+id/page_circleProgressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/page_circleProgressBar"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            app:cpb_background_progressbar_color="@color/colorUnSelectedAccent"
+            app:cpb_background_progressbar_width="1dp"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progress_max="1"
+            app:cpb_progressbar_color="@color/colorAccent"
+            app:cpb_progressbar_width="6dp"
+            app:cpb_round_border="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/next_cardView"
+            android:layout_width="93dp"
+            android:layout_height="93dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colorAccent"
+            android:padding="0dp"
+            android:onClick="@{() -> viewModel.onNextCardClick()}"
+            app:cardCornerRadius="46dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@+id/next_progress_textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/cairo_bold"
+                android:gravity="center"
+                android:text="@string/text_next"
+                android:textColor="@color/colorWhite"
+                android:theme="@style/BodyStyle" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
