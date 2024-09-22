@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.MutableLiveData
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -85,7 +86,7 @@ object AppSharedMethods {
     fun Context.setImageInAdapter(
         drawable: Int, mTargetImageView: ImageView
     ) {
-        GlideApp.with(this).load(ResourcesCompat.getDrawable(this.resources, drawable, null))
+        Glide.with(this).load(ResourcesCompat.getDrawable(this.resources, drawable, null))
             .into(mTargetImageView)
     }
 
