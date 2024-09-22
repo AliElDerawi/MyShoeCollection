@@ -67,8 +67,6 @@ class WelcomeFragment : Fragment() {
     }
 
     fun onNextCardClick() {
-        mBinding.pageCircleProgressBar.progress = (1).toFloat()
-
         findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToInstructionsFragment2())
     }
 
