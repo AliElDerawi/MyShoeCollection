@@ -30,7 +30,7 @@
             android:paddingStart="@dimen/margin_top_view"
             android:paddingTop="@dimen/margin_small"
             android:paddingEnd="@dimen/margin_top_view"
-            android:paddingBottom="@dimen/margin_top_view">
+            android:paddingBottom="@dimen/margin_left_right">
 
 
             <ImageView
