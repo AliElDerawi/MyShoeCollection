@@ -5,28 +5,19 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.udacity.shoestore.models.ShoeModel
 
-@BindingAdapter("shoeName")
-fun TextView.setShoeName(item: ShoeModel) {
-    text = item.name
+
+
+@BindingAdapter("text")
+fun TextView.setContent(text: String) {
+    this.text = text
 }
 
-@BindingAdapter("shoeCompany")
-fun TextView.setShoeCompany(item: ShoeModel) {
-    text = item.company
+@BindingAdapter("number")
+fun TextView.setNumber(number: Double) {
+    text = number.toString()
 }
 
-@BindingAdapter("shoeSize")
-fun TextView.setShoeSize(item: ShoeModel) {
-    text = item.size.toString()
-}
-
-@BindingAdapter("shoeDescription")
-fun TextView.setShoeDescription(item: ShoeModel) {
-    text = item.description
-}
-
-@BindingAdapter("editShoeName")
-fun EditText.saveShoeName(text : String){
-
-
+@BindingAdapter("number")
+fun TextView.setNumber(number: Int) {
+    text = number.toString()
 }

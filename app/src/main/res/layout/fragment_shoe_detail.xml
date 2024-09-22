@@ -163,7 +163,6 @@
                             android:layout_height="match_parent"
                             android:imeOptions="actionNext"
                             android:inputType="text"
-
                             android:onTextChanged="@{(text, start, before, count) -> shoeDetailViewModel.onCompanyTextChanged(text,start,before,count)}"
                             android:textColor="@color/colorDark1C"
                             android:textCursorDrawable="@color/colorDark31"

@@ -61,7 +61,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/logo_cardView"
             app:layout_constraintTop_toTopOf="parent"
-            app:shoeName="@{shoe}"
+            app:text="@{shoe.name}"
             tools:text="@string/app_name" />
 
         <TextView
@@ -76,7 +76,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/logo_cardView"
             app:layout_constraintTop_toBottomOf="@+id/name_textView"
-            app:shoeCompany="@{shoe}"
+            app:text="@{shoe.company}"
             tools:text="@string/app_name" />
 
 
@@ -93,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/logo_cardView"
             app:layout_constraintTop_toBottomOf="@+id/company_textView"
-            app:shoeSize="@{shoe}" />
+            app:number="@{shoe.size}" />
 
 
         <TextView
@@ -109,7 +109,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/logo_cardView"
             app:layout_constraintTop_toBottomOf="@+id/size_textView"
-            app:shoeDescription="@{shoe}" />
+            app:text="@{shoe.description}" />
 
 
         <View
