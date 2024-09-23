@@ -3,15 +3,14 @@ package com.udacity.shoestore.features.createAccount.view
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.edit
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
+import com.udacity.shoestore.data.BaseFragment
 import com.udacity.shoestore.databinding.FragmentCreateAccountBinding
 import com.udacity.shoestore.features.createAccount.viewModel.CreateAccountViewModel
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
@@ -19,26 +18,25 @@ import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.java.KoinJavaComponent.inject
 
 
-class CreateAccountFragment : Fragment() {
+class CreateAccountFragment : BaseFragment() {
 
 
     private lateinit var mBinding: FragmentCreateAccountBinding
 
     private val mSharedViewModel: MainViewModel by inject()
 
-    private val mCreateAccountViewModel: CreateAccountViewModel by viewModel()
+    override val mViewModel: CreateAccountViewModel by viewModel()
 
-    private lateinit var mActivity: Activity
+    private lateinit var mActivity: FragmentActivity
 
     private lateinit var mLifecycleOwner: LifecycleOwner
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is Activity) {
+        if (context is FragmentActivity) {
             mActivity = context
         }
     }
@@ -56,7 +54,7 @@ class CreateAccountFragment : Fragment() {
         mSharedViewModel.setHideToolbar(true)
         mLifecycleOwner = this
         mBinding.lifecycleOwner = this
-        mBinding.createAccountViewModel = mCreateAccountViewModel
+        mBinding.createAccountViewModel = mViewModel
         return mBinding.root
 
     }
@@ -73,9 +71,8 @@ class CreateAccountFragment : Fragment() {
 
     private fun initViewModelObserver() {
 
-        mCreateAccountViewModel.completeCreateAccountLiveData.observe(mLifecycleOwner) { redirect ->
+        mViewModel.completeCreateAccountLiveData.observe(mLifecycleOwner) { redirect ->
             if (redirect) {
-                mCreateAccountViewModel.setCompleteCreateAccount(false)
                 getSharedPreference().edit {
                     putBoolean(AppSharedData.PREF_IS_LOGIN, true)
                     putString(

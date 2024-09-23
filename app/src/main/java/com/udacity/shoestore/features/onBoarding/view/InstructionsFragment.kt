@@ -2,50 +2,46 @@ package com.udacity.shoestore.features.onBoarding.view
 
 import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.udacity.shoestore.R
+import com.udacity.shoestore.data.BaseFragment
 import com.udacity.shoestore.databinding.FragmentInstructionsBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.onBoarding.adapter.OnBoardingAdapter
 import com.udacity.shoestore.features.onBoarding.viewModel.InstructionsViewModel
 import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.utils.AppSharedMethods.getInstruction
-import com.udacity.shoestore.utils.AppSharedMethods.showToast
 import com.udacity.shoestore.models.InstructionModel
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class InstructionsFragment : Fragment(), View.OnClickListener {
+class InstructionsFragment : BaseFragment(), View.OnClickListener {
 
 
     private lateinit var mBinding: FragmentInstructionsBinding
 
     private val mSharedViewModel: MainViewModel by inject()
-    private val mInstructionsViewModel: InstructionsViewModel by viewModel()
+    override val mViewModel: InstructionsViewModel by viewModel()
 
 
-    private lateinit var mActivity: Activity
+    private lateinit var mActivity: FragmentActivity
 
     private lateinit var mLifecycleOwner: LifecycleOwner
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is Activity) {
+        if (context is FragmentActivity) {
             mActivity = context
         }
     }
@@ -64,7 +60,7 @@ class InstructionsFragment : Fragment(), View.OnClickListener {
         mSharedViewModel.setHideToolbar(true)
         mLifecycleOwner = this
         mBinding.lifecycleOwner = this
-        mBinding.viewModel = mInstructionsViewModel
+        mBinding.viewModel = mViewModel
         return mBinding.root
     }
 
@@ -85,7 +81,7 @@ class InstructionsFragment : Fragment(), View.OnClickListener {
         mBinding.boardingScreenCircleIndicator.setViewPager(mBinding.boardingViewPager)
 
 
-        mInstructionsViewModel.setLastPage(getTutorialRequestResult.size - 1)
+        mViewModel.setLastPage(getTutorialRequestResult.size - 1)
         mBinding.pageCircleProgressBar.progressMax = getTutorialRequestResult.size.toFloat()
         mBinding.pageCircleProgressBar.progress = 1F
 
@@ -105,18 +101,18 @@ class InstructionsFragment : Fragment(), View.OnClickListener {
 
     private fun initViewModelObserver() {
 
-        mInstructionsViewModel.currentPagePageLiveData.observe(mLifecycleOwner) {
+        mViewModel.currentPagePageLiveData.observe(mLifecycleOwner) {
             mBinding.pageCircleProgressBar.progress = (it + 1).toFloat()
-            mBinding.boardingViewPager.setCurrentItem(mInstructionsViewModel.currentPagePageLiveData.value!!)
+            mBinding.boardingViewPager.setCurrentItem(mViewModel.currentPagePageLiveData.value!!)
 
-            if (mInstructionsViewModel.currentPagePageLiveData.value == mInstructionsViewModel.lastPageLiveData.value) {
+            if (mViewModel.currentPagePageLiveData.value == mViewModel.lastPageLiveData.value) {
                 showCompleteButton()
             } else {
                 hideCompleteButton()
             }
         }
 
-        mInstructionsViewModel.goNextScreen.observe(mLifecycleOwner) {
+        mViewModel.goNextScreen.observe(mLifecycleOwner) {
             if (it) {
                 getSharedPreference().edit {
                     putBoolean(AppSharedData.PREF_IS_NEW_USER, false)
@@ -135,7 +131,7 @@ class InstructionsFragment : Fragment(), View.OnClickListener {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
-                mInstructionsViewModel.onPageChange(position)
+                mViewModel.onPageChange(position)
 
             }
         })

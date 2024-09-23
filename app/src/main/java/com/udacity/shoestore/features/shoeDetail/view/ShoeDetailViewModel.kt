@@ -1,15 +1,17 @@
 package com.udacity.shoestore.features.shoeDetail.view
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udacity.shoestore.R
+import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.models.ShoeModel
 import com.udacity.shoestore.utils.AppSharedMethods
 import com.udacity.shoestore.utils.ShoeStoreApp
 
 
-class ShoeDetailViewModel : ViewModel() {
+class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
 
     private var _shoeNameLiveData = MutableLiveData<String>("")
     val shoeNameLiveData: MutableLiveData<String>

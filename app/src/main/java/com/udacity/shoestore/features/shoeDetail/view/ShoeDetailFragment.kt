@@ -3,37 +3,27 @@ package com.udacity.shoestore.features.shoeDetail.view
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.ObservableField
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.internal.TextWatcherAdapter
-import com.udacity.shoestore.R
+import com.udacity.shoestore.data.BaseFragment
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
-import com.udacity.shoestore.models.ShoeModel
-import com.udacity.shoestore.utils.AppSharedMethods.isEmpty
-import com.udacity.shoestore.utils.AppSharedMethods.showToast
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.Objects
 
 
-class ShoeDetailFragment : Fragment() {
+class ShoeDetailFragment : BaseFragment() {
 
     private lateinit var mBinding: FragmentShoeDetailBinding
 
     private val mSharedViewModel: MainViewModel by inject()
-    private val mShoesDetailViewModel : ShoeDetailViewModel by viewModel()
+    override val mViewModel : ShoeDetailViewModel by viewModel()
 
-    private lateinit var mActivity: Activity
+    private lateinit var mActivity: FragmentActivity
 
     private lateinit var mLifecycleOwner: LifecycleOwner
 
@@ -41,7 +31,7 @@ class ShoeDetailFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is Activity) {
+        if (context is FragmentActivity) {
             mActivity = context
         }
     }
@@ -60,7 +50,7 @@ class ShoeDetailFragment : Fragment() {
         mSharedViewModel.showUpButton(true)
         mLifecycleOwner = this
         mBinding.lifecycleOwner = this
-        mBinding.shoeDetailViewModel = mShoesDetailViewModel
+        mBinding.shoeDetailViewModel = mViewModel
         initViewModelObserver()
 //        (mActivity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
@@ -73,14 +63,14 @@ class ShoeDetailFragment : Fragment() {
     }
 
     private fun initViewModelObserver(){
-        mShoesDetailViewModel.onProcessSaveShoe.observe(mLifecycleOwner){
+        mViewModel.onProcessSaveShoe.observe(mLifecycleOwner){
             if(it != null){
                 mSharedViewModel.addShoe(it)
                 findNavController().popBackStack()
             }
         }
 
-        mShoesDetailViewModel.onCancelClick.observe(mLifecycleOwner){
+        mViewModel.onCancelClick.observe(mLifecycleOwner){
             if(it){
                 findNavController().popBackStack()
             }

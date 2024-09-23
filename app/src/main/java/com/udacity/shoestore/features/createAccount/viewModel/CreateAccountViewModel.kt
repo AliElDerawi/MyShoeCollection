@@ -1,18 +1,20 @@
 package com.udacity.shoestore.features.createAccount.viewModel
 
 import android.app.Activity
+import android.app.Application
 import android.widget.EditText
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udacity.shoestore.R
+import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.utils.AppSharedMethods.isEmpty
 import com.udacity.shoestore.utils.AppSharedMethods.isValidEmail
 import com.udacity.shoestore.utils.AppSharedMethods.showToast
+import com.udacity.shoestore.utils.SingleLiveEvent
 
-class CreateAccountViewModel : ViewModel() {
+class CreateAccountViewModel(val app: Application) : BaseViewModel(app)  {
 
-    private val _completeCreateAccountLiveData = MutableLiveData<Boolean>()
-
+    private val _completeCreateAccountLiveData = SingleLiveEvent<Boolean>()
     val completeCreateAccountLiveData: MutableLiveData<Boolean>
         get() = _completeCreateAccountLiveData
 
@@ -27,11 +29,6 @@ class CreateAccountViewModel : ViewModel() {
     private val _confirmPasswordLiveData = MutableLiveData<String>("")
     val confirmPasswordLiveData: MutableLiveData<String>
         get() = _confirmPasswordLiveData
-
-    fun setCompleteCreateAccount(completeCreateAccount: Boolean) {
-        _completeCreateAccountLiveData.value = completeCreateAccount
-    }
-
 
     fun onEmailTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         _emailLiveData.value = s.toString()

@@ -12,28 +12,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.udacity.shoestore.R
+import com.udacity.shoestore.data.BaseFragment
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.databinding.FragmentShoeListNewBinding
 import com.udacity.shoestore.databinding.ItemBookmarkedShoeBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.shoeList.adapter.ItemBookmarkedShoeAdapter
+import com.udacity.shoestore.features.shoeList.viewModel.ShoeListViewModel
 import com.udacity.shoestore.models.ShoeModel
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ShoeListFragment : Fragment() {
+class ShoeListFragment : BaseFragment() {
 
 
     private lateinit var mBinding: FragmentShoeListNewBinding
 
     private val mSharedViewModel: MainViewModel by inject()
+    override val mViewModel: ShoeListViewModel by viewModel()
 
-    private lateinit var mActivity: Activity
+    private lateinit var mActivity: FragmentActivity
 
     private lateinit var mLifecycleOwner: LifecycleOwner
     private lateinit var mItemBookmarkedShoeAdapter: ItemBookmarkedShoeAdapter
@@ -41,7 +46,7 @@ class ShoeListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is Activity) {
+        if (context is FragmentActivity) {
             mActivity = context
         }
     }
@@ -67,7 +72,6 @@ class ShoeListFragment : Fragment() {
         mSharedViewModel.showUpButton(false)
         return mBinding.root
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

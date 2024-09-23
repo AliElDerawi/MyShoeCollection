@@ -1,13 +1,15 @@
 package com.udacity.shoestore.features.onBoarding.viewModel
 
+import android.app.Application
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
+import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.utils.AppSharedData
 
-class InstructionsViewModel : ViewModel() {
+class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
 
 
     private var _currentPageMutableLiveDate = MutableLiveData<Int>(0)

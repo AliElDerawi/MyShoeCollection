@@ -1,15 +1,17 @@
 package com.udacity.shoestore.features.login.viewModel
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udacity.shoestore.R
+import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.utils.AppSharedMethods.checkIfUserExist
 import com.udacity.shoestore.utils.AppSharedMethods.isValidEmail
 import com.udacity.shoestore.utils.AppSharedMethods.showToast
 import com.udacity.shoestore.utils.SingleLiveEvent
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(val app: Application) : BaseViewModel(app) {
 
     private val _completeLoginLiveData = SingleLiveEvent<Boolean>()
     val completeLoginLiveData: LiveData<Boolean>

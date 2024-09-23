@@ -22,8 +22,7 @@ class ShoeStoreApp : MultiDexApplication() {
         fun getInstance(): ShoeStoreApp? {
             if (mShoeStoreAppInstance == null) {
                 synchronized(ShoeStoreApp::class.java) {
-                    if (mShoeStoreAppInstance == null)
-                        mShoeStoreAppInstance = ShoeStoreApp()
+                    if (mShoeStoreAppInstance == null) mShoeStoreAppInstance = ShoeStoreApp()
                 }
             }
             return mShoeStoreAppInstance
@@ -39,19 +38,19 @@ class ShoeStoreApp : MultiDexApplication() {
             //Declare a ViewModel - be later inject into Fragment with dedicated injector using by viewModel()
 
             viewModel {
-                LoginViewModel()
+                LoginViewModel(get())
             }
 
             viewModel {
-                CreateAccountViewModel()
+                CreateAccountViewModel(get())
             }
 
             viewModel {
-                InstructionsViewModel()
+                InstructionsViewModel(get())
             }
 
             viewModel {
-                ShoeDetailViewModel()
+                ShoeDetailViewModel(get())
             }
 
             single {

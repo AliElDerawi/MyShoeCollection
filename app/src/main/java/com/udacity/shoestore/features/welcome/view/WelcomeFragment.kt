@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
@@ -21,14 +22,14 @@ class WelcomeFragment : Fragment() {
 
     private val mSharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
 
-    private lateinit var mActivity: Activity
+    private lateinit var mActivity: FragmentActivity
 
     private lateinit var mLifecycleOwner: LifecycleOwner
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is Activity) {
+        if (context is FragmentActivity) {
             mActivity = context
         }
     }
