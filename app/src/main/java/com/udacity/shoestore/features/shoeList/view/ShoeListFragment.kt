@@ -24,13 +24,14 @@ import com.udacity.shoestore.databinding.ItemBookmarkedShoeBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.shoeList.adapter.ItemBookmarkedShoeAdapter
 import com.udacity.shoestore.models.ShoeModel
+import org.koin.android.ext.android.inject
 
 class ShoeListFragment : Fragment() {
 
 
     private lateinit var mBinding: FragmentShoeListNewBinding
 
-    private val mSharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
+    private val mSharedViewModel: MainViewModel by inject()
 
     private lateinit var mActivity: Activity
 

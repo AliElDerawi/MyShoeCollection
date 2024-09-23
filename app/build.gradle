@@ -64,6 +64,17 @@ dependencies {
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
+    // Koin
+    implementation "io.insert-koin:koin-android:$koinVersion"
+    implementation("io.insert-koin:koin-core:$koinVersion")
+
+    implementation("io.insert-koin:koin-android-compat:$koinVersion")
+    // Jetpack WorkManager
+    implementation("io.insert-koin:koin-androidx-workmanager:$koinVersion")
+    // Navigation Graph
+    implementation("io.insert-koin:koin-androidx-navigation:$koinVersion")
+
+
 
 
 }

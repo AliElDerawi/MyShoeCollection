@@ -17,6 +17,9 @@ import com.udacity.shoestore.features.createAccount.viewModel.CreateAccountViewM
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.java.KoinJavaComponent.inject
 
 
 class CreateAccountFragment : Fragment() {
@@ -24,9 +27,9 @@ class CreateAccountFragment : Fragment() {
 
     private lateinit var mBinding: FragmentCreateAccountBinding
 
-    private val mSharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
+    private val mSharedViewModel: MainViewModel by inject()
 
-    private val mCreateAccountViewModel: CreateAccountViewModel by viewModels<CreateAccountViewModel>()
+    private val mCreateAccountViewModel: CreateAccountViewModel by viewModel()
 
     private lateinit var mActivity: Activity
 
@@ -45,8 +48,7 @@ class CreateAccountFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
 

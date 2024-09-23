@@ -16,11 +16,12 @@ import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.utils.AppSharedMethods
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val mMainViewModel: MainViewModel by viewModels<MainViewModel>()
+    private val mMainViewModel: MainViewModel by inject()
 
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var navController: NavController

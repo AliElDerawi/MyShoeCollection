@@ -21,6 +21,8 @@ import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.models.ShoeModel
 import com.udacity.shoestore.utils.AppSharedMethods.isEmpty
 import com.udacity.shoestore.utils.AppSharedMethods.showToast
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Objects
 
 
@@ -28,8 +30,8 @@ class ShoeDetailFragment : Fragment() {
 
     private lateinit var mBinding: FragmentShoeDetailBinding
 
-    private val mSharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
-    private val mShoesDetailViewModel : ShoeDetailViewModel by viewModels<ShoeDetailViewModel>()
+    private val mSharedViewModel: MainViewModel by inject()
+    private val mShoesDetailViewModel : ShoeDetailViewModel by viewModel()
 
     private lateinit var mActivity: Activity
 

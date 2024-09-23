@@ -17,6 +17,8 @@ import com.udacity.shoestore.features.login.viewModel.LoginViewModel
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class LoginFragment : Fragment() {
@@ -24,9 +26,9 @@ class LoginFragment : Fragment() {
 
     private lateinit var mBinding: FragmentLoginBinding
 
-    private val mSharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
+    private val mSharedViewModel: MainViewModel by inject()
 
-    private val mLoginViewModel: LoginViewModel by viewModels<LoginViewModel>()
+    private val mLoginViewModel: LoginViewModel by viewModel()
 
     private lateinit var mActivity: Activity
 

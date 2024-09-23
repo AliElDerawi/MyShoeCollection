@@ -5,6 +5,7 @@ buildscript {
 
     ext {
         glide_version = '4.15.1'
+        koinVersion = '3.4.0'
     }
 
     repositories {

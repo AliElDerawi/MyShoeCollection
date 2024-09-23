@@ -25,6 +25,8 @@ import com.udacity.shoestore.utils.AppSharedMethods.getInstruction
 import com.udacity.shoestore.utils.AppSharedMethods.showToast
 import com.udacity.shoestore.models.InstructionModel
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class InstructionsFragment : Fragment(), View.OnClickListener {
@@ -32,8 +34,8 @@ class InstructionsFragment : Fragment(), View.OnClickListener {
 
     private lateinit var mBinding: FragmentInstructionsBinding
 
-    private val mSharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
-    private val mInstructionsViewModel: InstructionsViewModel by viewModels<InstructionsViewModel>()
+    private val mSharedViewModel: MainViewModel by inject()
+    private val mInstructionsViewModel: InstructionsViewModel by viewModel()
 
 
     private lateinit var mActivity: Activity
