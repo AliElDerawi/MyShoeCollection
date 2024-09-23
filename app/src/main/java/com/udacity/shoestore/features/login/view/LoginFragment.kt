@@ -73,7 +73,6 @@ class LoginFragment : Fragment() {
                 getSharedPreference().edit {
                     putBoolean(AppSharedData.PREF_IS_LOGIN, true)
                 }
-                mLoginViewModel.setCompleteLogin(false)
                 if (getSharedPreference().getBoolean(AppSharedData.PREF_IS_NEW_USER, true)) {
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToWelcomeFragment())
                 } else {
@@ -85,7 +84,6 @@ class LoginFragment : Fragment() {
         mLoginViewModel.onCreateAccountClick.observe(mLifecycleOwner) {
             if (it) {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment())
-                mLoginViewModel.setCreateAccountClick(false)
             }
         }
 

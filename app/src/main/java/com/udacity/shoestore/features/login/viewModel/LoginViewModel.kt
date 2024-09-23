@@ -1,17 +1,18 @@
 package com.udacity.shoestore.features.login.viewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udacity.shoestore.R
 import com.udacity.shoestore.utils.AppSharedMethods.checkIfUserExist
 import com.udacity.shoestore.utils.AppSharedMethods.isValidEmail
 import com.udacity.shoestore.utils.AppSharedMethods.showToast
+import com.udacity.shoestore.utils.SingleLiveEvent
 
 class LoginViewModel : ViewModel() {
 
-    private val _completeLoginLiveData = MutableLiveData<Boolean>()
-
-    val completeLoginLiveData: MutableLiveData<Boolean>
+    private val _completeLoginLiveData = SingleLiveEvent<Boolean>()
+    val completeLoginLiveData: LiveData<Boolean>
         get() = _completeLoginLiveData
 
     private val _emailLiveDate = MutableLiveData<String>("")
@@ -22,14 +23,9 @@ class LoginViewModel : ViewModel() {
     val passwordLiveData: MutableLiveData<String>
         get() = _passwordLiveData
 
-    private val _onCreateAccountClick = MutableLiveData<Boolean>()
-    val onCreateAccountClick: MutableLiveData<Boolean>
+    private val _onCreateAccountClick = SingleLiveEvent<Boolean>()
+    val onCreateAccountClick: LiveData<Boolean>
         get() = _onCreateAccountClick
-
-
-    fun setCompleteLogin(completeLogin: Boolean) {
-        _completeLoginLiveData.value = completeLogin
-    }
 
 
     fun login() {
@@ -56,9 +52,6 @@ class LoginViewModel : ViewModel() {
 
     fun onCreateAccountClick() {
         _onCreateAccountClick.value = true
-    }
-    fun setCreateAccountClick(createAccount: Boolean) {
-        _onCreateAccountClick.value = createAccount
     }
 
 }
