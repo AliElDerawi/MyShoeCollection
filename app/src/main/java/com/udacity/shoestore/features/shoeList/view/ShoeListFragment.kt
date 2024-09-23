@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseFragment
+import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.databinding.FragmentShoeListNewBinding
 import com.udacity.shoestore.databinding.ItemBookmarkedShoeBinding
@@ -108,13 +109,15 @@ class ShoeListFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.logout) {
             mSharedViewModel.setHideToolbar(true)
-            findNavController().navigate(ShoeListFragmentDirections.actionShoesListFragmentToLoginFragment())
+            mSharedViewModel.navigationCommand.value =
+                NavigationCommand.To(ShoeListFragmentDirections.actionShoesListFragmentToLoginFragment())
         }
         return true
     }
 
     fun onAddShoeClick() {
-        findNavController().navigate(ShoeListFragmentDirections.actionShoesListFragmentToShoeDetailFragment())
+        mSharedViewModel.navigationCommand.value =
+            NavigationCommand.To(ShoeListFragmentDirections.actionShoesListFragmentToShoeDetailFragment())
     }
 
 

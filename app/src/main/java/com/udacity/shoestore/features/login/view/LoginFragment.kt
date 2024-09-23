@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.data.BaseFragment
+import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.FragmentLoginBinding
 import com.udacity.shoestore.features.login.viewModel.LoginViewModel
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
@@ -75,16 +76,20 @@ class LoginFragment : BaseFragment() {
                     putBoolean(AppSharedData.PREF_IS_LOGIN, true)
                 }
                 if (getSharedPreference().getBoolean(AppSharedData.PREF_IS_NEW_USER, true)) {
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToWelcomeFragment())
+                    mSharedViewModel.navigationCommand.value = NavigationCommand.To(
+                        LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
+                    )
                 } else {
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToShoesListFragment())
+                    mSharedViewModel.navigationCommand.value =
+                        NavigationCommand.To(LoginFragmentDirections.actionLoginFragmentToShoesListFragment())
                 }
             }
         }
 
         mViewModel.onCreateAccountClick.observe(mLifecycleOwner) {
             if (it) {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment())
+                mSharedViewModel.navigationCommand.value =
+                    NavigationCommand.To(LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment())
             }
         }
 

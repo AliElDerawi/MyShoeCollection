@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseFragment
+import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.FragmentInstructionsBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.onBoarding.adapter.OnBoardingAdapter
@@ -118,8 +119,8 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
                     putBoolean(AppSharedData.PREF_IS_NEW_USER, false)
                 }
 
-                findNavController().navigate(InstructionsFragmentDirections.actionInstructionsFragmentToShoesListFragment())
-
+                mSharedViewModel.navigationCommand.value =
+                    NavigationCommand.To((InstructionsFragmentDirections.actionInstructionsFragmentToShoesListFragment()))
             }
         }
     }

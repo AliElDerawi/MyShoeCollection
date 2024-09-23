@@ -1,12 +1,14 @@
 package com.udacity.shoestore.features.main.viewModel
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.models.ShoeModel
 import com.udacity.shoestore.utils.AppSharedMethods.notifyObserver
 
-class MainViewModel : ViewModel() {
+class MainViewModel(val app : Application) : BaseViewModel(app) {
 
 
     private val _hideToolbar = MutableLiveData<Boolean>()

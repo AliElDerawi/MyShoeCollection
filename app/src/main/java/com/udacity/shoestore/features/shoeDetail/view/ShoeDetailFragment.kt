@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.data.BaseFragment
+import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import org.koin.android.ext.android.inject
@@ -66,13 +67,13 @@ class ShoeDetailFragment : BaseFragment() {
         mViewModel.onProcessSaveShoe.observe(mLifecycleOwner){
             if(it != null){
                 mSharedViewModel.addShoe(it)
-                findNavController().popBackStack()
+                mSharedViewModel.navigationCommand.value = NavigationCommand.Back
             }
         }
 
         mViewModel.onCancelClick.observe(mLifecycleOwner){
             if(it){
-                findNavController().popBackStack()
+                mSharedViewModel.navigationCommand.value = NavigationCommand.Back
             }
         }
     }

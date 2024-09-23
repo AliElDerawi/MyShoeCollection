@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.R
+import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.ActivityMainBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.utils.AppSharedData
@@ -56,6 +57,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         mMainViewModel.showUpButton.observe(this){
             supportActionBar!!.setDisplayHomeAsUpEnabled(it)
+        }
+
+        mMainViewModel.navigationCommand.observe(this) { command ->
+
+            Timber.d("initViewModelObserver:command: " + command.toString())
+
+            when (command) {
+                is NavigationCommand.To -> navController.navigate(command.directions)
+                is NavigationCommand.Back -> onBackPressed()
+                is NavigationCommand.BackTo -> navController.popBackStack(
+                    command.destinationId,
+                    false
+                )
+            }
         }
     }
 

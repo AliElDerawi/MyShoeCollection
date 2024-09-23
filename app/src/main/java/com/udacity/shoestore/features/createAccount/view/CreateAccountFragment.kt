@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.data.BaseFragment
+import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.FragmentCreateAccountBinding
 import com.udacity.shoestore.features.createAccount.viewModel.CreateAccountViewModel
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
@@ -84,7 +85,10 @@ class CreateAccountFragment : BaseFragment() {
                         mBinding.passwordTextInputEditText.text.toString()
                     )
                 }
-                findNavController().navigate(CreateAccountFragmentDirections.actionCreateAccountFragmentToWelcomeFragment())
+
+                mSharedViewModel.navigationCommand.value = NavigationCommand.To(
+                    CreateAccountFragmentDirections.actionCreateAccountFragmentToWelcomeFragment()
+                )
             }
         }
     }
