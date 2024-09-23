@@ -3,20 +3,13 @@ package com.udacity.shoestore.utils
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.drawable.Drawable
 import android.util.Patterns
-import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.udacity.shoestore.R
 import com.udacity.shoestore.models.InstructionModel
 
@@ -28,7 +21,17 @@ object AppSharedMethods {
         if (mToast != null) {
             mToast!!.cancel()
         }
-        mToast = Toast.makeText(ShoeStoreApp.getInstance()!!.applicationContext, message, duration)
+        mToast = Toast.makeText(ShoeStoreApp.getApp().applicationContext, message, duration)
+        mToast!!.show()
+    }
+
+    fun showToast(message: String, duration: Int = Toast.LENGTH_LONG) {
+        if (mToast != null) {
+            mToast!!.cancel()
+        }
+        mToast = Toast.makeText(
+            ShoeStoreApp.getApp().applicationContext, message, duration
+        )
         mToast!!.show()
     }
 
@@ -37,12 +40,11 @@ object AppSharedMethods {
             mToast!!.cancel()
         }
         mToast = Toast.makeText(
-            ShoeStoreApp.getInstance()!!.applicationContext,
-            ShoeStoreApp.getInstance()!!.applicationContext.getString(message),
-            duration
+            ShoeStoreApp.getApp().applicationContext, message, duration
         )
         mToast!!.show()
     }
+
 
     fun EditText.isEmpty(): Boolean {
         return this.text.toString().isEmpty()
@@ -91,7 +93,7 @@ object AppSharedMethods {
     }
 
     fun getSharedPreference(): SharedPreferences {
-        return ShoeStoreApp.getInstance()!!
+        return ShoeStoreApp.getApp()!!
             .getSharedPreferences(AppSharedData.MY_PREF, Context.MODE_PRIVATE)
     }
 
@@ -101,10 +103,11 @@ object AppSharedMethods {
 
     fun checkIfUserExist(email: String, password: String): Boolean {
         if (getSharedPreference().contains(AppSharedData.PREF_USER_EMAIL)) {
-            return getSharedPreference().getString(AppSharedData.PREF_USER_EMAIL, "") == email
-                    && getSharedPreference().getString(
-                AppSharedData.PREF_USER_PASSWORD,
+            return getSharedPreference().getString(
+                AppSharedData.PREF_USER_EMAIL,
                 ""
+            ) == email && getSharedPreference().getString(
+                AppSharedData.PREF_USER_PASSWORD, ""
             ) == password
         } else {
             return false

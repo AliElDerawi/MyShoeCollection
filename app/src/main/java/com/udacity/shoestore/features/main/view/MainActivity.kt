@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mBinding.mainToolbar.setTitle(null)
         navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph)
-        Timber.plant(Timber.DebugTree())
         initViewModelObservers()
         initListeners()
 

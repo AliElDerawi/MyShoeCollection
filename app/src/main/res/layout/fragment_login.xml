@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-    <!--  I used constraintLayout, but LinearLayout could be use here, since there's no nested viewgroup      -->
+        <!--  I used constraintLayout, but LinearLayout could be use here, since there's no nested viewgroup      -->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -115,7 +115,7 @@
                         app:boxCornerRadiusBottomStart="0dp"
                         app:boxCornerRadiusTopEnd="0dp"
                         app:boxCornerRadiusTopStart="0dp"
-                        app:boxStrokeColor="@color/colorTrans"
+                        app:boxStrokeColor="@color/colorAccent"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
                         app:counterOverflowTextColor="@color/colorBlack"
@@ -199,8 +199,8 @@
                             android:id="@+id/password_textInputEditText"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:inputType="textPassword"
                             android:imeOptions="actionDone"
+                            android:inputType="textPassword"
                             android:onTextChanged="@{(text, start, before, count) -> loginViewModel.onPasswordTextChanged(text,start,before,count)}"
                             android:textColor="@color/colorDark1C"
                             android:textCursorDrawable="@color/colorDark31"
@@ -231,9 +231,9 @@
                 android:elevation="0dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
+                android:onClick="@{() -> loginViewModel.login()}"
                 android:text="@string/text_login"
                 app:cornerRadius="@dimen/dim_button_corner"
-                android:onClick="@{() -> loginViewModel.login()}"
                 app:layout_constraintTop_toBottomOf="@+id/password_cardView"
                 app:strokeWidth="0dp" />
 

@@ -1,6 +1,5 @@
 package com.udacity.shoestore.utils
 
-import androidx.core.content.ContextCompat
 import androidx.multidex.MultiDexApplication
 import com.udacity.shoestore.features.createAccount.viewModel.CreateAccountViewModel
 import com.udacity.shoestore.features.login.viewModel.LoginViewModel
@@ -22,13 +21,13 @@ class ShoeStoreApp : MultiDexApplication() {
         @Volatile
         var mShoeStoreAppInstance: ShoeStoreApp? = null
 
-        fun getInstance(): ShoeStoreApp? {
+        fun getApp(): ShoeStoreApp {
             if (mShoeStoreAppInstance == null) {
                 synchronized(ShoeStoreApp::class.java) {
                     if (mShoeStoreAppInstance == null) mShoeStoreAppInstance = ShoeStoreApp()
                 }
             }
-            return mShoeStoreAppInstance
+            return mShoeStoreAppInstance!!
         }
 
     }

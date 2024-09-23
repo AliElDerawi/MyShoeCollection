@@ -93,6 +93,15 @@ class LoginFragment : BaseFragment() {
             }
         }
 
+        mViewModel.showEmailError.observe(mLifecycleOwner) {
+            mBinding.emailTextInputEditText.error = mActivity.getString(it)
+            mViewModel.showToastInt.value = it
+        }
+
+        mViewModel.showPasswordError.observe(mLifecycleOwner) {
+            mViewModel.showToastInt.value = it
+        }
+
     }
 
 }

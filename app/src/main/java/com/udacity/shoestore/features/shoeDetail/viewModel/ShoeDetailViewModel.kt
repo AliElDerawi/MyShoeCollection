@@ -1,9 +1,7 @@
 package com.udacity.shoestore.features.shoeDetail.view
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.models.ShoeModel
@@ -66,7 +64,7 @@ class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
 
     init {
         _instructionMessage.value =
-            ShoeStoreApp.getInstance()!!.getString(R.string.text_add_shoe_message)
+            ShoeStoreApp.getApp()!!.getString(R.string.text_add_shoe_message)
     }
 
     fun onCancelClick() {

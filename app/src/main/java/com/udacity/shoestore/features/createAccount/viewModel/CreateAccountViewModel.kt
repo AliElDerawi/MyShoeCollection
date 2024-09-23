@@ -11,6 +11,8 @@ import com.udacity.shoestore.utils.AppSharedMethods.isEmpty
 import com.udacity.shoestore.utils.AppSharedMethods.isValidEmail
 import com.udacity.shoestore.utils.AppSharedMethods.showToast
 import com.udacity.shoestore.utils.SingleLiveEvent
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class CreateAccountViewModel(val app: Application) : BaseViewModel(app)  {
 
@@ -18,16 +20,16 @@ class CreateAccountViewModel(val app: Application) : BaseViewModel(app)  {
     val completeCreateAccountLiveData: MutableLiveData<Boolean>
         get() = _completeCreateAccountLiveData
 
-    private val _emailLiveData = MutableLiveData<String>("")
-    val emailLiveData: MutableLiveData<String>
+    private val _emailLiveData = MutableStateFlow("")
+    val emailLiveData: StateFlow<String>
         get() = _emailLiveData
 
-    private val _passwordLiveData = MutableLiveData<String>("")
-    val passwordLiveData: MutableLiveData<String>
+    private val _passwordLiveData = MutableStateFlow("")
+    val passwordLiveData: StateFlow<String>
         get() = _passwordLiveData
 
-    private val _confirmPasswordLiveData = MutableLiveData<String>("")
-    val confirmPasswordLiveData: MutableLiveData<String>
+    private val _confirmPasswordLiveData = MutableStateFlow("")
+    val confirmPasswordLiveData: StateFlow<String>
         get() = _confirmPasswordLiveData
 
     fun onEmailTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -45,16 +47,16 @@ class CreateAccountViewModel(val app: Application) : BaseViewModel(app)  {
 
     fun createAccount(
     ) {
-        if (_emailLiveData.value!!.isEmpty()) {
-            showToast(R.string.text_msg_please_enter_email)
-        } else if (!_emailLiveData.value!!.isValidEmail()) {
-            showToast(R.string.text_msg_enter_valid_email_address)
-        } else if (_passwordLiveData.value!!.isEmpty()) {
-            showToast(R.string.text_msg_please_enter_password)
-        } else if (_confirmPasswordLiveData.value!!.isEmpty()) {
-            showToast(R.string.text_msg_please_enter_confirm_password)
-        } else if (_passwordLiveData.value.toString() != _confirmPasswordLiveData.value.toString()) {
-            showToast(R.string.text_msg_password_mismatch)
+        if (_emailLiveData.value.isEmpty()) {
+            showToastInt.value = R.string.text_msg_please_enter_email
+        } else if (!_emailLiveData.value.isValidEmail()) {
+            showToastInt.value = R.string.text_msg_enter_valid_email_address
+        } else if (_passwordLiveData.value.isEmpty()) {
+            showToastInt.value = R.string.text_msg_please_enter_password
+        } else if (_confirmPasswordLiveData.value.isEmpty()) {
+            showToastInt.value = R.string.text_msg_please_enter_confirm_password
+        } else if (_passwordLiveData.value != _confirmPasswordLiveData.value) {
+            showToastInt.value = R.string.text_msg_password_mismatch
         } else {
             _completeCreateAccountLiveData.value = true
         }
