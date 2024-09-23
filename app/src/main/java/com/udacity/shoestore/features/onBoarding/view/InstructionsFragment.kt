@@ -94,17 +94,14 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
 
 
     private fun initListeners() {
-        with(mBinding) {
-            nextCardView.setOnClickListener(this@InstructionsFragment)
-            skipTextView.setOnClickListener(this@InstructionsFragment)
-        }
+
     }
 
     private fun initViewModelObserver() {
 
         mViewModel.currentPagePageLiveData.observe(mLifecycleOwner) {
             mBinding.pageCircleProgressBar.progress = (it + 1).toFloat()
-            mBinding.boardingViewPager.setCurrentItem(mViewModel.currentPagePageLiveData.value!!)
+            mBinding.boardingViewPager.currentItem = (mViewModel.currentPagePageLiveData.value!!)
 
             if (mViewModel.currentPagePageLiveData.value == mViewModel.lastPageLiveData.value) {
                 showCompleteButton()

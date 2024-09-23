@@ -82,7 +82,6 @@ class ShoeListFragment : BaseFragment() {
 
     private fun initViewModelObserver() {
         mSharedViewModel.shoeList.observe(mLifecycleOwner) {
-            Log.d("ShoeListFragment", "initViewModelObserver: ${it.size}")
             if (it != null && it.size > 0) {
                 for (shoe in it) {
                     addViewToViewGroup(mBinding.shoesLinearLayout, shoe)
