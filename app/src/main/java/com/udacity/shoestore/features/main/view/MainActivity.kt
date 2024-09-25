@@ -42,35 +42,39 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initViewModelObservers() {
-        mMainViewModel.hideToolbar.observe(this) {
-            if (it) {
-                mBinding.mainToolbar.visibility = View.GONE
-            } else {
-                mBinding.mainToolbar.visibility = View.VISIBLE
+
+        with(mBinding){
+            mMainViewModel.hideToolbar.observe(this@MainActivity) {
+                if (it) {
+                    mainToolbar.visibility = View.GONE
+                } else {
+                    mainToolbar.visibility = View.VISIBLE
+                }
+            }
+
+            mMainViewModel.toolbarTitle.observe(this@MainActivity) {
+                textViewToolbarTitle.text = it
+            }
+
+            mMainViewModel.showUpButton.observe(this@MainActivity){
+                supportActionBar!!.setDisplayHomeAsUpEnabled(it)
+            }
+
+            mMainViewModel.navigationCommand.observe(this@MainActivity) { command ->
+
+                Timber.d("initViewModelObserver:command: " + command.toString())
+
+                when (command) {
+                    is NavigationCommand.To -> navController.navigate(command.directions)
+                    is NavigationCommand.Back -> onBackPressed()
+                    is NavigationCommand.BackTo -> navController.popBackStack(
+                        command.destinationId,
+                        false
+                    )
+                }
             }
         }
 
-        mMainViewModel.toolbarTitle.observe(this) {
-            mBinding.textViewToolbarTitle.text = it
-        }
-
-        mMainViewModel.showUpButton.observe(this){
-            supportActionBar!!.setDisplayHomeAsUpEnabled(it)
-        }
-
-        mMainViewModel.navigationCommand.observe(this) { command ->
-
-            Timber.d("initViewModelObserver:command: " + command.toString())
-
-            when (command) {
-                is NavigationCommand.To -> navController.navigate(command.directions)
-                is NavigationCommand.Back -> onBackPressed()
-                is NavigationCommand.BackTo -> navController.popBackStack(
-                    command.destinationId,
-                    false
-                )
-            }
-        }
     }
 
     private fun initListeners() {

@@ -74,17 +74,21 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
 
 
     private fun initViewPager(getTutorialRequestResult: List<InstructionModel>) {
-        val mOnBoardingPagerAdapter = OnBoardingAdapter(
-            getTutorialRequestResult
-        )
-        mBinding.boardingViewPager.setAdapter(mOnBoardingPagerAdapter)
-        mBinding.boardingViewPager.setCurrentItem(0)
-        mBinding.boardingScreenCircleIndicator.setViewPager(mBinding.boardingViewPager)
+
+        with(mBinding){
+            val mOnBoardingPagerAdapter = OnBoardingAdapter(
+                getTutorialRequestResult
+            )
+            boardingViewPager.setAdapter(mOnBoardingPagerAdapter)
+            boardingViewPager.setCurrentItem(0)
+            boardingScreenCircleIndicator.setViewPager(boardingViewPager)
 
 
-        mViewModel.setLastPage(getTutorialRequestResult.size - 1)
-        mBinding.pageCircleProgressBar.progressMax = getTutorialRequestResult.size.toFloat()
-        mBinding.pageCircleProgressBar.progress = 1F
+            mViewModel.setLastPage(getTutorialRequestResult.size - 1)
+            pageCircleProgressBar.progressMax = getTutorialRequestResult.size.toFloat()
+            pageCircleProgressBar.progress = 1F
+
+        }
 
 
 
@@ -99,27 +103,30 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
 
     private fun initViewModelObserver() {
 
-        mViewModel.currentPagePageLiveData.observe(mLifecycleOwner) {
-            mBinding.pageCircleProgressBar.progress = (it + 1).toFloat()
-            mBinding.boardingViewPager.currentItem = (mViewModel.currentPagePageLiveData.value!!)
+        with(mBinding){
+            mViewModel.currentPagePageLiveData.observe(mLifecycleOwner) {
+                pageCircleProgressBar.progress = (it + 1).toFloat()
+                boardingViewPager.currentItem = (mViewModel.currentPagePageLiveData.value!!)
 
-            if (mViewModel.currentPagePageLiveData.value == mViewModel.lastPageLiveData.value) {
-                showCompleteButton()
-            } else {
-                hideCompleteButton()
-            }
-        }
-
-        mViewModel.goNextScreen.observe(mLifecycleOwner) {
-            if (it) {
-                getSharedPreference().edit {
-                    putBoolean(AppSharedData.PREF_IS_NEW_USER, false)
+                if (mViewModel.currentPagePageLiveData.value == mViewModel.lastPageLiveData.value) {
+                    showCompleteButton()
+                } else {
+                    hideCompleteButton()
                 }
+            }
 
-                mSharedViewModel.navigationCommand.value =
-                    NavigationCommand.To((InstructionsFragmentDirections.actionInstructionsFragmentToShoesListFragment()))
+            mViewModel.goNextScreen.observe(mLifecycleOwner) {
+                if (it) {
+                    getSharedPreference().edit {
+                        putBoolean(AppSharedData.PREF_IS_NEW_USER, false)
+                    }
+
+                    mSharedViewModel.navigationCommand.value =
+                        NavigationCommand.To((InstructionsFragmentDirections.actionInstructionsFragmentToShoesListFragment()))
+                }
             }
         }
+
     }
 
     private fun initBoardingViewPagerListener() {

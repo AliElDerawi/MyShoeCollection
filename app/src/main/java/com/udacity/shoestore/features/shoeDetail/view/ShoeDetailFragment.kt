@@ -69,60 +69,64 @@ class ShoeDetailFragment : BaseFragment() {
     }
 
     private fun initViewModelObserver() {
-        mViewModel.onProcessSaveShoe.observe(mLifecycleOwner) {
-            if (it != null) {
-                mSharedViewModel.addShoe(it)
-                mSharedViewModel.navigationCommand.value = NavigationCommand.Back
+
+        with(mBinding){
+            mViewModel.onProcessSaveShoe.observe(mLifecycleOwner) {
+                if (it != null) {
+                    mSharedViewModel.addShoe(it)
+                    mSharedViewModel.navigationCommand.value = NavigationCommand.Back
+                }
             }
-        }
 
-        mViewModel.onCancelClick.observe(mLifecycleOwner) {
-            if (it) {
-                mSharedViewModel.navigationCommand.value = NavigationCommand.Back
+            mViewModel.onCancelClick.observe(mLifecycleOwner) {
+                if (it) {
+                    mSharedViewModel.navigationCommand.value = NavigationCommand.Back
+                }
             }
-        }
 
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mViewModel.isSaveButtonEnabledStateFlow.collect { isEnabled ->
-                    mBinding.saveButton.backgroundTintList = if (isEnabled) {
-                        ColorStateList.valueOf(
-                            ResourcesCompat.getColor(
-                                mActivity.resources, R.color.colorAccent, null
+            lifecycleScope.launch {
+                lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    mViewModel.isSaveButtonEnabledStateFlow.collect { isEnabled ->
+                        saveButton.backgroundTintList = if (isEnabled) {
+                            ColorStateList.valueOf(
+                                ResourcesCompat.getColor(
+                                    mActivity.resources, R.color.colorAccent, null
+                                )
                             )
-                        )
-                    } else {
-                        ColorStateList.valueOf(
-                            ResourcesCompat.getColor(
-                                mActivity.resources, R.color.colorGrayF2, null
-                            )
-                        )
-                    }
-
-                    mBinding.saveButton.strokeColor = if (isEnabled) {
-                        ColorStateList.valueOf(
-                            ResourcesCompat.getColor(
-                                mActivity.resources, R.color.colorAccent, null
-                            )
-                        )
-                    } else {
-                        ColorStateList.valueOf(
-                            ResourcesCompat.getColor(
-                                mActivity.resources, R.color.colorGray63, null
-                            )
-                        )
-                    }
-
-                    mBinding.saveButton.setTextColor(
-                        if (isEnabled) {
-                            ResourcesCompat.getColor(mActivity.resources, R.color.colorWhite, null)
                         } else {
-                            ResourcesCompat.getColor(mActivity.resources, R.color.colorBlack, null)
+                            ColorStateList.valueOf(
+                                ResourcesCompat.getColor(
+                                    mActivity.resources, R.color.colorGrayF2, null
+                                )
+                            )
                         }
-                    )
+
+                        saveButton.strokeColor = if (isEnabled) {
+                            ColorStateList.valueOf(
+                                ResourcesCompat.getColor(
+                                    mActivity.resources, R.color.colorAccent, null
+                                )
+                            )
+                        } else {
+                            ColorStateList.valueOf(
+                                ResourcesCompat.getColor(
+                                    mActivity.resources, R.color.colorGray63, null
+                                )
+                            )
+                        }
+
+                        saveButton.setTextColor(
+                            if (isEnabled) {
+                                ResourcesCompat.getColor(mActivity.resources, R.color.colorWhite, null)
+                            } else {
+                                ResourcesCompat.getColor(mActivity.resources, R.color.colorBlack, null)
+                            }
+                        )
+                    }
                 }
             }
         }
+
     }
 
 }

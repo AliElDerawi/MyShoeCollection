@@ -70,37 +70,40 @@ class LoginFragment : BaseFragment() {
 
     private fun initViewModelObserver() {
 
-        mViewModel.completeLoginLiveData.observe(mLifecycleOwner) { redirect ->
-            if (redirect) {
-                getSharedPreference().edit {
-                    putBoolean(AppSharedData.PREF_IS_LOGIN, true)
+        with(mBinding){
+            mViewModel.completeLoginLiveData.observe(mLifecycleOwner) { redirect ->
+                if (redirect) {
+                    getSharedPreference().edit {
+                        putBoolean(AppSharedData.PREF_IS_LOGIN, true)
+                    }
+                    if (getSharedPreference().getBoolean(AppSharedData.PREF_IS_NEW_USER, true)) {
+                        mSharedViewModel.navigationCommand.value = NavigationCommand.To(
+                            LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
+                        )
+                    } else {
+                        mSharedViewModel.navigationCommand.value =
+                            NavigationCommand.To(LoginFragmentDirections.actionLoginFragmentToShoesListFragment())
+                    }
                 }
-                if (getSharedPreference().getBoolean(AppSharedData.PREF_IS_NEW_USER, true)) {
-                    mSharedViewModel.navigationCommand.value = NavigationCommand.To(
-                        LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
-                    )
-                } else {
+            }
+
+            mViewModel.onCreateAccountClick.observe(mLifecycleOwner) {
+                if (it) {
                     mSharedViewModel.navigationCommand.value =
-                        NavigationCommand.To(LoginFragmentDirections.actionLoginFragmentToShoesListFragment())
+                        NavigationCommand.To(LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment())
                 }
             }
-        }
 
-        mViewModel.onCreateAccountClick.observe(mLifecycleOwner) {
-            if (it) {
-                mSharedViewModel.navigationCommand.value =
-                    NavigationCommand.To(LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment())
+            mViewModel.showEmailError.observe(mLifecycleOwner) {
+                emailTextInputEditText.error = mActivity.getString(it)
+                mViewModel.showToastInt.value = it
+            }
+
+            mViewModel.showPasswordError.observe(mLifecycleOwner) {
+                mViewModel.showToastInt.value = it
             }
         }
 
-        mViewModel.showEmailError.observe(mLifecycleOwner) {
-            mBinding.emailTextInputEditText.error = mActivity.getString(it)
-            mViewModel.showToastInt.value = it
-        }
-
-        mViewModel.showPasswordError.observe(mLifecycleOwner) {
-            mViewModel.showToastInt.value = it
-        }
 
     }
 

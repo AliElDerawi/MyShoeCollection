@@ -67,7 +67,6 @@ class ShoeListFragment : BaseFragment() {
         mLifecycleOwner = viewLifecycleOwner
         mBinding.lifecycleOwner = this
         mBinding.shoeListFragment = this
-        mBinding.lifecycleOwner = this
         setHasOptionsMenu(true)
         mSharedViewModel.setToolbarTitle(mActivity.getString(R.string.text_bookmarked_shoes))
         mSharedViewModel.showUpButton(false)
