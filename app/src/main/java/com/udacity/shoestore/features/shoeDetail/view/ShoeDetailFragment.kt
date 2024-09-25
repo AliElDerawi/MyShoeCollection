@@ -69,7 +69,7 @@ class ShoeDetailFragment : BaseFragment() {
     }
 
     private fun initViewModelObserver() {
-        mViewModel.onProcessSaveShoe.observe(this) {
+        mViewModel.onProcessSaveShoe.observe(mLifecycleOwner) {
             if (it != null) {
                 mSharedViewModel.addShoe(it)
                 mSharedViewModel.navigationCommand.value = NavigationCommand.Back
