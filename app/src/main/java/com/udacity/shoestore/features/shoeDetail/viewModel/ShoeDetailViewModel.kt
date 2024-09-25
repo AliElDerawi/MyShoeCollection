@@ -2,30 +2,35 @@ package com.udacity.shoestore.features.shoeDetail.view
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.models.ShoeModel
 import com.udacity.shoestore.utils.AppSharedMethods
-import com.udacity.shoestore.utils.ShoeStoreApp
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 
 
 class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
 
-    private var _shoeNameLiveData = MutableLiveData<String>("")
-    val shoeNameLiveData: MutableLiveData<String>
-        get() = _shoeNameLiveData
+    private var _shoeNameStateFlow = MutableStateFlow("")
+    val shoeNameStateFlow: StateFlow<String>
+        get() = _shoeNameStateFlow
 
-    private var _shoeCompanyLiveData = MutableLiveData<String>("")
-    val shoeCompanyLiveData: MutableLiveData<String>
-        get() = _shoeCompanyLiveData
+    private var _shoeCompanyStateFlow = MutableStateFlow("")
+    val shoeCompanyStateFlow: StateFlow<String>
+        get() = _shoeCompanyStateFlow
 
-    private var _shoeSizeLiveData = MutableLiveData<String>("")
-    val shoeSizeLiveData: MutableLiveData<String>
-        get() = _shoeSizeLiveData
+    private var _shoeSizeStateFlow = MutableStateFlow("")
+    val shoeSizeStateFlow: StateFlow<String>
+        get() = _shoeSizeStateFlow
 
-    private var _shoeDescriptionLiveData = MutableLiveData<String>("")
-    val shoeDescriptionLiveData: MutableLiveData<String>
-        get() = _shoeDescriptionLiveData
+    private var _shoeDescriptionStateFlow = MutableStateFlow("")
+    val shoeDescriptionStateFlow: StateFlow<String>
+        get() = _shoeDescriptionStateFlow
 
     private var _onProcessSaveShoe = MutableLiveData<ShoeModel>()
 
@@ -40,30 +45,39 @@ class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
     val instructionMessage: MutableLiveData<String>
         get() = _instructionMessage
 
+    init {
+        _instructionMessage.value = app.getString(R.string.text_add_shoe_message)
+    }
+
+    val isSaveButtonEnabledStateFlow: StateFlow<Boolean> = combine(
+        _shoeNameStateFlow,
+        _shoeCompanyStateFlow,
+        _shoeSizeStateFlow,
+        _shoeDescriptionStateFlow
+    ) { name, company, size, description ->
+        name.isNotEmpty() && company.isNotEmpty() && size.isNotEmpty() && description.isNotEmpty()
+    }.stateIn(viewModelScope, SharingStarted.Lazily, false)
+
     fun onSaveClick() {
 
-        if (_shoeNameLiveData.value!!.isEmpty()) {
+        if (_shoeNameStateFlow.value.isEmpty()) {
             AppSharedMethods.showToast(R.string.text_msg_please_enter_shoe_name)
-        } else if (_shoeCompanyLiveData.value!!.isEmpty()) {
+        } else if (_shoeCompanyStateFlow.value.isEmpty()) {
             AppSharedMethods.showToast(R.string.text_msg_please_enter_shoe_company)
-        } else if (_shoeSizeLiveData.value!!.isEmpty()) {
+        } else if (_shoeSizeStateFlow.value.isEmpty()) {
             AppSharedMethods.showToast(R.string.please_enter_shoe_size)
-        } else if (_shoeDescriptionLiveData.value!!.isEmpty()) {
+        } else if (_shoeDescriptionStateFlow.value.isEmpty()) {
             AppSharedMethods.showToast(R.string.text_please_enter_shoe_description)
         } else {
             val shoeModel = ShoeModel(
-                _shoeNameLiveData.value!!,
-                _shoeSizeLiveData.value!!.toDouble(),
-                _shoeCompanyLiveData.value!!,
-                _shoeDescriptionLiveData.value!!
+                _shoeNameStateFlow.value,
+                _shoeSizeStateFlow.value.toDouble(),
+                _shoeCompanyStateFlow.value,
+                _shoeDescriptionStateFlow.value
             )
             _onProcessSaveShoe.value = shoeModel
         }
 
-    }
-
-    init {
-        _instructionMessage.value = app.getString(R.string.text_add_shoe_message)
     }
 
     fun onCancelClick() {
@@ -71,19 +85,19 @@ class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
     }
 
     fun onNameTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        _shoeNameLiveData.value = s.toString()
+        _shoeNameStateFlow.value = s.toString()
     }
 
     fun onCompanyTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        _shoeCompanyLiveData.value = s.toString()
+        _shoeCompanyStateFlow.value = s.toString()
     }
 
     fun onSizeTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        _shoeSizeLiveData.value = s.toString()
+        _shoeSizeStateFlow.value = s.toString()
     }
 
     fun onDescriptionTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        _shoeDescriptionLiveData.value = s.toString()
+        _shoeDescriptionStateFlow.value = s.toString()
     }
 
 }
