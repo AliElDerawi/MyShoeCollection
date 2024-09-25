@@ -133,8 +133,8 @@
                             android:layout_height="match_parent"
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
-                            android:textColor="@color/colorDark1C"
                             android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onEmailTextChanged(text,start,before,count)}"
+                            android:textColor="@color/colorDark1C"
                             android:textCursorDrawable="@color/colorDark31"
                             android:textSize="@dimen/text_small"
                             android:theme="@style/regularFont"
@@ -204,8 +204,8 @@
                             android:layout_height="match_parent"
                             android:imeOptions="actionNext"
                             android:inputType="textPassword"
-                            android:textColor="@color/colorDark1C"
                             android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onPasswordTextChanged(text,start,before,count)}"
+                            android:textColor="@color/colorDark1C"
                             android:textCursorDrawable="@color/colorDark31"
                             android:textSize="@dimen/text_small"
                             android:theme="@style/regularFont"
@@ -274,8 +274,8 @@
                             android:layout_height="match_parent"
                             android:imeOptions="actionDone"
                             android:inputType="textPassword"
-                            android:textColor="@color/colorDark1C"
                             android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onConfirmPasswordTextChanged(text,start,before,count)}"
+                            android:textColor="@color/colorDark1C"
                             android:textCursorDrawable="@color/colorDark31"
                             android:textSize="@dimen/text_small"
                             android:theme="@style/regularFont"
@@ -292,7 +292,7 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/create_account_button"
                 style="@style/buttonStyleNew"
                 android:layout_width="match_parent"
@@ -301,16 +301,17 @@
                 android:layout_marginTop="@dimen/margin_left_right"
                 android:layout_marginEnd="@dimen/margin_btnView"
                 android:layout_marginBottom="@dimen/margin_left_right"
-                android:backgroundTint="@color/colorAccent"
+                android:backgroundTint="@color/colorGrayF2"
                 android:elevation="0dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:onClick="@{() -> createAccountViewModel.createAccount()}"
                 android:text="@string/text_create_account"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
                 app:cornerRadius="@dimen/dim_button_corner"
                 app:layout_constraintTop_toBottomOf="@+id/confirm_password_cardView"
-                app:strokeWidth="0dp" />
+                app:strokeColor="@color/colorGray63"
+                app:strokeWidth="1dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
