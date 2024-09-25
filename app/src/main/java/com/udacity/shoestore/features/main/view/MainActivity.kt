@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     mainToolbar.visibility = View.VISIBLE
                 }
             }
-
             mMainViewModel.toolbarTitle.observe(this@MainActivity) {
                 textViewToolbarTitle.text = it
             }
