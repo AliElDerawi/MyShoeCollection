@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.utils.AppSharedData
+import com.udacity.shoestore.utils.SingleLiveEvent
 
 class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
 
@@ -21,7 +22,7 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
     val lastPageLiveData: LiveData<Int>
         get() = _lastPageMutableLiveData
 
-    private var _goNextScreen = MutableLiveData<Boolean>(false)
+    private var _goNextScreen = SingleLiveEvent<Boolean>()
     val goNextScreen: LiveData<Boolean>
         get() = _goNextScreen
 
