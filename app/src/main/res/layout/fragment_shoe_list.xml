@@ -10,11 +10,14 @@
             name="shoeListFragment"
             type="com.udacity.shoestore.features.shoeList.view.ShoeListFragment" />
 
+        <variable
+            name="sharedViewModel"
+            type="com.udacity.shoestore.features.main.viewModel.MainViewModel" />
+
     </data>
 
 
     <!--  There's no need to use constraint or linear layout here, FrameLayout can do the trick      -->
-
 
 
     <FrameLayout
@@ -27,13 +30,14 @@
             android:id="@+id/shoes_list_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingStart="@dimen/margin_small"
             android:paddingEnd="@dimen/margin_small"
             android:paddingBottom="@dimen/margin_small"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:shoeList="@{sharedViewModel.shoeList}"
             tools:itemCount="4"
             tools:listitem="@layout/item_bookmarked_shoe" />
-
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_shoe_fab"

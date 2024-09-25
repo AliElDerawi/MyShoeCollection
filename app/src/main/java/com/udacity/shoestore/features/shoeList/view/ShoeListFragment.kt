@@ -46,7 +46,6 @@ class ShoeListFragment : BaseFragment() {
     private lateinit var mActivity: FragmentActivity
 
     private lateinit var mLifecycleOwner: LifecycleOwner
-    private lateinit var mItemBookmarkedShoeAdapter: ItemBookmarkedShoeAdapter
 
 
     override fun onAttach(context: Context) {
@@ -71,6 +70,7 @@ class ShoeListFragment : BaseFragment() {
         mLifecycleOwner = viewLifecycleOwner
         mBinding.lifecycleOwner = this
         mBinding.shoeListFragment = this
+        mBinding.sharedViewModel = mSharedViewModel
         setHasOptionsMenu(true)
         mSharedViewModel.setToolbarTitle(mActivity.getString(R.string.text_bookmarked_shoes))
         mSharedViewModel.showUpButton(false)
@@ -81,25 +81,10 @@ class ShoeListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModelObserver()
-        initRecyclerView()
     }
 
     private fun initViewModelObserver() {
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mSharedViewModel.shoeList.collect { list ->
-                    mItemBookmarkedShoeAdapter.submitList(list)
-                }
-            }
-        }
-    }
 
-    private fun initRecyclerView() {
-        mItemBookmarkedShoeAdapter = ItemBookmarkedShoeAdapter()
-        mBinding.shoesListRecyclerView.adapter = mItemBookmarkedShoeAdapter
-        mBinding.shoesListRecyclerView.setHasFixedSize(true)
-        mBinding.shoesListRecyclerView.layoutManager =
-            LinearLayoutManager(mActivity, RecyclerView.VERTICAL, false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -122,13 +107,13 @@ class ShoeListFragment : BaseFragment() {
             NavigationCommand.To(ShoeListFragmentDirections.actionShoesListFragmentToShoeDetailFragment())
     }
 
-
-    fun addViewToViewGroup(viewGroup: ViewGroup, shoeModel: ShoeModel) {
-        val inflater = LayoutInflater.from(viewGroup.context)
-        val binding = ItemBookmarkedShoeBinding.inflate(inflater, viewGroup, true)
-        binding.shoe = shoeModel
-        binding.executePendingBindings()
-    }
+//
+//    fun addViewToViewGroup(viewGroup: ViewGroup, shoeModel: ShoeModel) {
+//        val inflater = LayoutInflater.from(viewGroup.context)
+//        val binding = ItemBookmarkedShoeBinding.inflate(inflater, viewGroup, true)
+//        binding.shoe = shoeModel
+//        binding.executePendingBindings()
+//    }
 
 
 }
