@@ -59,7 +59,7 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
         // Inflate the layout for this fragment
         mBinding = FragmentInstructionsBinding.inflate(inflater, container, false)
         mSharedViewModel.setHideToolbar(true)
-        mLifecycleOwner = this
+        mLifecycleOwner = viewLifecycleOwner
         mBinding.lifecycleOwner = this
         mBinding.viewModel = mViewModel
         return mBinding.root

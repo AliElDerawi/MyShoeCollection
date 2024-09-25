@@ -64,7 +64,7 @@ class ShoeListFragment : BaseFragment() {
         // Inflate the layout for this fragment
         mBinding = FragmentShoeListNewBinding.inflate(inflater, container, false)
         mSharedViewModel.setHideToolbar(false)
-        mLifecycleOwner = this
+        mLifecycleOwner = viewLifecycleOwner
         mBinding.lifecycleOwner = this
         mBinding.shoeListFragment = this
         mBinding.lifecycleOwner = this

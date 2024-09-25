@@ -54,7 +54,7 @@ class ShoeDetailFragment : BaseFragment() {
         mBinding = FragmentShoeDetailBinding.inflate(inflater, container, false)
         mSharedViewModel.setHideToolbar(false)
         mSharedViewModel.showUpButton(true)
-        mLifecycleOwner = this
+        mLifecycleOwner = viewLifecycleOwner
         mBinding.lifecycleOwner = this
         mBinding.shoeDetailViewModel = mViewModel
         initViewModelObserver()
@@ -69,7 +69,7 @@ class ShoeDetailFragment : BaseFragment() {
     }
 
     private fun initViewModelObserver() {
-        mViewModel.onProcessSaveShoe.observe(mLifecycleOwner) {
+        mViewModel.onProcessSaveShoe.observe(this) {
             if (it != null) {
                 mSharedViewModel.addShoe(it)
                 mSharedViewModel.navigationCommand.value = NavigationCommand.Back

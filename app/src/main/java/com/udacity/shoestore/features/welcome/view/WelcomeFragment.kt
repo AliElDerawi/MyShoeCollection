@@ -54,7 +54,7 @@ class WelcomeFragment : BaseFragment() {
         mSharedViewModel.setHideToolbar(true)
         mBinding.welcomeFragment = this
         mBinding.lifecycleOwner = this
-        mLifecycleOwner = this
+        mLifecycleOwner = viewLifecycleOwner
         return mBinding.root
     }
 

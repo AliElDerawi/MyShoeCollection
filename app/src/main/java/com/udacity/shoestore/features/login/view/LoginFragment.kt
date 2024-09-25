@@ -53,7 +53,7 @@ class LoginFragment : BaseFragment() {
         mBinding = FragmentLoginBinding.inflate(inflater, container, false)
         mSharedViewModel.setHideToolbar(true)
         mBinding.loginViewModel = mViewModel
-        mLifecycleOwner = this
+        mLifecycleOwner = viewLifecycleOwner
         mBinding.lifecycleOwner = this
         return mBinding.root
     }
