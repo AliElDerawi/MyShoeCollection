@@ -63,8 +63,7 @@ class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
     }
 
     init {
-        _instructionMessage.value =
-            ShoeStoreApp.getApp()!!.getString(R.string.text_add_shoe_message)
+        _instructionMessage.value = app.getString(R.string.text_add_shoe_message)
     }
 
     fun onCancelClick() {
