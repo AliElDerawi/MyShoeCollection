@@ -50,10 +50,7 @@ class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
     }
 
     val isSaveButtonEnabledStateFlow: StateFlow<Boolean> = combine(
-        _shoeNameStateFlow,
-        _shoeCompanyStateFlow,
-        _shoeSizeStateFlow,
-        _shoeDescriptionStateFlow
+        _shoeNameStateFlow, _shoeCompanyStateFlow, _shoeSizeStateFlow, _shoeDescriptionStateFlow
     ) { name, company, size, description ->
         name.isNotEmpty() && company.isNotEmpty() && size.isNotEmpty() && description.isNotEmpty()
     }.stateIn(viewModelScope, SharingStarted.Lazily, false)
@@ -61,13 +58,13 @@ class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
     fun onSaveClick() {
 
         if (_shoeNameStateFlow.value.isEmpty()) {
-            AppSharedMethods.showToast(R.string.text_msg_please_enter_shoe_name)
+            showToastInt.value = R.string.text_msg_please_enter_shoe_name
         } else if (_shoeCompanyStateFlow.value.isEmpty()) {
-            AppSharedMethods.showToast(R.string.text_msg_please_enter_shoe_company)
+            showToastInt.value = R.string.text_msg_please_enter_shoe_company
         } else if (_shoeSizeStateFlow.value.isEmpty()) {
-            AppSharedMethods.showToast(R.string.please_enter_shoe_size)
+            showToastInt.value = R.string.please_enter_shoe_size
         } else if (_shoeDescriptionStateFlow.value.isEmpty()) {
-            AppSharedMethods.showToast(R.string.text_please_enter_shoe_description)
+            showToastInt.value = R.string.text_please_enter_shoe_description
         } else {
             val shoeModel = ShoeModel(
                 _shoeNameStateFlow.value,
