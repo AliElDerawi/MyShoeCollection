@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.models.ShoeModel
 import com.udacity.shoestore.utils.AppSharedMethods.notifyObserver
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class MainViewModel(val app : Application) : BaseViewModel(app) {
 
@@ -21,9 +23,9 @@ class MainViewModel(val app : Application) : BaseViewModel(app) {
     val toolbarTitle: LiveData<String>
         get() = _toolbarTitle
 
-    private var _shoeList = MutableLiveData<MutableList<ShoeModel>>()
+    private var _shoeList = MutableStateFlow<MutableList<ShoeModel>>(mutableListOf())
 
-    val shoeList: LiveData<MutableList<ShoeModel>>
+    val shoeList: StateFlow<MutableList<ShoeModel>>
         get() = _shoeList
 
     private val _showUpButton = MutableLiveData<Boolean>()
@@ -49,7 +51,7 @@ class MainViewModel(val app : Application) : BaseViewModel(app) {
     }
 
     fun addShoe(shoe: ShoeModel) {
-        _shoeList.value!!.add(shoe)
+        _shoeList.value.add(shoe)
 //        _shoeList.notifyObserver()
     }
 

@@ -14,7 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,13 +31,14 @@ import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.shoeList.adapter.ItemBookmarkedShoeAdapter
 import com.udacity.shoestore.features.shoeList.viewModel.ShoeListViewModel
 import com.udacity.shoestore.models.ShoeModel
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ShoeListFragment : BaseFragment() {
 
 
-    private lateinit var mBinding: FragmentShoeListNewBinding
+    private lateinit var mBinding: FragmentShoeListBinding
 
     private val mSharedViewModel: MainViewModel by inject()
     override val mViewModel: ShoeListViewModel by viewModel()
@@ -62,7 +66,7 @@ class ShoeListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        mBinding = FragmentShoeListNewBinding.inflate(inflater, container, false)
+        mBinding = FragmentShoeListBinding.inflate(inflater, container, false)
         mSharedViewModel.setHideToolbar(false)
         mLifecycleOwner = viewLifecycleOwner
         mBinding.lifecycleOwner = this
@@ -77,26 +81,26 @@ class ShoeListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModelObserver()
+        initRecyclerView()
     }
 
     private fun initViewModelObserver() {
-        mSharedViewModel.shoeList.observe(mLifecycleOwner) {
-            if (it != null && it.size > 0) {
-                for (shoe in it) {
-                    addViewToViewGroup(mBinding.shoesLinearLayout, shoe)
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mSharedViewModel.shoeList.collect { list ->
+                    mItemBookmarkedShoeAdapter.submitList(list)
                 }
             }
-//            mItemBookmarkedShoeAdapter.submitList(it)
         }
     }
 
-//    private fun initRecyclerView() {
-//        mItemBookmarkedShoeAdapter = ItemBookmarkedShoeAdapter()
-//        mBinding.shoesListRecyclerView.adapter = mItemBookmarkedShoeAdapter
-//        mBinding.shoesListRecyclerView.setHasFixedSize(true)
-//        mBinding.shoesListRecyclerView.layoutManager =
-//            LinearLayoutManager(mActivity, RecyclerView.VERTICAL, false)
-//    }
+    private fun initRecyclerView() {
+        mItemBookmarkedShoeAdapter = ItemBookmarkedShoeAdapter()
+        mBinding.shoesListRecyclerView.adapter = mItemBookmarkedShoeAdapter
+        mBinding.shoesListRecyclerView.setHasFixedSize(true)
+        mBinding.shoesListRecyclerView.layoutManager =
+            LinearLayoutManager(mActivity, RecyclerView.VERTICAL, false)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
