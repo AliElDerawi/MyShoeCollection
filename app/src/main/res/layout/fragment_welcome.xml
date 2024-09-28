@@ -32,6 +32,21 @@
             android:paddingEnd="@dimen/margin_top_view"
             android:paddingBottom="@dimen/margin_left_right">
 
+            <TextView
+                android:id="@+id/skip_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo_bold"
+                android:padding="20dp"
+                android:visibility="invisible"
+                android:text="@string/text_skip"
+                android:textAllCaps="true"
+                android:textColor="@color/colorGrayB2"
+                android:textSize="15sp"
+                android:theme="@style/BodyStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageView
                 android:id="@+id/logo_imageView"
@@ -72,7 +87,6 @@
                 android:id="@+id/next_cardView"
                 android:layout_width="93dp"
                 android:layout_height="93dp"
-                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_left_right"
                 android:layout_marginBottom="52dp"
