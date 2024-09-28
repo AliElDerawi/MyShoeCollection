@@ -1,6 +1,5 @@
 package com.udacity.shoestore.features.onBoarding.view
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.content.edit
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseFragment
@@ -19,7 +17,6 @@ import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.onBoarding.adapter.OnBoardingAdapter
 import com.udacity.shoestore.features.onBoarding.viewModel.InstructionsViewModel
 import com.udacity.shoestore.utils.AppSharedData
-import com.udacity.shoestore.utils.AppSharedMethods.getInstruction
 import com.udacity.shoestore.models.InstructionModel
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
 import org.koin.android.ext.android.inject
@@ -67,29 +64,20 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewPager(mActivity.getInstruction())
+        initViewPager()
         initListeners()
         initViewModelObserver()
     }
 
 
-    private fun initViewPager(getTutorialRequestResult: List<InstructionModel>) {
+    private fun initViewPager() {
 
-        with(mBinding){
-            val mOnBoardingPagerAdapter = OnBoardingAdapter(
-                getTutorialRequestResult
-            )
-            boardingViewPager.setAdapter(mOnBoardingPagerAdapter)
-            boardingViewPager.setCurrentItem(0)
-            boardingScreenCircleIndicator.setViewPager(boardingViewPager)
+        with(mBinding) {
 
-
-            mViewModel.setLastPage(getTutorialRequestResult.size - 1)
-            pageCircleProgressBar.progressMax = getTutorialRequestResult.size.toFloat()
-            pageCircleProgressBar.progress = 1F
+            boardingViewPager.adapter = OnBoardingAdapter(InstructionModel.getInstructionCallBack())
+            mViewModel.setLastPage(mViewModel.instructionList.value.size - 1)
 
         }
-
 
 
         initListeners()
@@ -103,12 +91,12 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
 
     private fun initViewModelObserver() {
 
-        with(mBinding){
+        with(mBinding) {
             mViewModel.currentPagePageLiveData.observe(mLifecycleOwner) {
                 pageCircleProgressBar.progress = (it + 1).toFloat()
                 boardingViewPager.currentItem = (mViewModel.currentPagePageLiveData.value!!)
 
-                if (mViewModel.currentPagePageLiveData.value == mViewModel.lastPageLiveData.value) {
+                if (mViewModel.currentPagePageLiveData.value == mViewModel.lastPageStateFlow.value) {
                     showCompleteButton()
                 } else {
                     hideCompleteButton()

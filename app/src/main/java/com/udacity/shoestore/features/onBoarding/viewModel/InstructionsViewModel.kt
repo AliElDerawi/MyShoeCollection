@@ -1,14 +1,14 @@
 package com.udacity.shoestore.features.onBoarding.viewModel
 
 import android.app.Application
-import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.data.BaseViewModel
-import com.udacity.shoestore.utils.AppSharedData
+import com.udacity.shoestore.models.InstructionModel
+import com.udacity.shoestore.utils.AppSharedMethods.getInstruction
 import com.udacity.shoestore.utils.SingleLiveEvent
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
 
@@ -18,17 +18,21 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
         get() = _currentPageMutableLiveDate
 
 
-    private var _lastPageMutableLiveData = MutableLiveData<Int>(0)
-    val lastPageLiveData: LiveData<Int>
-        get() = _lastPageMutableLiveData
+    private var _lastPageMutableStateFlow = MutableStateFlow(0)
+    val lastPageStateFlow: StateFlow<Int>
+        get() = _lastPageMutableStateFlow
 
     private var _goNextScreen = SingleLiveEvent<Boolean>()
     val goNextScreen: LiveData<Boolean>
         get() = _goNextScreen
 
-    fun init() {
+    private var _instructionList = MutableStateFlow<MutableList<InstructionModel>>(mutableListOf())
+    val instructionList: StateFlow<MutableList<InstructionModel>>
+        get() = _instructionList
+
+    init {
         _currentPageMutableLiveDate.value = 0
-        _lastPageMutableLiveData.value = 0
+        _instructionList.value.addAll(app.getInstruction())
     }
 
     fun setCurrentPage(page: Int) {
@@ -40,7 +44,7 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
     }
 
     fun setLastPage(page: Int) {
-        _lastPageMutableLiveData.value = page
+        _lastPageMutableStateFlow.value = page
     }
 
 
@@ -51,7 +55,7 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
     }
 
     fun onNextCardClick() {
-        if (currentPagePageLiveData.value == lastPageLiveData.value) {
+        if (currentPagePageLiveData.value == lastPageStateFlow.value) {
             _goNextScreen.value = true
         } else {
             incrementPage()

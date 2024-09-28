@@ -31,8 +31,6 @@
                 android:id="@+id/skip_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
                 android:fontFamily="@font/cairo_bold"
                 android:onClick="@{() -> viewModel.onSkipClick()}"
                 android:padding="20dp"
@@ -49,16 +47,17 @@
                 android:id="@+id/boarding_viewPager"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:circleIndicator="@{boardingScreenCircleIndicator}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/skip_textView" />
+                app:layout_constraintTop_toBottomOf="@+id/skip_textView"
+                app:viewPagerData="@{viewModel.instructionList}" />
 
 
             <me.relex.circleindicator.CircleIndicator3
                 android:id="@+id/boarding_screen_circleIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_top_view"
                 app:ci_drawable="@drawable/ic_page_selected"
                 app:ci_drawable_unselected="@drawable/ic_page_unselected"
@@ -71,9 +70,8 @@
                 android:id="@+id/page_circleProgressBar"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_top_view"
+                app:config="@{viewModel.instructionList}"
                 app:cpb_background_progressbar_color="@color/colorUnSelectedAccent"
                 app:cpb_background_progressbar_width="1dp"
                 app:cpb_progress_direction="to_right"
@@ -91,8 +89,6 @@
                 android:id="@+id/next_cardView"
                 android:layout_width="93dp"
                 android:layout_height="93dp"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 android:background="@color/colorAccent"
                 android:onClick="@{() -> viewModel.onNextCardClick()}"
