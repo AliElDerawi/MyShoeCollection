@@ -1,11 +1,13 @@
 package com.udacity.shoestore.utils
 
-import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.udacity.shoestore.features.shoeList.adapter.ItemBookmarkedShoeAdapter
-import com.udacity.shoestore.models.ShoeModel
+import androidx.viewpager2.widget.ViewPager2
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import com.udacity.shoestore.data.BaseRecyclerViewAdapter
+import me.relex.circleindicator.CircleIndicator3
 
 
 @BindingAdapter("text")
@@ -23,11 +25,44 @@ fun TextView.setNumber(number: Int) {
     text = number.toString()
 }
 
-@BindingAdapter("shoeList")
-fun RecyclerView.setData(shoeList: MutableList<ShoeModel>?) {
+@BindingAdapter("imageSrc")
+fun ImageView.setImageSrc(imageId: Int) {
+    setImageResource(imageId)
+}
+
+
+@BindingAdapter("recyclerData")
+fun <T : Any> RecyclerView.setData(list: MutableList<T>?) {
+
     if (adapter == null) {
-        val adapter = ItemBookmarkedShoeAdapter()
+
+        adapter as? BaseRecyclerViewAdapter<T>
         this.adapter = adapter
     }
-    (adapter as ItemBookmarkedShoeAdapter).submitList(shoeList)
+    (adapter as? BaseRecyclerViewAdapter<T>)?.submitList(list)
 }
+
+@BindingAdapter("viewPagerData","circleIndicator")
+fun <T : Any> ViewPager2.setData(list: MutableList<T>?, circleIndicator: CircleIndicator3) {
+
+    if (adapter == null) {
+
+        adapter as? BaseRecyclerViewAdapter<T>
+        this.adapter = adapter
+    }
+    (adapter as? BaseRecyclerViewAdapter<T>)?.submitList(list)
+    currentItem = 0
+    circleIndicator.setViewPager(this)
+
+}
+
+@BindingAdapter("config")
+fun <T : Any> CircularProgressBar.setConfig(list: MutableList<T>?) {
+
+    list?.let {
+        progressMax = list.size.toFloat()
+        progress = 1F
+    }
+
+}
+

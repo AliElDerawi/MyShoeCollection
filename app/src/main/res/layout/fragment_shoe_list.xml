@@ -35,7 +35,7 @@
             android:paddingEnd="@dimen/margin_small"
             android:paddingBottom="@dimen/margin_small"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:shoeList="@{sharedViewModel.shoeList}"
+            app:recyclerData="@{sharedViewModel.shoeList}"
             tools:itemCount="4"
             tools:listitem="@layout/item_bookmarked_shoe" />
 

@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="shoe"
+            type="com.udacity.shoestore.models.InstructionModel" />
+
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,6 +40,7 @@
                     android:id="@+id/icon_imageView"
                     android:layout_width="match_parent"
                     android:layout_height="276dp"
+                    app:imageSrc="@{shoe.drawable}"
                     app:srcCompat="@drawable/ic_shoe"
                     app:tint="@color/colorAccent" />
 
@@ -43,6 +52,7 @@
                 android:id="@+id/title_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:text="@{shoe.title}"
                 android:layout_marginTop="@dimen/margin_left_right"
                 android:theme="@style/TitleStyle"
                 tools:text="@string/app_name" />
@@ -54,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
+                app:text="@{shoe.description}"
                 android:lineSpacingMultiplier="0.7"
                 android:theme="@style/BodyStyle"
                 tools:text="@string/app_name" />

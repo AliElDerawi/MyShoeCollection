@@ -1,37 +1,23 @@
 package com.udacity.shoestore.features.shoeList.view
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseFragment
 import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
-import com.udacity.shoestore.databinding.FragmentShoeListNewBinding
-import com.udacity.shoestore.databinding.ItemBookmarkedShoeBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
-import com.udacity.shoestore.features.shoeList.adapter.ItemBookmarkedShoeAdapter
+import com.udacity.shoestore.features.shoeList.adapter.ItemBookmarkShoeAdapter
 import com.udacity.shoestore.features.shoeList.viewModel.ShoeListViewModel
 import com.udacity.shoestore.models.ShoeModel
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -68,9 +54,9 @@ class ShoeListFragment : BaseFragment() {
         mBinding = FragmentShoeListBinding.inflate(inflater, container, false)
         mSharedViewModel.setHideToolbar(false)
         mLifecycleOwner = viewLifecycleOwner
+        mBinding.sharedViewModel = mSharedViewModel
         mBinding.lifecycleOwner = this
         mBinding.shoeListFragment = this
-        mBinding.sharedViewModel = mSharedViewModel
         setHasOptionsMenu(true)
         mSharedViewModel.setToolbarTitle(mActivity.getString(R.string.text_bookmarked_shoes))
         mSharedViewModel.showUpButton(false)
@@ -80,11 +66,16 @@ class ShoeListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewModelObserver()
+//        initViewModelObserver()
+        setupRecyclerView()
     }
 
-    private fun initViewModelObserver() {
+    private fun setupRecyclerView() {
 
+        mBinding.shoesListRecyclerView.adapter =
+            ItemBookmarkShoeAdapter(ShoeModel.getShoeModelCallback(), { shoeModel ->
+                mSharedViewModel.showToast.value = "Handling Click in Generic List Adapter"
+            })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
