@@ -19,6 +19,8 @@ import com.udacity.shoestore.data.BaseFragment
 import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
+import com.udacity.shoestore.utils.AppSharedMethods.getCompatColor
+import com.udacity.shoestore.utils.AppSharedMethods.getCompatColorStateList
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -58,7 +60,6 @@ class ShoeDetailFragment : BaseFragment() {
         mBinding.lifecycleOwner = this
         mBinding.shoeDetailViewModel = mViewModel
         initViewModelObserver()
-//        (mActivity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
         return mBinding.root
     }
@@ -88,38 +89,22 @@ class ShoeDetailFragment : BaseFragment() {
                 lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     mViewModel.isSaveButtonEnabledStateFlow.collect { isEnabled ->
                         saveButton.backgroundTintList = if (isEnabled) {
-                            ColorStateList.valueOf(
-                                ResourcesCompat.getColor(
-                                    mActivity.resources, R.color.colorAccent, null
-                                )
-                            )
+                            mActivity.getCompatColorStateList(R.color.colorAccent)
                         } else {
-                            ColorStateList.valueOf(
-                                ResourcesCompat.getColor(
-                                    mActivity.resources, R.color.colorGrayF2, null
-                                )
-                            )
+                            mActivity.getCompatColorStateList(R.color.colorGrayF2)
                         }
 
                         saveButton.strokeColor = if (isEnabled) {
-                            ColorStateList.valueOf(
-                                ResourcesCompat.getColor(
-                                    mActivity.resources, R.color.colorAccent, null
-                                )
-                            )
+                            mActivity.getCompatColorStateList(R.color.colorAccent)
                         } else {
-                            ColorStateList.valueOf(
-                                ResourcesCompat.getColor(
-                                    mActivity.resources, R.color.colorGray63, null
-                                )
-                            )
+                            mActivity.getCompatColorStateList(R.color.colorGray63)
                         }
 
                         saveButton.setTextColor(
                             if (isEnabled) {
-                                ResourcesCompat.getColor(mActivity.resources, R.color.colorWhite, null)
+                                mActivity.getCompatColor(R.color.colorWhite)
                             } else {
-                                ResourcesCompat.getColor(mActivity.resources, R.color.colorBlack, null)
+                                mActivity.getCompatColor(R.color.colorBlack)
                             }
                         )
                     }

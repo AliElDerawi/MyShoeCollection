@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.snackbar.Snackbar
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.ActivityMainBinding
@@ -17,6 +18,7 @@ import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.utils.AppSharedMethods
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
+import com.udacity.shoestore.utils.AppSharedMethods.showToast
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -73,6 +75,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
+
+        with(mMainViewModel) {
+
+            showToast.observe(this@MainActivity) {
+                AppSharedMethods.showToast(it)
+            }
+        }
+
 
     }
 

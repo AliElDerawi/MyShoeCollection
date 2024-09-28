@@ -22,6 +22,8 @@ import com.udacity.shoestore.databinding.FragmentCreateAccountBinding
 import com.udacity.shoestore.features.createAccount.viewModel.CreateAccountViewModel
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.utils.AppSharedData
+import com.udacity.shoestore.utils.AppSharedMethods.getCompatColor
+import com.udacity.shoestore.utils.AppSharedMethods.getCompatColorStateList
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -79,14 +81,13 @@ class CreateAccountFragment : BaseFragment() {
 
     private fun initViewModelObserver() {
 
-        with(mBinding){
+        with(mBinding) {
             mViewModel.completeCreateAccountLiveData.observe(mLifecycleOwner) { redirect ->
                 if (redirect) {
                     getSharedPreference().edit {
                         putBoolean(AppSharedData.PREF_IS_LOGIN, true)
                         putString(
-                            AppSharedData.PREF_USER_EMAIL,
-                            emailTextInputEditText.text.toString()
+                            AppSharedData.PREF_USER_EMAIL, emailTextInputEditText.text.toString()
                         )
                         putString(
                             AppSharedData.PREF_USER_PASSWORD,
@@ -104,38 +105,22 @@ class CreateAccountFragment : BaseFragment() {
                 lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     mViewModel.isCreateAccountButtonEnabled.collect { isEnabled ->
                         createAccountButton.backgroundTintList = if (isEnabled) {
-                            ColorStateList.valueOf(
-                                ResourcesCompat.getColor(
-                                    mActivity.resources, R.color.colorAccent, null
-                                )
-                            )
+                            mActivity.getCompatColorStateList(R.color.colorAccent)
                         } else {
-                            ColorStateList.valueOf(
-                                ResourcesCompat.getColor(
-                                    mActivity.resources, R.color.colorGrayF2, null
-                                )
-                            )
+                            mActivity.getCompatColorStateList(R.color.colorGrayF2)
                         }
 
                         createAccountButton.strokeColor = if (isEnabled) {
-                            ColorStateList.valueOf(
-                                ResourcesCompat.getColor(
-                                    mActivity.resources, R.color.colorAccent, null
-                                )
-                            )
+                            mActivity.getCompatColorStateList(R.color.colorAccent)
                         } else {
-                            ColorStateList.valueOf(
-                                ResourcesCompat.getColor(
-                                    mActivity.resources, R.color.colorGray63, null
-                                )
-                            )
+                            mActivity.getCompatColorStateList(R.color.colorGray63)
                         }
 
                         createAccountButton.setTextColor(
                             if (isEnabled) {
-                                ResourcesCompat.getColor(mActivity.resources, R.color.colorWhite, null)
+                                mActivity.getCompatColor(R.color.colorWhite)
                             } else {
-                                ResourcesCompat.getColor(mActivity.resources, R.color.colorBlack, null)
+                                mActivity.getCompatColor(R.color.colorBlack)
                             }
                         )
                     }

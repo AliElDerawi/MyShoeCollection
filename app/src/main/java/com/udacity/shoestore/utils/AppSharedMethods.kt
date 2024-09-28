@@ -1,8 +1,10 @@
 package com.udacity.shoestore.utils
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.ColorStateList
 import android.util.Patterns
 import android.widget.EditText
 import android.widget.ImageView
@@ -58,7 +60,7 @@ object AppSharedMethods {
         return !this.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(this.toString()).matches()
     }
 
-    fun Activity.getInstruction(): List<InstructionModel> {
+    fun Application.getInstruction(): List<InstructionModel> {
         val instructions = mutableListOf<InstructionModel>()
 //        instructions.add(InstructionModel("Welcome to ShoeStore", "In the ShoeStore app. You can add shoes to your bookmark and view them.", R.drawable.ic_shoe))
         instructions.add(
@@ -93,7 +95,7 @@ object AppSharedMethods {
     }
 
     fun getSharedPreference(): SharedPreferences {
-        return ShoeStoreApp.getApp()!!
+        return ShoeStoreApp.getApp()
             .getSharedPreferences(AppSharedData.MY_PREF, Context.MODE_PRIVATE)
     }
 
@@ -112,6 +114,17 @@ object AppSharedMethods {
         } else {
             return false
         }
+    }
 
+    fun Activity.getCompatColor(color: Int): Int {
+        return ResourcesCompat.getColor(resources, color, null)
+    }
+
+    fun Activity.getCompatColorStateList(color: Int): ColorStateList {
+        return  ColorStateList.valueOf(
+            ResourcesCompat.getColor(
+                resources, color, null
+            )
+        )
     }
 }
