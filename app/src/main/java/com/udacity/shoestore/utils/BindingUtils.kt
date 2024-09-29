@@ -1,32 +1,68 @@
 package com.udacity.shoestore.utils
 
-import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.udacity.shoestore.models.ShoeModel
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import com.udacity.shoestore.data.BaseRecyclerViewAdapter
+import me.relex.circleindicator.CircleIndicator3
 
-@BindingAdapter("shoeName")
-fun TextView.setShoeName(item: ShoeModel) {
-    text = item.name
+
+@BindingAdapter("text")
+fun TextView.setContent(text: String) {
+    this.text = text
 }
 
-@BindingAdapter("shoeCompany")
-fun TextView.setShoeCompany(item: ShoeModel) {
-    text = item.company
+@BindingAdapter("number")
+fun TextView.setNumber(number: Double) {
+    text = number.toString()
 }
 
-@BindingAdapter("shoeSize")
-fun TextView.setShoeSize(item: ShoeModel) {
-    text = item.size.toString()
+@BindingAdapter("number")
+fun TextView.setNumber(number: Int) {
+    text = number.toString()
 }
 
-@BindingAdapter("shoeDescription")
-fun TextView.setShoeDescription(item: ShoeModel) {
-    text = item.description
+@BindingAdapter("imageSrc")
+fun ImageView.setImageSrc(imageId: Int) {
+    setImageResource(imageId)
 }
 
-@BindingAdapter("editShoeName")
-fun EditText.saveShoeName(text : String){
 
+@BindingAdapter("recyclerData")
+fun <T : Any> RecyclerView.setData(list: MutableList<T>?) {
+
+    if (adapter == null) {
+
+        adapter as? BaseRecyclerViewAdapter<T>
+        this.adapter = adapter
+    }
+    (adapter as? BaseRecyclerViewAdapter<T>)?.submitList(list)
+}
+
+@BindingAdapter("viewPagerData","circleIndicator")
+fun <T : Any> ViewPager2.setData(list: MutableList<T>?, circleIndicator: CircleIndicator3) {
+
+    if (adapter == null) {
+
+        adapter as? BaseRecyclerViewAdapter<T>
+        this.adapter = adapter
+    }
+    (adapter as? BaseRecyclerViewAdapter<T>)?.submitList(list)
+    currentItem = 0
+    circleIndicator.setViewPager(this)
 
 }
+
+@BindingAdapter("config")
+fun <T : Any> CircularProgressBar.setConfig(list: MutableList<T>?) {
+
+    list?.let {
+        progressMax = list.size.toFloat()
+        progress = 1F
+    }
+
+}
+

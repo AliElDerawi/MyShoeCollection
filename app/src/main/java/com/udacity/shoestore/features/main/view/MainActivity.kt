@@ -10,17 +10,21 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.snackbar.Snackbar
 import com.udacity.shoestore.R
+import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.ActivityMainBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.utils.AppSharedMethods
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
+import com.udacity.shoestore.utils.AppSharedMethods.showToast
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val mMainViewModel: MainViewModel by viewModels<MainViewModel>()
+    private val mMainViewModel: MainViewModel by inject()
 
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -34,28 +38,52 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mBinding.mainToolbar.setTitle(null)
         navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph)
-        Timber.plant(Timber.DebugTree())
         initViewModelObservers()
         initListeners()
 
     }
 
     private fun initViewModelObservers() {
-        mMainViewModel.hideToolbar.observe(this) {
-            if (it) {
-                mBinding.mainToolbar.visibility = View.GONE
-            } else {
-                mBinding.mainToolbar.visibility = View.VISIBLE
+
+        with(mBinding){
+            mMainViewModel.hideToolbar.observe(this@MainActivity) {
+                if (it) {
+                    mainToolbar.visibility = View.GONE
+                } else {
+                    mainToolbar.visibility = View.VISIBLE
+                }
+            }
+            mMainViewModel.toolbarTitle.observe(this@MainActivity) {
+                textViewToolbarTitle.text = it
+            }
+
+            mMainViewModel.showUpButton.observe(this@MainActivity){
+                supportActionBar!!.setDisplayHomeAsUpEnabled(it)
+            }
+
+            mMainViewModel.navigationCommand.observe(this@MainActivity) { command ->
+
+                Timber.d("initViewModelObserver:command: " + command.toString())
+
+                when (command) {
+                    is NavigationCommand.To -> navController.navigate(command.directions)
+                    is NavigationCommand.Back -> onBackPressed()
+                    is NavigationCommand.BackTo -> navController.popBackStack(
+                        command.destinationId,
+                        false
+                    )
+                }
             }
         }
 
-        mMainViewModel.toolbarTitle.observe(this) {
-            mBinding.textViewToolbarTitle.text = it
+        with(mMainViewModel) {
+
+            showToast.observe(this@MainActivity) {
+                AppSharedMethods.showToast(it)
+            }
         }
 
-        mMainViewModel.showUpButton.observe(this){
-            supportActionBar!!.setDisplayHomeAsUpEnabled(it)
-        }
+
     }
 
     private fun initListeners() {

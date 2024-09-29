@@ -49,6 +49,11 @@
     <string name="please_enter_shoe_size">Please enter shoe size</string>
     <string name="text_please_enter_shoe_description">Please enter shoe description</string>
     <string name="text_msg_invalid_email_or_password">Invalid Email or Password</string>
+    <string name="text_hint_description">Description</string>
+    <string name="text_description_instruction_image">Instruction image</string>
+    <string name="text_bookmarked_shoe_image">Bookmarked Shoe Image</string>
+    <string name="text_description_app_logo">App Logo</string>
+    <string name="text_description_welcome_image">Welcome Image</string>
 
 
 </resources>

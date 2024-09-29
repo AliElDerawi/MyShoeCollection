@@ -3,39 +3,41 @@ package com.udacity.shoestore.features.login.view
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.edit
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
+import com.udacity.shoestore.data.BaseFragment
+import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.FragmentLoginBinding
 import com.udacity.shoestore.features.login.viewModel.LoginViewModel
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
 
 
     private lateinit var mBinding: FragmentLoginBinding
 
-    private val mSharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
+    private val mSharedViewModel: MainViewModel by inject()
 
-    private val mLoginViewModel: LoginViewModel by viewModels<LoginViewModel>()
+    override val mViewModel: LoginViewModel by viewModel()
 
-    private lateinit var mActivity: Activity
+    private lateinit var mActivity: FragmentActivity
 
     private lateinit var mLifecycleOwner: LifecycleOwner
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is Activity) {
+        if (context is FragmentActivity) {
             mActivity = context
         }
     }
@@ -50,8 +52,8 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         mBinding = FragmentLoginBinding.inflate(inflater, container, false)
         mSharedViewModel.setHideToolbar(true)
-        mBinding.loginViewModel = mLoginViewModel
-        mLifecycleOwner = this
+        mBinding.loginViewModel = mViewModel
+        mLifecycleOwner = viewLifecycleOwner
         mBinding.lifecycleOwner = this
         return mBinding.root
     }
@@ -68,26 +70,40 @@ class LoginFragment : Fragment() {
 
     private fun initViewModelObserver() {
 
-        mLoginViewModel.completeLoginLiveData.observe(mLifecycleOwner) { redirect ->
-            if (redirect) {
-                getSharedPreference().edit {
-                    putBoolean(AppSharedData.PREF_IS_LOGIN, true)
+        with(mBinding){
+            mViewModel.completeLoginLiveData.observe(mLifecycleOwner) { redirect ->
+                if (redirect) {
+                    getSharedPreference().edit {
+                        putBoolean(AppSharedData.PREF_IS_LOGIN, true)
+                    }
+                    if (getSharedPreference().getBoolean(AppSharedData.PREF_IS_NEW_USER, true)) {
+                        mSharedViewModel.navigationCommand.value = NavigationCommand.To(
+                            LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
+                        )
+                    } else {
+                        mSharedViewModel.navigationCommand.value =
+                            NavigationCommand.To(LoginFragmentDirections.actionLoginFragmentToShoesListFragment())
+                    }
                 }
-                mLoginViewModel.setCompleteLogin(false)
-                if (getSharedPreference().getBoolean(AppSharedData.PREF_IS_NEW_USER, true)) {
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToWelcomeFragment())
-                } else {
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToShoesListFragment())
+            }
+
+            mViewModel.onCreateAccountClick.observe(mLifecycleOwner) {
+                if (it) {
+                    mSharedViewModel.navigationCommand.value =
+                        NavigationCommand.To(LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment())
                 }
+            }
+
+            mViewModel.showEmailError.observe(mLifecycleOwner) {
+                emailTextInputEditText.error = mActivity.getString(it)
+                mViewModel.showToastInt.value = it
+            }
+
+            mViewModel.showPasswordError.observe(mLifecycleOwner) {
+                mViewModel.showToastInt.value = it
             }
         }
 
-        mLoginViewModel.onCreateAccountClick.observe(mLifecycleOwner) {
-            if (it) {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment())
-                mLoginViewModel.setCreateAccountClick(false)
-            }
-        }
 
     }
 

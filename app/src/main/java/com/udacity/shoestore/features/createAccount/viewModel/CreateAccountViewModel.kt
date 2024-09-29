@@ -1,63 +1,67 @@
 package com.udacity.shoestore.features.createAccount.viewModel
 
-import android.app.Activity
-import android.widget.EditText
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.udacity.shoestore.R
-import com.udacity.shoestore.utils.AppSharedMethods.isEmpty
+import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.utils.AppSharedMethods.isValidEmail
-import com.udacity.shoestore.utils.AppSharedMethods.showToast
+import com.udacity.shoestore.utils.SingleLiveEvent
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 
-class CreateAccountViewModel : ViewModel() {
+class CreateAccountViewModel(val app: Application) : BaseViewModel(app) {
 
-    private val _completeCreateAccountLiveData = MutableLiveData<Boolean>()
-
+    private val _completeCreateAccountLiveData = SingleLiveEvent<Boolean>()
     val completeCreateAccountLiveData: MutableLiveData<Boolean>
         get() = _completeCreateAccountLiveData
 
-    private val _emailLiveData = MutableLiveData<String>("")
-    val emailLiveData: MutableLiveData<String>
-        get() = _emailLiveData
+    private val _emailStateFlow = MutableStateFlow("")
+    val emailStateFlow: StateFlow<String>
+        get() = _emailStateFlow
 
-    private val _passwordLiveData = MutableLiveData<String>("")
-    val passwordLiveData: MutableLiveData<String>
-        get() = _passwordLiveData
+    private val _passwordStateFlow = MutableStateFlow("")
+    val passwordStateFlow: StateFlow<String>
+        get() = _passwordStateFlow
 
-    private val _confirmPasswordLiveData = MutableLiveData<String>("")
-    val confirmPasswordLiveData: MutableLiveData<String>
-        get() = _confirmPasswordLiveData
+    private val _confirmPasswordStateFlow = MutableStateFlow("")
+    val confirmPasswordStateFlow: StateFlow<String>
+        get() = _confirmPasswordStateFlow
 
-    fun setCompleteCreateAccount(completeCreateAccount: Boolean) {
-        _completeCreateAccountLiveData.value = completeCreateAccount
-    }
-
+    val isCreateAccountButtonEnabled: StateFlow<Boolean> = combine(
+        _emailStateFlow, _passwordStateFlow, _confirmPasswordStateFlow
+    ) { email, password, confirmPassword ->
+        email.isNotEmpty() && email.isValidEmail() && password.isNotEmpty() && confirmPassword.isNotEmpty() && password == confirmPassword
+    }.stateIn(viewModelScope, SharingStarted.Lazily, false)
 
     fun onEmailTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        _emailLiveData.value = s.toString()
+        _emailStateFlow.value = s.toString()
     }
 
     fun onPasswordTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        _passwordLiveData.value = s.toString()
+        _passwordStateFlow.value = s.toString()
     }
 
     fun onConfirmPasswordTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        _confirmPasswordLiveData.value = s.toString()
+        _confirmPasswordStateFlow.value = s.toString()
     }
 
 
     fun createAccount(
     ) {
-        if (_emailLiveData.value!!.isEmpty()) {
-            showToast(R.string.text_msg_please_enter_email)
-        } else if (!_emailLiveData.value!!.isValidEmail()) {
-            showToast(R.string.text_msg_enter_valid_email_address)
-        } else if (_passwordLiveData.value!!.isEmpty()) {
-            showToast(R.string.text_msg_please_enter_password)
-        } else if (_confirmPasswordLiveData.value!!.isEmpty()) {
-            showToast(R.string.text_msg_please_enter_confirm_password)
-        } else if (_passwordLiveData.value.toString() != _confirmPasswordLiveData.value.toString()) {
-            showToast(R.string.text_msg_password_mismatch)
+        if (_emailStateFlow.value.isEmpty()) {
+            showToastInt.value = R.string.text_msg_please_enter_email
+        } else if (!_emailStateFlow.value.isValidEmail()) {
+            showToastInt.value = R.string.text_msg_enter_valid_email_address
+        } else if (_passwordStateFlow.value.isEmpty()) {
+            showToastInt.value = R.string.text_msg_please_enter_password
+        } else if (_confirmPasswordStateFlow.value.isEmpty()) {
+            showToastInt.value = R.string.text_msg_please_enter_confirm_password
+        } else if (_passwordStateFlow.value != _confirmPasswordStateFlow.value) {
+            showToastInt.value = R.string.text_msg_password_mismatch
         } else {
             _completeCreateAccountLiveData.value = true
         }

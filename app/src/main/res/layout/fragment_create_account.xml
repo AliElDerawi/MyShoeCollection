@@ -32,8 +32,8 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="@dimen/margin_left_right"
                 app:cardBackgroundColor="@color/colorWhite"
-                app:cardCornerRadius="30dp"
-                app:cardElevation="4dp"
+                app:cardCornerRadius="@dimen/dim_30_dp"
+                app:cardElevation="@dimen/dim_4_dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -44,6 +44,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
+                    android:contentDescription="@string/text_description_app_logo"
                     app:srcCompat="@drawable/ic_shoe"
                     app:tint="@color/colorAccent" />
 
@@ -94,58 +95,49 @@
                 app:cardElevation="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/subTitle_textView"
                 app:strokeColor="@color/colorUnSelectedEditText"
-                app:strokeWidth="1dp">
+                app:strokeWidth="@dimen/dim_1_dp">
 
-                <FrameLayout
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_textInputLayout"
+                    style="@style/CustomFontTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp">
+                    android:hint="@string/hint_email"
+                    android:paddingStart="@dimen/dim_2_dp"
+                    android:paddingEnd="@dimen/dim_2_dp"
+                    android:textColorHint="@color/colorBlack"
+                    app:boxBackgroundColor="@color/colorTrans"
+                    app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
+                    app:boxCornerRadiusBottomEnd="0dp"
+                    app:boxCornerRadiusBottomStart="0dp"
+                    app:boxCornerRadiusTopEnd="0dp"
+                    app:boxCornerRadiusTopStart="0dp"
+                    app:boxStrokeColor="@color/colorTrans"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:counterOverflowTextColor="@color/colorBlack"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/colorBlack"
+                    app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
+                    app:placeholderTextColor="@color/colorDark31">
 
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/email_textInputLayout"
-                        style="@style/CustomFontTextInputLayout"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email_textInputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/hint_email"
-                        android:textColorHint="@color/colorBlack"
-                        app:boxBackgroundColor="@color/colorTrans"
-                        app:boxCollapsedPaddingTop="7dp"
-                        app:boxCornerRadiusBottomEnd="0dp"
-                        app:boxCornerRadiusBottomStart="0dp"
-                        app:boxCornerRadiusTopEnd="0dp"
-                        app:boxCornerRadiusTopStart="0dp"
-                        app:boxStrokeColor="@color/colorTrans"
-                        app:boxStrokeWidth="0dp"
-                        app:boxStrokeWidthFocused="0dp"
-                        app:counterOverflowTextColor="@color/colorBlack"
-                        app:hintTextAppearance="@style/TextInputLayoutHintText"
-                        app:hintTextColor="@color/colorBlack"
-                        app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
-                        app:placeholderTextColor="@color/colorDark31">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/email_textInputEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:imeOptions="actionNext"
-                            android:inputType="textEmailAddress"
-                            android:textColor="@color/colorDark1C"
-                            android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onEmailTextChanged(text,start,before,count)}"
-                            android:textCursorDrawable="@color/colorDark31"
-                            android:textSize="@dimen/text_small"
-                            android:theme="@style/regularFont"
-                            tools:text="@string/text_placeholder_email"
-                            tools:textAlignment="viewStart" />
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onEmailTextChanged(text,start,before,count)}"
+                        android:textColor="@color/colorDark1C"
+                        android:textCursorDrawable="@color/colorDark31"
+                        android:textSize="@dimen/text_small"
+                        android:theme="@style/regularFont"
+                        tools:text="@string/text_placeholder_email"
+                        tools:textAlignment="viewStart" />
 
 
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                </FrameLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
             </com.google.android.material.card.MaterialCardView>
@@ -162,61 +154,52 @@
                 app:cardElevation="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/email_cardView"
                 app:strokeColor="@color/colorUnSelectedEditText"
-                app:strokeWidth="1dp">
+                app:strokeWidth="@dimen/dim_1_dp">
 
-                <FrameLayout
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_textInputLayout"
+                    style="@style/CustomFontTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp">
+                    android:hint="@string/hint_password"
+                    android:paddingStart="@dimen/dim_2_dp"
+                    android:paddingEnd="@dimen/dim_2_dp"
+                    android:textColorHint="@color/colorBlack"
+                    app:boxBackgroundColor="@color/colorTrans"
+                    app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
+                    app:boxCornerRadiusBottomEnd="0dp"
+                    app:boxCornerRadiusBottomStart="0dp"
+                    app:boxCornerRadiusTopEnd="0dp"
+                    app:boxCornerRadiusTopStart="0dp"
+                    app:boxStrokeColor="@color/colorTrans"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:counterOverflowTextColor="@color/colorBlack"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/colorBlack"
+                    app:passwordToggleDrawable="@drawable/bg_password_status"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorDark1C"
+                    app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
+                    app:placeholderTextColor="@color/colorDark31">
 
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/password_textInputLayout"
-                        style="@style/CustomFontTextInputLayout"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password_textInputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/hint_password"
-                        android:textColorHint="@color/colorBlack"
-                        app:boxBackgroundColor="@color/colorTrans"
-                        app:boxCollapsedPaddingTop="7dp"
-                        app:boxCornerRadiusBottomEnd="0dp"
-                        app:boxCornerRadiusBottomStart="0dp"
-                        app:boxCornerRadiusTopEnd="0dp"
-                        app:boxCornerRadiusTopStart="0dp"
-                        app:boxStrokeColor="@color/colorTrans"
-                        app:boxStrokeWidth="0dp"
-                        app:boxStrokeWidthFocused="0dp"
-                        app:counterOverflowTextColor="@color/colorBlack"
-                        app:hintTextAppearance="@style/TextInputLayoutHintText"
-                        app:hintTextColor="@color/colorBlack"
-                        app:passwordToggleDrawable="@drawable/bg_password_status"
-                        app:passwordToggleEnabled="true"
-                        app:passwordToggleTint="@color/colorDark1C"
-                        app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
-                        app:placeholderTextColor="@color/colorDark31">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/password_textInputEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:imeOptions="actionNext"
-                            android:inputType="textPassword"
-                            android:textColor="@color/colorDark1C"
-                            android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onPasswordTextChanged(text,start,before,count)}"
-                            android:textCursorDrawable="@color/colorDark31"
-                            android:textSize="@dimen/text_small"
-                            android:theme="@style/regularFont"
-                            tools:text="@string/text_placeholder_email"
-                            tools:textAlignment="viewStart" />
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onPasswordTextChanged(text,start,before,count)}"
+                        android:textColor="@color/colorDark1C"
+                        android:textCursorDrawable="@color/colorDark31"
+                        android:textSize="@dimen/text_small"
+                        android:theme="@style/regularFont"
+                        tools:text="@string/text_placeholder_email"
+                        tools:textAlignment="viewStart" />
 
 
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                </FrameLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
             </com.google.android.material.card.MaterialCardView>
@@ -232,67 +215,58 @@
                 app:cardElevation="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/password_cardView"
                 app:strokeColor="@color/colorUnSelectedEditText"
-                app:strokeWidth="1dp">
+                app:strokeWidth="@dimen/dim_1_dp">
 
-                <FrameLayout
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/confirm_password_textInputLayout"
+                    style="@style/CustomFontTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp">
+                    android:hint="@string/text_confirm_password"
+                    android:paddingStart="@dimen/dim_2_dp"
+                    android:paddingEnd="@dimen/dim_2_dp"
+                    android:textColorHint="@color/colorBlack"
+                    app:boxBackgroundColor="@color/colorTrans"
+                    app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
+                    app:boxCornerRadiusBottomEnd="0dp"
+                    app:boxCornerRadiusBottomStart="0dp"
+                    app:boxCornerRadiusTopEnd="0dp"
+                    app:boxCornerRadiusTopStart="0dp"
+                    app:boxStrokeColor="@color/colorTrans"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:counterOverflowTextColor="@color/colorBlack"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/colorBlack"
+                    app:passwordToggleDrawable="@drawable/bg_password_status"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorDark1C"
+                    app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
+                    app:placeholderTextColor="@color/colorDark31">
 
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/confirm_password_textInputLayout"
-                        style="@style/CustomFontTextInputLayout"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/confirm_password_textInputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/text_confirm_password"
-                        android:textColorHint="@color/colorBlack"
-                        app:boxBackgroundColor="@color/colorTrans"
-                        app:boxCollapsedPaddingTop="7dp"
-                        app:boxCornerRadiusBottomEnd="0dp"
-                        app:boxCornerRadiusBottomStart="0dp"
-                        app:boxCornerRadiusTopEnd="0dp"
-                        app:boxCornerRadiusTopStart="0dp"
-                        app:boxStrokeColor="@color/colorTrans"
-                        app:boxStrokeWidth="0dp"
-                        app:boxStrokeWidthFocused="0dp"
-                        app:counterOverflowTextColor="@color/colorBlack"
-                        app:hintTextAppearance="@style/TextInputLayoutHintText"
-                        app:hintTextColor="@color/colorBlack"
-                        app:passwordToggleDrawable="@drawable/bg_password_status"
-                        app:passwordToggleEnabled="true"
-                        app:passwordToggleTint="@color/colorDark1C"
-                        app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
-                        app:placeholderTextColor="@color/colorDark31">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/confirm_password_textInputEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:imeOptions="actionDone"
-                            android:inputType="textPassword"
-                            android:textColor="@color/colorDark1C"
-                            android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onConfirmPasswordTextChanged(text,start,before,count)}"
-                            android:textCursorDrawable="@color/colorDark31"
-                            android:textSize="@dimen/text_small"
-                            android:theme="@style/regularFont"
-                            tools:text="@string/text_placeholder_email"
-                            tools:textAlignment="viewStart" />
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onConfirmPasswordTextChanged(text,start,before,count)}"
+                        android:textColor="@color/colorDark1C"
+                        android:textCursorDrawable="@color/colorDark31"
+                        android:textSize="@dimen/text_small"
+                        android:theme="@style/regularFont"
+                        tools:text="@string/text_placeholder_email"
+                        tools:textAlignment="viewStart" />
 
 
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                </FrameLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
             </com.google.android.material.card.MaterialCardView>
 
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/create_account_button"
                 style="@style/buttonStyleNew"
                 android:layout_width="match_parent"
@@ -301,16 +275,17 @@
                 android:layout_marginTop="@dimen/margin_left_right"
                 android:layout_marginEnd="@dimen/margin_btnView"
                 android:layout_marginBottom="@dimen/margin_left_right"
-                android:backgroundTint="@color/colorAccent"
+                android:backgroundTint="@color/colorGrayF2"
                 android:elevation="0dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:onClick="@{() -> createAccountViewModel.createAccount()}"
                 android:text="@string/text_create_account"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
                 app:cornerRadius="@dimen/dim_button_corner"
                 app:layout_constraintTop_toBottomOf="@+id/confirm_password_cardView"
-                app:strokeWidth="0dp" />
+                app:strokeColor="@color/colorGray63"
+                app:strokeWidth="@dimen/dim_1_dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
