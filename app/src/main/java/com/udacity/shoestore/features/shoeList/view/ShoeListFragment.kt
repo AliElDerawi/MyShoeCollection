@@ -66,16 +66,16 @@ class ShoeListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        initViewModelObserver()
         setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
 
         mBinding.shoesListRecyclerView.adapter =
-            ItemBookmarkShoeAdapter(ShoeModel.getShoeModelCallback(), { shoeModel ->
-                mSharedViewModel.showToast.value = "Handling Click in Generic List Adapter"
-            })
+            ItemBookmarkShoeAdapter(ShoeModel.getShoeModelCallback()) { shoeModel ->
+                mSharedViewModel.showToast.value =
+                    "Handling Click in Generic List Adapter: ${shoeModel.name}"
+            }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
