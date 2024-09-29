@@ -20,7 +20,6 @@
         <!--  LinearLayout is used here since there's no nested relation   -->
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,6 +39,7 @@
                     android:id="@+id/icon_imageView"
                     android:layout_width="match_parent"
                     android:layout_height="276dp"
+                    android:contentDescription="@string/text_description_instruction_image"
                     app:imageSrc="@{shoe.drawable}"
                     app:srcCompat="@drawable/ic_shoe"
                     app:tint="@color/colorAccent" />
@@ -52,9 +52,9 @@
                 android:id="@+id/title_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:text="@{shoe.title}"
                 android:layout_marginTop="@dimen/margin_left_right"
                 android:theme="@style/TitleStyle"
+                app:text="@{shoe.title}"
                 tools:text="@string/app_name" />
 
 
@@ -64,9 +64,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                app:text="@{shoe.description}"
                 android:lineSpacingMultiplier="0.7"
                 android:theme="@style/BodyStyle"
+                app:text="@{shoe.description}"
                 tools:text="@string/app_name" />
 
 

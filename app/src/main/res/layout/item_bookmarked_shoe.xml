@@ -17,18 +17,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:paddingStart="4dp"
         android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dim_4_dp"
         android:paddingEnd="@dimen/margin_small">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/logo_cardView"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="@dimen/dim_4_dp"
             app:cardBackgroundColor="@color/colorWhite"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="4dp"
+            app:cardCornerRadius="@dimen/dim_30_dp"
+            app:cardElevation="@dimen/dim_4_dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,6 +39,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:contentDescription="@string/text_bookmarked_shoe_image"
                 app:srcCompat="@drawable/ic_shoe"
                 app:tint="@color/colorAccent" />
 
@@ -87,13 +88,13 @@
             android:layout_marginStart="@dimen/margin_btnView"
             android:gravity="center_vertical"
             android:lineSpacingMultiplier="0.7"
-            tools:text="@string/app_name"
             android:textColor="@color/colorDark1C"
             android:theme="@style/BodyStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/logo_cardView"
             app:layout_constraintTop_toBottomOf="@+id/company_textView"
-            app:number="@{shoe.size}" />
+            app:number="@{shoe.size}"
+            tools:text="@string/app_name" />
 
 
         <TextView
@@ -103,21 +104,21 @@
             android:layout_marginStart="@dimen/margin_btnView"
             android:gravity="center_vertical"
             android:lineSpacingMultiplier="0.7"
-            tools:text="@string/app_name"
             android:textColor="@color/colorDark1C"
             android:theme="@style/BodyStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/logo_cardView"
             app:layout_constraintTop_toBottomOf="@+id/size_textView"
-            app:text="@{shoe.description}" />
+            app:text="@{shoe.description}"
+            tools:text="@string/app_name" />
 
 
         <View
             android:id="@+id/divider_view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="@dimen/dim_4_dp"
+            android:layout_marginTop="@dimen/dim_12_dp"
             android:background="@color/colorDivider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description_textView" />

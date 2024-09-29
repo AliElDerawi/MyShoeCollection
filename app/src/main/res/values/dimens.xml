@@ -3,6 +3,7 @@
 
     <dimen name="text_mini">12sp</dimen>
     <dimen name="text_small">14sp</dimen>
+    <dimen name="text_small_extra">15sp</dimen>
     <dimen name="text_normal">16sp</dimen>
     <dimen name="text_sub_title">18sp</dimen>
     <dimen name="text_large">20sp</dimen>
@@ -21,6 +22,17 @@
     <dimen name="dim_edittext_height">56dp</dimen>
     <dimen name="dim_button_corner">14dp</dimen>
     <dimen name="dim_back_radius">18dp</dimen>
+    <dimen name="dim_30_dp">30dp</dimen>
+    <dimen name="dim_4_dp">4dp</dimen>
+    <dimen name="dim_1_dp">1dp</dimen>
+    <dimen name="dim_2_dp">2dp</dimen>
+    <dimen name="dim_7_dp">7dp</dimen>
+    <dimen name="dim_20_dp">20dp</dimen>
+    <dimen name="dim_6_dp">6dp</dimen>
+    <dimen name="dim_46_dp">46dp</dimen>
+    <dimen name="dim_10_dp">10dp</dimen>
+    <dimen name="dim_52_dp">52dp</dimen>
+    <dimen name="dim_12_dp">12dp</dimen>
 
 
 </resources>
