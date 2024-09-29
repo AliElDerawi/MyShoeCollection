@@ -42,43 +42,42 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.13.1'
-    implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'com.google.android.material:material:1.12.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation "com.jakewharton.timber:timber:5.0.1"
+    implementation "androidx.core:core-ktx:$coreVersion"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
     // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:2.8.1"
-    implementation "androidx.navigation:navigation-ui-ktx:2.8.1"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$junitTestVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
-    implementation 'me.relex:circleindicator:2.1.6'
-    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    // For control over item selection of both touch and mouse driven selection
+    implementation "androidx.recyclerview:recyclerview-selection:$recyclerViewSelectionVersion"
+
+    implementation "androidx.multidex:multidex:$multidexVersion"
+
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    implementation "me.relex:circleindicator:$circularIndicatorVersion"
+    implementation "com.mikhaellopez:circularprogressbar:$circularProgressBarIndicatorVersion"
 
     implementation "com.github.bumptech.glide:glide:$glide_version"
     ksp "com.github.bumptech.glide:ksp:$glide_version"
 
-    implementation 'androidx.multidex:multidex:2.0.1'
-
     // Koin
     implementation "io.insert-koin:koin-android:$koinVersion"
-    implementation("io.insert-koin:koin-core:$koinVersion")
+    implementation "io.insert-koin:koin-core:$koinVersion"
 
-    implementation("io.insert-koin:koin-android-compat:$koinVersion")
+    implementation "io.insert-koin:koin-android-compat:$koinVersion"
     // Jetpack WorkManager
-    implementation("io.insert-koin:koin-androidx-workmanager:$koinVersion")
+    implementation "io.insert-koin:koin-androidx-workmanager:$koinVersion"
     // Navigation Graph
-    implementation("io.insert-koin:koin-androidx-navigation:$koinVersion")
-
-    implementation "androidx.recyclerview:recyclerview:1.3.2"
-    // For control over item selection of both touch and mouse driven selection
-    implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
-
-
+    implementation "io.insert-koin:koin-androidx-navigation:$koinVersion"
 
 
 }
