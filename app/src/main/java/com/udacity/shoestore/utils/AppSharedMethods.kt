@@ -20,17 +20,13 @@ object AppSharedMethods {
     private var mToast: Toast? = null
 
     fun Activity.showToast(message: String, duration: Int = Toast.LENGTH_LONG) {
-        if (mToast != null) {
-            mToast!!.cancel()
-        }
+        mToast?.cancel()
         mToast = Toast.makeText(ShoeStoreApp.getApp().applicationContext, message, duration)
         mToast!!.show()
     }
 
     fun showToast(message: String, duration: Int = Toast.LENGTH_LONG) {
-        if (mToast != null) {
-            mToast!!.cancel()
-        }
+        mToast?.cancel()
         mToast = Toast.makeText(
             ShoeStoreApp.getApp().applicationContext, message, duration
         )
@@ -38,9 +34,7 @@ object AppSharedMethods {
     }
 
     fun showToast(message: Int, duration: Int = Toast.LENGTH_LONG) {
-        if (mToast != null) {
-            mToast!!.cancel()
-        }
+        mToast?.cancel()
         mToast = Toast.makeText(
             ShoeStoreApp.getApp().applicationContext, message, duration
         )
@@ -57,12 +51,11 @@ object AppSharedMethods {
     }
 
     fun String.isValidEmail(): Boolean {
-        return !this.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(this.toString()).matches()
+        return this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
     }
 
     fun Application.getInstruction(): List<InstructionModel> {
         val instructions = mutableListOf<InstructionModel>()
-//        instructions.add(InstructionModel("Welcome to ShoeStore", "In the ShoeStore app. You can add shoes to your bookmark and view them.", R.drawable.ic_shoe))
         instructions.add(
             InstructionModel(
                 getString(R.string.text_instruction_title_01),
@@ -99,21 +92,12 @@ object AppSharedMethods {
             .getSharedPreferences(AppSharedData.MY_PREF, Context.MODE_PRIVATE)
     }
 
-    fun <T> MutableLiveData<T>.notifyObserver() {
-        this.value = this.value
-    }
-
     fun checkIfUserExist(email: String, password: String): Boolean {
-        if (getSharedPreference().contains(AppSharedData.PREF_USER_EMAIL)) {
-            return getSharedPreference().getString(
-                AppSharedData.PREF_USER_EMAIL,
-                ""
-            ) == email && getSharedPreference().getString(
-                AppSharedData.PREF_USER_PASSWORD, ""
-            ) == password
-        } else {
-            return false
-        }
+        val sharedPreferences = getSharedPreference()
+        val storedEmail = sharedPreferences.getString(AppSharedData.PREF_USER_EMAIL, null)
+        val storedPassword = sharedPreferences.getString(AppSharedData.PREF_USER_PASSWORD, null)
+
+        return storedEmail == email && storedPassword == password
     }
 
     fun Activity.getCompatColor(color: Int): Int {
@@ -121,7 +105,7 @@ object AppSharedMethods {
     }
 
     fun Activity.getCompatColorStateList(color: Int): ColorStateList {
-        return  ColorStateList.valueOf(
+        return ColorStateList.valueOf(
             ResourcesCompat.getColor(
                 resources, color, null
             )
