@@ -1,78 +1,58 @@
-# The Shoe Store
+# ShoeStore
 
-This project will consist of five screens. You don't have to create a shoe store, you can use any other item as long as you create the following screens. You will be creating:
+SheoStore is an app for bookmarking your favorite shoes, it has been developed for **Udacity Android Kotlin Developer Nanodegree Program**.
 
-1. Login screen: Email and password fields and labels plus create and login buttons
-2. Welcome onboarding screen
-3. Instructions onboarding screen
-4. Shoe Listing screen
-5. Shoe Detail screen for adding a new shoe
+The main features of this realese are:
+* Ability to create your own bookmarked shoes list and save Data inside SharedViewModel.
+* Using the App in Landscape and Portrait mode without any data missing or reloading the data.
+* Implement layout using ConstraintLayout only or non-nested LinearLayout or FrameLayout.
+* Implement MVVM Design Pattern.
+* Implement Clean Architecture.
+* Implement the power of DatabindingAdapter.
+* Implement Koin for Dependency injection.
+* Implement Flow to create dynamic filling forms.
+* Implement Single Activity and multiple fragments Design Patterns.
+* Onboarding screen.
 
-## Getting Started
 
-Open the starter project in the latest stable version of Android Studio.
+What External library used:
+-------
 
-Open the starter project in Android Studio
+* [Timber](https://github.com/JakeWharton/timber), for code logging.
 
-##Steps
+* [Glidev4](http://bumptech.github.io/glide/doc/getting-started.html), for loading and fetching photos.
 
-1. Open the starter project in Android Studio
+* [Koin](https://github.com/johncarl81/parceler), for dependany injection.
 
-2. Add the navigation libraries to the app build.gradle file
+* [CircleIndicator](https://github.com/ongakuer/CircleIndicator), for ViewPager pages indicator.
 
-3. Add the safe-arg plugin to the main and app build.gradle file
+* [CircularProgressBar](https://github.com/lopspower/CircularProgressBar), for Circular Progress for Onboarding screens.
 
-4. Create a new navigation xml file
+* [KSP](https://developer.android.com/build/migrate-to-ksp), for annotation processors compiler plugins.
 
-5. Create a new Login destination.
 
-   * Include email and password labels 
+Useful links:
+-------
 
-   - Include email and password fields
-   - Create buttons for creating a new login and logging in with an existing account
-   - Clicking either button should navigate to the Welcome Screen.
+* [Android Kotlin Developer Nanodegree Program](https://www.udacity.com/course/android-kotlin-developer-nanodegree--nd940), for full details of the Program and its related projects.
+* [Starter Project Code](https://github.com/udacity/nd940-android-kotlin-course1-starter), for the starter code of the Project.
+* [Project Rubric](https://docs.google.com/document/d/1n1vvMoQ_cv2E9NDcej7WDQMTqsY096dTPyh7Alkb1_0/edit?usp=sharing), for the Project Rubric.
 
-6. Create a new Welcome screen destination that includes:
 
-   * A new layout
-   * At least 2 textviews
-   * A navigation button with actions to navigate to the instructions screen
+Snapshots from the app:
+-------
+* Phone Screens (Portrait):
 
-7. Create a new Instruction destination that includes:
+<p align="center">
+  <img src="./images/login.jpg" width="300" height="530" />  
+  <img src="./images/onboarding.jpg" width="300" height="530" /> 
+  <img src="./images/add_shoe_to_bookmark.jpg" width="300" height="530" /> 
+  <img src="./images/flow_form.gif" width="300" height="530" /> 
 
-   * A new layout
-   * At least 2 textviews
-   * A navigation button with actions to navigate to the shoe list screen
+</p>
 
-8. Create a class that extends ViewModel
+* Phone Screens (Landscape):
 
-   *  Use a LiveData field that returns the list of shoes
-
-9. Create a new Shoe List destination that includes:
-
-   * A new layout
-   * A ScrollView
-   * A LinearLayout for Shoe Items
-   * A FloatingActionButton with an action to navigate to the shoe detail screen
-
-10. In MainActivity, setup the nav controller with the toolbar and an AppBarConfiguration.
-
-11. Create a new Shoe Detail destination that includes:
-
-    * A new layout
-    * A TextView label and EditView for the
-      * Shoe Name
-      * Company
-      * Shoe Size
-      * Description
-    * A Cancel button with an action to navigate back to the shoe list screen
-    * A Save button with an action to navigate back to the shoe list screen and add a new Shoe to the Shoe View Model
-
-12. Make sure you can’t go back to onboarding screens
-
-13. In the Shoe List screen:
-
-    * Use an Activity level ViewModel to hold a list of Shoes (use by activityViewModels)
-    * Observe the shoes variable from the ViewModel
-    * Use DataBindingUtil to inflate the shoe_list layout
-    * Add a new layout item into the scrollview for each shoe.
+<p align="center">
+  <img src="./images/bookmark_list_landscape.jpg" width="530" height="300" />
+</p>
