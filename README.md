@@ -54,5 +54,5 @@ Snapshots from the app:
 * Phone Screens (Landscape):
 
 <p align="center">
-  <img src="./images/bookmark_list_landscape.jpg" width="530" height="300" />
+  <img src="./images/bookmark_list_landscape.jpg" width="630" height="400" />
 </p>
