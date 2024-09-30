@@ -3,11 +3,11 @@
 SheoStore is an app for bookmarking your favorite shoes, it has been developed for **Udacity Android Kotlin Developer Nanodegree Program**.
 
 The main features of this realese are:
-* Ability to create your own bookmarked shoes list and save Data inside SharedViewModel.
-* Using the App in Landscape and Portrait mode without any data missing or reloading the data.
-* Implement layout using ConstraintLayout only or non-nested LinearLayout or FrameLayout.
 * Implement MVVM Design Pattern.
+* Ability to create your own bookmarked shoes list and save Data inside SharedViewModel.
 * Implement Clean Architecture.
+* Using the App in Landscape and Portrait mode without any data missing or reloading the data.
+* Implement simplified layout using ConstraintLayout only or non-nested LinearLayout or FrameLayout.
 * Implement the power of DatabindingAdapter.
 * Implement Koin for Dependency injection.
 * Implement Flow to create dynamic filling forms.
