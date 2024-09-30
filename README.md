@@ -44,15 +44,15 @@ Snapshots from the app:
 * Phone Screens (Portrait):
 
 <p align="center">
-  <img src="./images/login.jpg" width="300" height="530" />  
-  <img src="./images/onboarding.jpg" width="300" height="530" /> 
-  <img src="./images/add_shoe_to_bookmark.jpg" width="300" height="530" /> 
-  <img src="./images/flow_form.gif" width="300" height="530" /> 
+  <img src="./images/login.jpg" width="300" height="666" />  
+  <img src="./images/onboarding.jpg" width="300" height="666" /> 
+  <img src="./images/add_shoe_to_bookmark.jpg" width="300" height="666" /> 
+  <img src="./images/flow_form.gif" width="300" height="666" /> 
 
 </p>
 
 * Phone Screens (Landscape):
 
 <p align="center">
-  <img src="./images/bookmark_list_landscape.jpg" width="630" height="400" />
+  <img src="./images/bookmark_list_landscape.jpg" width="666" height="300" />
 </p>
