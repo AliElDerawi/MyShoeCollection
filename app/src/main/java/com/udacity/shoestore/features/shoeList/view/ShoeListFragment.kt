@@ -8,7 +8,10 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseFragment
@@ -57,7 +60,6 @@ class ShoeListFragment : BaseFragment() {
         mBinding.sharedViewModel = mSharedViewModel
         mBinding.lifecycleOwner = this
         mBinding.shoeListFragment = this
-        setHasOptionsMenu(true)
         mSharedViewModel.setToolbarTitle(mActivity.getString(R.string.text_bookmarked_shoes))
         mSharedViewModel.showUpButton(false)
         return mBinding.root
@@ -66,7 +68,10 @@ class ShoeListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initMenu()
         setupRecyclerView()
+
     }
 
     private fun setupRecyclerView() {
@@ -78,19 +83,33 @@ class ShoeListFragment : BaseFragment() {
             }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.overflow_menu, menu)
-    }
 
+    private fun initMenu() {
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.logout) {
-            mSharedViewModel.setHideToolbar(true)
-            mSharedViewModel.navigationCommand.value =
-                NavigationCommand.To(ShoeListFragmentDirections.actionShoesListFragmentToLoginFragment())
-        }
-        return true
+        val menuHost: MenuHost = mActivity
+
+        // Add menu items without using the Fragment Menu APIs
+        // Note how we can tie the MenuProvider to the viewLifecycleOwner
+        // and an optional Lifecycle.State (here, RESUMED) to indicate when
+        // the menu should be visible
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+
+                menuInflater.inflate(R.menu.overflow_menu, menu)
+
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+
+                if (menuItem.itemId == R.id.logout) {
+                    mSharedViewModel.setHideToolbar(true)
+                    mSharedViewModel.navigationCommand.value =
+                        NavigationCommand.To(ShoeListFragmentDirections.actionShoesListFragmentToLoginFragment())
+                }
+                return true
+
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     fun onAddShoeClick() {
