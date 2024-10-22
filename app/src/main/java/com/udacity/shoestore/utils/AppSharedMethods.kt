@@ -92,6 +92,10 @@ object AppSharedMethods {
             .getSharedPreferences(AppSharedData.MY_PREF, Context.MODE_PRIVATE)
     }
 
+    fun isLogin(): Boolean {
+        return getSharedPreference().getBoolean(AppSharedData.PREF_IS_LOGIN, false)
+    }
+
     fun checkIfUserExist(email: String, password: String): Boolean {
         val sharedPreferences = getSharedPreference()
         val storedEmail = sharedPreferences.getString(AppSharedData.PREF_USER_EMAIL, null)

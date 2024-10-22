@@ -38,7 +38,6 @@ class ShoeListFragment : BaseFragment() {
     override val mViewModel: ShoeListViewModel by viewModel()
 
     private lateinit var mActivity: FragmentActivity
-
     private lateinit var mLifecycleOwner: LifecycleOwner
 
 
