@@ -3,10 +3,8 @@ package com.udacity.shoestore.features.main.viewModel
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.models.ShoeModel
-import com.udacity.shoestore.utils.AppSharedMethods.notifyObserver
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -52,7 +50,6 @@ class MainViewModel(val app : Application) : BaseViewModel(app) {
 
     fun addShoe(shoe: ShoeModel) {
         _shoeList.value.add(shoe)
-//        _shoeList.notifyObserver()
     }
 
 
