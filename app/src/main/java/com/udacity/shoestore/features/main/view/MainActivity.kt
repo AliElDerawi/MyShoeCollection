@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initViewModelObservers() {
 
-        with(mBinding){
+        with(mBinding) {
             mMainViewModel.hideToolbar.observe(this@MainActivity) {
                 if (it) {
                     mainToolbar.visibility = View.GONE
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 textViewToolbarTitle.text = it
             }
 
-            mMainViewModel.showUpButton.observe(this@MainActivity){
+            mMainViewModel.showUpButton.observe(this@MainActivity) {
                 supportActionBar!!.setDisplayHomeAsUpEnabled(it)
             }
 
@@ -69,8 +69,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     is NavigationCommand.To -> navController.navigate(command.directions)
                     is NavigationCommand.Back -> onBackPressed()
                     is NavigationCommand.BackTo -> navController.popBackStack(
-                        command.destinationId,
-                        false
+                        command.destinationId, false
                     )
                 }
             }
@@ -88,9 +87,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initListeners() {
 
-
-        if (getSharedPreference().getBoolean(AppSharedData.PREF_IS_LOGIN, true)) {
-
+        if (getSharedPreference().getBoolean(AppSharedData.PREF_IS_LOGIN, false)) {
+            navController.navigate(R.id.shoesListFragment)
+        } else {
+            navController.navigate(R.id.loginFragment)
         }
     }
 
