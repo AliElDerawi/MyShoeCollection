@@ -23,6 +23,7 @@ buildscript {
         espressoVersion = '3.6.1'
         junitTestVersion = '1.2.1'
         securityCryptoVersion = '1.1.0-alpha06'
+        dataStoreVersion = '1.1.1'
     }
 
 

@@ -63,6 +63,8 @@ dependencies {
 
     implementation "androidx.security:security-crypto-ktx:$securityCryptoVersion"
 
+    implementation "androidx.datastore:datastore-preferences:$dataStoreVersion"
+
     implementation "com.jakewharton.timber:timber:$timberVersion"
 
     implementation "me.relex:circleindicator:$circularIndicatorVersion"

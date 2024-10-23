@@ -105,9 +105,8 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
 
             mViewModel.goNextScreen.observe(mLifecycleOwner) {
                 if (it) {
-                    getSharedPreference().edit {
-                        putBoolean(AppSharedData.PREF_IS_NEW_USER, false)
-                    }
+
+                    mSharedViewModel.updateNewUserValidation(false)
 
                     mSharedViewModel.navigationCommand.value =
                         NavigationCommand.To((InstructionsFragmentDirections.actionInstructionsFragmentToShoesListFragment()))

@@ -93,10 +93,6 @@ object AppSharedMethods {
         return getEncryptedSharedPrefs(ShoeStoreApp.getApp())
     }
 
-    fun isLogin(): Boolean {
-        return getSharedPreference().getBoolean(AppSharedData.PREF_IS_LOGIN, false)
-    }
-
     fun checkIfUserExist(email: String, password: String): Boolean {
         val sharedPreferences = getEncryptedSharedPrefs(ShoeStoreApp.getApp())
         val storedEmail = sharedPreferences.getString(AppSharedData.PREF_USER_EMAIL, null)
@@ -117,13 +113,17 @@ object AppSharedMethods {
         )
     }
 
+    fun isLogin(): Boolean {
+        return getSharedPreference().getBoolean(AppSharedData.PREF_IS_LOGIN, false)
+    }
+
     private fun getEncryptedSharedPrefs(context: Context): SharedPreferences {
         val masterKey =
             MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
 
         return EncryptedSharedPreferences.create(
             context,
-            "encrypted_prefs",
+            AppSharedData.MY_ENCRYPTED_PREF,
             masterKey,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
