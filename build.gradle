@@ -3,7 +3,7 @@ buildscript {
 
 
     ext {
-        kotlin_version = '1.9.21'
+        kotlin_version = '2.0.21'
         glide_version = '4.15.1'
         koinVersion = '3.4.0'
         coreVersion = '1.13.1'
@@ -22,6 +22,9 @@ buildscript {
         junitVersion = '4.13.2'
         espressoVersion = '3.6.1'
         junitTestVersion = '1.2.1'
+        securityCryptoVersion = '1.1.0-alpha06'
+        dataStoreVersion = '1.1.1'
+        splashScreenVersion = '1.0.1'
     }
 
 

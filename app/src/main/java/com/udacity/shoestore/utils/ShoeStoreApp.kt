@@ -1,5 +1,9 @@
 package com.udacity.shoestore.utils
 
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.multidex.MultiDexApplication
 import com.udacity.shoestore.features.createAccount.viewModel.CreateAccountViewModel
 import com.udacity.shoestore.features.login.viewModel.LoginViewModel
@@ -14,8 +18,9 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import timber.log.Timber
 
-class ShoeStoreApp : MultiDexApplication() {
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = AppSharedData.MY_USER_PREFERENCES)
 
+class ShoeStoreApp : MultiDexApplication() {
 
     companion object {
         @Volatile

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/placeholderFragment">
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.udacity.shoestore.features.login.view.LoginFragment"
@@ -11,7 +11,8 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_createAccountFragment"
-            app:destination="@id/createAccountFragment" />
+            app:destination="@id/createAccountFragment"
+            app:popUpTo="@id/loginFragment" />
         <action
             android:id="@+id/action_loginFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment"
@@ -75,6 +76,9 @@
         android:id="@+id/shoeDetailFragment"
         android:name="com.udacity.shoestore.features.shoeDetail.view.ShoeDetailFragment"
         android:label="ShoeDetailFragment" />
+    <fragment android:id="@+id/placeholderFragment"
+        android:name="com.udacity.shoestore.features.placeHolder.PlaceHolderFragment"
+        />
 
 
 </navigation>

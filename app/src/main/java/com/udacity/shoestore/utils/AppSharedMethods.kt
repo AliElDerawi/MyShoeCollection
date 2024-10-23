@@ -10,10 +10,12 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.MutableLiveData
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.bumptech.glide.Glide
 import com.udacity.shoestore.R
 import com.udacity.shoestore.models.InstructionModel
+
 
 object AppSharedMethods {
 
@@ -88,12 +90,11 @@ object AppSharedMethods {
     }
 
     fun getSharedPreference(): SharedPreferences {
-        return ShoeStoreApp.getApp()
-            .getSharedPreferences(AppSharedData.MY_PREF, Context.MODE_PRIVATE)
+        return getEncryptedSharedPrefs(ShoeStoreApp.getApp())
     }
 
     fun checkIfUserExist(email: String, password: String): Boolean {
-        val sharedPreferences = getSharedPreference()
+        val sharedPreferences = getEncryptedSharedPrefs(ShoeStoreApp.getApp())
         val storedEmail = sharedPreferences.getString(AppSharedData.PREF_USER_EMAIL, null)
         val storedPassword = sharedPreferences.getString(AppSharedData.PREF_USER_PASSWORD, null)
 
@@ -109,6 +110,23 @@ object AppSharedMethods {
             ResourcesCompat.getColor(
                 resources, color, null
             )
+        )
+    }
+
+    fun isLogin(): Boolean {
+        return getSharedPreference().getBoolean(AppSharedData.PREF_IS_LOGIN, false)
+    }
+
+    private fun getEncryptedSharedPrefs(context: Context): SharedPreferences {
+        val masterKey =
+            MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
+
+        return EncryptedSharedPreferences.create(
+            context,
+            AppSharedData.MY_ENCRYPTED_PREF,
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     }
 }

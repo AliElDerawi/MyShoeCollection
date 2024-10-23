@@ -1,6 +1,5 @@
 package com.udacity.shoestore.features.login.view
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.edit
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.lifecycleScope
 import com.udacity.shoestore.data.BaseFragment
 import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.FragmentLoginBinding
@@ -17,6 +16,9 @@ import com.udacity.shoestore.features.login.viewModel.LoginViewModel
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,7 +35,6 @@ class LoginFragment : BaseFragment() {
     private lateinit var mActivity: FragmentActivity
 
     private lateinit var mLifecycleOwner: LifecycleOwner
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -70,20 +71,26 @@ class LoginFragment : BaseFragment() {
 
     private fun initViewModelObserver() {
 
-        with(mBinding){
+        with(mBinding) {
             mViewModel.completeLoginLiveData.observe(mLifecycleOwner) { redirect ->
                 if (redirect) {
                     getSharedPreference().edit {
                         putBoolean(AppSharedData.PREF_IS_LOGIN, true)
                     }
-                    if (getSharedPreference().getBoolean(AppSharedData.PREF_IS_NEW_USER, true)) {
-                        mSharedViewModel.navigationCommand.value = NavigationCommand.To(
-                            LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
-                        )
-                    } else {
-                        mSharedViewModel.navigationCommand.value =
-                            NavigationCommand.To(LoginFragmentDirections.actionLoginFragmentToShoesListFragment())
+                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                        if (mSharedViewModel.isNewUserFlow.first()) {
+                            mSharedViewModel.navigationCommand.postValue(
+                                NavigationCommand.To(
+                                    LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
+                                )
+                            )
+                        } else {
+                            mSharedViewModel.navigationCommand.postValue(
+                                NavigationCommand.To(LoginFragmentDirections.actionLoginFragmentToShoesListFragment())
+                            )
+                        }
                     }
+
                 }
             }
 
@@ -103,8 +110,6 @@ class LoginFragment : BaseFragment() {
                 mViewModel.showToastInt.value = it
             }
         }
-
-
     }
 
 }

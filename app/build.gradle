@@ -5,7 +5,7 @@ plugins {
     id "androidx.navigation.safeargs"
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
-    id 'com.google.devtools.ksp' version '1.9.0-1.0.13'
+    id 'com.google.devtools.ksp' version '2.0.21-1.0.25'
 
 }
 
@@ -61,6 +61,12 @@ dependencies {
 
     implementation "androidx.multidex:multidex:$multidexVersion"
 
+    implementation "androidx.security:security-crypto-ktx:$securityCryptoVersion"
+
+    implementation "androidx.datastore:datastore-preferences:$dataStoreVersion"
+
+    implementation "androidx.core:core-splashscreen:$splashScreenVersion"
+
     implementation "com.jakewharton.timber:timber:$timberVersion"
 
     implementation "me.relex:circleindicator:$circularIndicatorVersion"
@@ -78,6 +84,7 @@ dependencies {
     implementation "io.insert-koin:koin-androidx-workmanager:$koinVersion"
     // Navigation Graph
     implementation "io.insert-koin:koin-androidx-navigation:$koinVersion"
+
 
 
 }

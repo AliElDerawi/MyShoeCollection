@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/logout"
+        android:id="@+id/loginFragment"
         android:title="@string/text_logout" />
 
 </menu>

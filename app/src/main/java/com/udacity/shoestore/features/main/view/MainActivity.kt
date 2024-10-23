@@ -1,24 +1,19 @@
 package com.udacity.shoestore.features.main.view
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import com.google.android.material.snackbar.Snackbar
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.ActivityMainBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.utils.AppSharedMethods
-import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
-import com.udacity.shoestore.utils.AppSharedMethods.showToast
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -27,8 +22,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val mMainViewModel: MainViewModel by inject()
 
     private lateinit var mBinding: ActivityMainBinding
-    private lateinit var navController: NavController
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var mNavController: NavController
+    private lateinit var mAppBarConfiguration: AppBarConfiguration
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,16 +31,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(mBinding.mainToolbar)
         mBinding.mainToolbar.setTitle(null)
-        navController = findNavController(R.id.nav_host_fragment)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+        mNavController = findNavController(R.id.nav_host_fragment)
+        mAppBarConfiguration = AppBarConfiguration(mNavController.graph)
+        val navInflater = mNavController.navInflater
+        val navGraph = navInflater.inflate(R.navigation.main_navigation)
+        navGraph.setStartDestination(
+            if (AppSharedMethods.isLogin()) {
+                R.id.shoesListFragment
+            } else {
+                R.id.loginFragment
+            }
+        )
+        mNavController.graph = navGraph
         initViewModelObservers()
-        initListeners()
-
     }
 
     private fun initViewModelObservers() {
 
-        with(mBinding){
+        with(mBinding) {
             mMainViewModel.hideToolbar.observe(this@MainActivity) {
                 if (it) {
                     mainToolbar.visibility = View.GONE
@@ -57,7 +60,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 textViewToolbarTitle.text = it
             }
 
-            mMainViewModel.showUpButton.observe(this@MainActivity){
+            mMainViewModel.showUpButton.observe(this@MainActivity) {
                 supportActionBar!!.setDisplayHomeAsUpEnabled(it)
             }
 
@@ -66,11 +69,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 Timber.d("initViewModelObserver:command: " + command.toString())
 
                 when (command) {
-                    is NavigationCommand.To -> navController.navigate(command.directions)
-                    is NavigationCommand.Back -> onBackPressed()
-                    is NavigationCommand.BackTo -> navController.popBackStack(
-                        command.destinationId,
-                        false
+                    is NavigationCommand.To -> mNavController.navigate(command.directions)
+                    is NavigationCommand.Back -> mNavController.popBackStack()
+                    is NavigationCommand.BackTo -> mNavController.popBackStack(
+                        command.destinationId, false
                     )
                 }
             }
@@ -82,20 +84,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 AppSharedMethods.showToast(it)
             }
         }
-
-
-    }
-
-    private fun initListeners() {
-
-
-        if (getSharedPreference().getBoolean(AppSharedData.PREF_IS_LOGIN, true)) {
-
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
+        return NavigationUI.navigateUp(mNavController, mAppBarConfiguration)
     }
 
     override fun onClick(view: View?) {

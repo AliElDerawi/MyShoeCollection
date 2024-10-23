@@ -8,11 +8,14 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.edit
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseFragment
 import com.udacity.shoestore.data.NavigationCommand
@@ -21,6 +24,8 @@ import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.shoeList.adapter.ItemBookmarkShoeAdapter
 import com.udacity.shoestore.features.shoeList.viewModel.ShoeListViewModel
 import com.udacity.shoestore.models.ShoeModel
+import com.udacity.shoestore.utils.AppSharedData
+import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,7 +38,6 @@ class ShoeListFragment : BaseFragment() {
     override val mViewModel: ShoeListViewModel by viewModel()
 
     private lateinit var mActivity: FragmentActivity
-
     private lateinit var mLifecycleOwner: LifecycleOwner
 
 
@@ -101,8 +105,14 @@ class ShoeListFragment : BaseFragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
 
-                if (menuItem.itemId == R.id.logout) {
+                // TODO Comment : We can use NavigationUI.onNavDestinationSelected() to handle the navigation
+//                return NavigationUI.onNavDestinationSelected(menuItem, requireView().findNavController())
+
+                if (menuItem.itemId == R.id.loginFragment) {
                     mSharedViewModel.setHideToolbar(true)
+                    getSharedPreference().edit {
+                        putBoolean(AppSharedData.PREF_IS_LOGIN, false)
+                    }
                     mSharedViewModel.navigationCommand.value =
                         NavigationCommand.To(ShoeListFragmentDirections.actionShoesListFragmentToLoginFragment())
                 }
