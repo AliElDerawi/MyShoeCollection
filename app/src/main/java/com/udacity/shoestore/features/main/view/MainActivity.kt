@@ -36,16 +36,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         mNavController = navHostFragment.navController
         mAppBarConfiguration = AppBarConfiguration(mNavController.graph)
-        val navInflater = mNavController.navInflater
-        val navGraph = navInflater.inflate(R.navigation.main_navigation)
-        navGraph.setStartDestination(
-            if (AppSharedMethods.isLogin()) {
-                R.id.shoesListFragment
-            } else {
-                R.id.loginFragment
-            }
-        )
-        mNavController.graph = navGraph
+
+        if (savedInstanceState == null){
+            val navInflater = mNavController.navInflater
+            val navGraph = navInflater.inflate(R.navigation.main_navigation)
+            navGraph.setStartDestination(
+                if (AppSharedMethods.isLogin()) {
+                    R.id.shoesListFragment
+                } else {
+                    R.id.loginFragment
+                }
+            )
+            mNavController.graph = navGraph
+        }
+
         initViewModelObservers()
 
     }
