@@ -50,7 +50,7 @@
         android:id="@+id/instructionsFragment"
         android:name="com.udacity.shoestore.features.onBoarding.view.InstructionsFragment"
         android:label="InstructionsFragment"
-        tools:layout="@layout/fragment_instructions" >
+        tools:layout="@layout/fragment_instructions">
         <action
             android:id="@+id/action_instructionsFragment_to_shoesListFragment"
             app:destination="@id/shoesListFragment"
@@ -61,7 +61,7 @@
         android:id="@+id/shoesListFragment"
         android:name="com.udacity.shoestore.features.shoeList.view.ShoeListFragment"
         android:label="fragment_shoe_list"
-        tools:layout="@layout/fragment_shoe_list" >
+        tools:layout="@layout/fragment_shoe_list">
         <action
             android:id="@+id/action_shoesListFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -69,16 +69,18 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_shoesListFragment_to_shoeDetailFragment"
-            app:destination="@id/shoeDetailFragment" />
+            app:destination="@id/shoeDetailFragment"
+            app:popUpTo="@id/shoesListFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_shoe_detail"
         android:id="@+id/shoeDetailFragment"
         android:name="com.udacity.shoestore.features.shoeDetail.view.ShoeDetailFragment"
-        android:label="ShoeDetailFragment" />
-    <fragment android:id="@+id/placeholderFragment"
-        android:name="com.udacity.shoestore.features.placeHolder.PlaceHolderFragment"
-        />
+        android:label="ShoeDetailFragment"
+        tools:layout="@layout/fragment_shoe_detail" />
+    <fragment
+        android:id="@+id/placeholderFragment"
+        android:name="com.udacity.shoestore.features.placeHolder.PlaceHolderFragment" />
 
 
 </navigation>
