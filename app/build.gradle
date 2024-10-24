@@ -1,12 +1,11 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android'
-    id "androidx.navigation.safeargs"
-    id 'kotlin-parcelize'
-    id 'kotlin-kapt'
-    id 'com.google.devtools.ksp' version '2.0.21-1.0.25'
-
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.safe.args)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -42,49 +41,48 @@ android {
 
 dependencies {
 
-    implementation "androidx.core:core-ktx:$coreVersion"
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "com.google.android.material:material:$materialVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.constraintLayout
 
     // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
 
-    testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$junitTestVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
 
-    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    implementation libs.recyclerView
     // For control over item selection of both touch and mouse driven selection
-    implementation "androidx.recyclerview:recyclerview-selection:$recyclerViewSelectionVersion"
+    implementation libs.recyclerViewSelection
 
-    implementation "androidx.multidex:multidex:$multidexVersion"
+    implementation libs.multidex
 
-    implementation "androidx.security:security-crypto-ktx:$securityCryptoVersion"
+    implementation libs.security.crypto.ktx
 
-    implementation "androidx.datastore:datastore-preferences:$dataStoreVersion"
+    implementation libs.dataStore
 
-    implementation "androidx.core:core-splashscreen:$splashScreenVersion"
+    implementation libs.splashScreen
 
-    implementation "com.jakewharton.timber:timber:$timberVersion"
+    implementation libs.timber
 
-    implementation "me.relex:circleindicator:$circularIndicatorVersion"
-    implementation "com.mikhaellopez:circularprogressbar:$circularProgressBarIndicatorVersion"
+    implementation libs.circleindicator
+    implementation libs.circularprogressbar
 
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    ksp "com.github.bumptech.glide:ksp:$glide_version"
+    implementation libs.glide
+    ksp libs.glide.compiler
 
     // Koin
-    implementation "io.insert-koin:koin-android:$koinVersion"
-    implementation "io.insert-koin:koin-core:$koinVersion"
+    implementation libs.koin.android
+    implementation libs.koin.core
 
-    implementation "io.insert-koin:koin-android-compat:$koinVersion"
+    implementation libs.koin.compat
     // Jetpack WorkManager
-    implementation "io.insert-koin:koin-androidx-workmanager:$koinVersion"
+    implementation libs.koin.workmanager
     // Navigation Graph
-    implementation "io.insert-koin:koin-androidx-navigation:$koinVersion"
-
+    implementation libs.koin.navigation
 
 
 }

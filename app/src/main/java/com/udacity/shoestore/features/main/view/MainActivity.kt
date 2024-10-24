@@ -6,6 +6,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.R
@@ -31,19 +32,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(mBinding.mainToolbar)
         mBinding.mainToolbar.setTitle(null)
-        mNavController = findNavController(R.id.nav_host_fragment)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        mNavController = navHostFragment.navController
         mAppBarConfiguration = AppBarConfiguration(mNavController.graph)
-        val navInflater = mNavController.navInflater
-        val navGraph = navInflater.inflate(R.navigation.main_navigation)
-        navGraph.setStartDestination(
-            if (AppSharedMethods.isLogin()) {
-                R.id.shoesListFragment
-            } else {
-                R.id.loginFragment
-            }
-        )
-        mNavController.graph = navGraph
+
+        if (savedInstanceState == null){
+            val navInflater = mNavController.navInflater
+            val navGraph = navInflater.inflate(R.navigation.main_navigation)
+            navGraph.setStartDestination(
+                if (AppSharedMethods.isLogin()) {
+                    R.id.shoesListFragment
+                } else {
+                    R.id.loginFragment
+                }
+            )
+            mNavController.graph = navGraph
+        }
+
         initViewModelObservers()
+
     }
 
     private fun initViewModelObservers() {
