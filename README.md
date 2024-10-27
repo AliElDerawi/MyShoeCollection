@@ -1,8 +1,9 @@
 # ShoeStore
 
-SheoStore is an app for bookmarking your favorite shoes. It was developed for the **Udacity Android Kotlin Developer Nanodegree Program**.
+ShoeStore is an app designed to help users catalog and bookmark their favorite shoes, providing a simple and organized way to save and manage a personalized shoe collection.
+It was developed as the first Project of the **Udacity Android Kotlin Developer Nanodegree Program**.
 
-The main features of this realese are:
+The main features of this release are:
 * Implement MVVM Design Pattern and Clean Architecture.
 * Ability to create your own bookmarked shoes list and save Data inside SharedViewModel.
 * Using the App in Landscape and Portrait mode without any data missing or reloading the data.
@@ -47,16 +48,48 @@ Snapshots from the app:
 -------
 * Phone Screens (Portrait):
 
-<p align="center">
-  <img src="./images/login.jpg" width="300" height="666" />  
-  <img src="./images/onboarding.jpg" width="300" height="666" /> 
-  <img src="./images/add_shoe_to_bookmark.jpg" width="300" height="666" /> 
-  <img src="./images/flow_form.gif" width="300" height="666" /> 
-
-</p>
+<div align="center">
+<table>
+  <tr>
+    <td>
+      <div align="center">
+      <div style="display: inline-block; margin: 10px;">
+      <img src="./images/login.jpg" width="300" height="666" />
+      <p>Login Screen</p>
+      </div>
+    </td>
+    <td>
+      <div align="center">
+      <div style="display: inline-block; margin: 10px;">
+      <img src="./images/onboarding.jpg" width="300" height="666" />
+      <p>Onboarding Screen</p>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div align="center">
+      <div style="display: inline-block; margin: 10px;">
+      <img src="./images/add_shoe_to_bookmark.jpg" width="300" height="666" />
+      <p>Add Shoe to Bookmark</p>
+      </div>
+    </td>
+    <td>
+      <div align="center">
+      <div style="display: inline-block; margin: 10px;">
+      <img src="./images/flow_form.gif" width="300" height="666" />
+      <p>Dynamic Filling Form</p>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>
 
 * Phone Screens (Landscape):
 
-<p align="center">
-  <img src="./images/bookmark_list_landscape.jpg" width="666" height="300" />
-</p>
+<div align="center">
+  <div style="display: inline-block; margin: 10px;">
+    <img src="./images/bookmark_list_landscape.jpg" width="666" height="300" />
+    <p>Bookmark List in Landscape Mode</p>
+  </div>
+</div>
