@@ -2,7 +2,7 @@ package com.udacity.shoestore.models
 
 import android.os.Parcelable
 import com.udacity.shoestore.data.GenericModelCallBack
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ShoeModel(

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.edit
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager2.widget.ViewPager2
@@ -16,38 +15,24 @@ import com.udacity.shoestore.databinding.FragmentInstructionsBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.onBoarding.adapter.OnBoardingAdapter
 import com.udacity.shoestore.features.onBoarding.viewModel.InstructionsViewModel
-import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.models.InstructionModel
-import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class InstructionsFragment : BaseFragment(), View.OnClickListener {
-
+class InstructionsFragment : BaseFragment() {
 
     private lateinit var mBinding: FragmentInstructionsBinding
-
     private val mSharedViewModel: MainViewModel by inject()
     override val mViewModel: InstructionsViewModel by viewModel()
-
-
     private lateinit var mActivity: FragmentActivity
-
     private lateinit var mLifecycleOwner: LifecycleOwner
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is FragmentActivity) {
             mActivity = context
         }
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -57,7 +42,7 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
         mBinding = FragmentInstructionsBinding.inflate(inflater, container, false)
         mSharedViewModel.setHideToolbar(true)
         mLifecycleOwner = viewLifecycleOwner
-        mBinding.lifecycleOwner = this
+        mBinding.lifecycleOwner = mLifecycleOwner
         mBinding.viewModel = mViewModel
         return mBinding.root
     }
@@ -65,7 +50,6 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewPager()
-        initListeners()
         initViewModelObserver()
     }
 
@@ -73,43 +57,34 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
     private fun initViewPager() {
 
         with(mBinding) {
-
             boardingViewPager.adapter = OnBoardingAdapter(InstructionModel.getInstructionCallBack())
-            mViewModel.setLastPage(mViewModel.instructionList.value.size - 1)
-
+            mViewModel.setLastPage(mViewModel.instructionListStateFlow.value.size - 1)
         }
 
-
-        initListeners()
         initBoardingViewPagerListener()
     }
 
 
-    private fun initListeners() {
-
-    }
-
     private fun initViewModelObserver() {
 
         with(mBinding) {
-            mViewModel.currentPagePageLiveData.observe(mLifecycleOwner) {
+            mViewModel.currentPageLiveData.observe(mLifecycleOwner) {
                 pageCircleProgressBar.progress = (it + 1).toFloat()
-                boardingViewPager.currentItem = (mViewModel.currentPagePageLiveData.value!!)
-
-                if (mViewModel.currentPagePageLiveData.value == mViewModel.lastPageStateFlow.value) {
+                boardingViewPager.currentItem = it
+                if (it == mViewModel.lastPageStateFlow.value) {
                     showCompleteButton()
                 } else {
                     hideCompleteButton()
                 }
             }
 
-            mViewModel.goNextScreen.observe(mLifecycleOwner) {
+            mViewModel.goNextScreenLiveData.observe(mLifecycleOwner) {
                 if (it) {
-
                     mSharedViewModel.updateNewUserValidation(false)
-
                     mSharedViewModel.navigationCommand.value =
-                        NavigationCommand.To((InstructionsFragmentDirections.actionInstructionsFragmentToShoesListFragment()))
+                        NavigationCommand.To(
+                            InstructionsFragmentDirections.actionInstructionsFragmentToShoesListFragment()
+                        )
                 }
             }
         }
@@ -117,30 +92,21 @@ class InstructionsFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun initBoardingViewPagerListener() {
-
         mBinding.boardingViewPager.registerOnPageChangeCallback(object :
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-
                 mViewModel.onPageChange(position)
-
             }
         })
     }
 
     private fun showCompleteButton() {
         mBinding.nextProgressTextView.text = mActivity.getString(R.string.text_start)
-
     }
 
     private fun hideCompleteButton() {
         mBinding.nextProgressTextView.text = mActivity.getString(R.string.text_next)
-    }
-
-
-    override fun onClick(view: View?) {
-
     }
 
 }

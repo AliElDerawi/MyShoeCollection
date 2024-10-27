@@ -13,57 +13,48 @@ import kotlinx.coroutines.flow.StateFlow
 class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
 
 
-    private var _currentPageMutableLiveDate = MutableLiveData<Int>(0)
-    val currentPagePageLiveData: LiveData<Int>
-        get() = _currentPageMutableLiveDate
+    private var _currentPageLiveData = MutableLiveData<Int>(0)
+    val currentPageLiveData: LiveData<Int>
+        get() = _currentPageLiveData
 
-
-    private var _lastPageMutableStateFlow = MutableStateFlow(0)
+    private var _lastPageStateFlow = MutableStateFlow(0)
     val lastPageStateFlow: StateFlow<Int>
-        get() = _lastPageMutableStateFlow
+        get() = _lastPageStateFlow
 
-    private var _goNextScreen = SingleLiveEvent<Boolean>()
-    val goNextScreen: LiveData<Boolean>
-        get() = _goNextScreen
+    private var _goNextScreenSingleLiveEvent = SingleLiveEvent<Boolean>()
+    val goNextScreenLiveData: LiveData<Boolean>
+        get() = _goNextScreenSingleLiveEvent
 
-    private var _instructionList = MutableStateFlow<MutableList<InstructionModel>>(mutableListOf())
-    val instructionList: StateFlow<MutableList<InstructionModel>>
-        get() = _instructionList
+    private var _instructionListStateFlow = MutableStateFlow<MutableList<InstructionModel>>(mutableListOf())
+    val instructionListStateFlow: StateFlow<MutableList<InstructionModel>>
+        get() = _instructionListStateFlow
 
     init {
-        _currentPageMutableLiveDate.value = 0
-        _instructionList.value.addAll(app.getInstruction())
-    }
-
-    fun setCurrentPage(page: Int) {
-        _currentPageMutableLiveDate.value = page
+        _instructionListStateFlow.value.addAll(app.getInstruction())
     }
 
     private fun incrementPage() {
-        _currentPageMutableLiveDate.value = _currentPageMutableLiveDate.value?.plus(1)
+        _currentPageLiveData.value = _currentPageLiveData.value?.plus(1)
     }
 
     fun setLastPage(page: Int) {
-        _lastPageMutableStateFlow.value = page
+        _lastPageStateFlow.value = page
     }
 
-
     fun onPageChange(position: Int) {
-
-        _currentPageMutableLiveDate.value = position
-
+        _currentPageLiveData.value = position
     }
 
     fun onNextCardClick() {
-        if (currentPagePageLiveData.value == lastPageStateFlow.value) {
-            _goNextScreen.value = true
+        if (currentPageLiveData.value == lastPageStateFlow.value) {
+            _goNextScreenSingleLiveEvent.value = true
         } else {
             incrementPage()
         }
     }
 
     fun onSkipClick() {
-        _goNextScreen.value = true
+        _goNextScreenSingleLiveEvent.value = true
     }
 
 
