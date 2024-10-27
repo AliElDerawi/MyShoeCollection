@@ -1,12 +1,13 @@
-package com.udacity.shoestore.features.shoeDetail.view
+package com.udacity.shoestore.features.shoeDetail.viewModel
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseViewModel
 import com.udacity.shoestore.models.ShoeModel
-import com.udacity.shoestore.utils.AppSharedMethods
+import com.udacity.shoestore.utils.SingleLiveEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -32,21 +33,20 @@ class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
     val shoeDescriptionStateFlow: StateFlow<String>
         get() = _shoeDescriptionStateFlow
 
-    private var _onProcessSaveShoe = MutableLiveData<ShoeModel>()
+    private var _onProcessSaveShoeSingleLiveEvent = SingleLiveEvent<ShoeModel>()
+    val onProcessSaveShoeLiveData: LiveData<ShoeModel>
+        get() = _onProcessSaveShoeSingleLiveEvent
 
-    val onProcessSaveShoe: MutableLiveData<ShoeModel>
-        get() = _onProcessSaveShoe
+    private var _onCancelClickSingleLiveEvent = SingleLiveEvent<Boolean>()
+    val onCancelClickMutableLiveData: LiveData<Boolean>
+        get() = _onCancelClickSingleLiveEvent
 
-    private var _onCancelClick = MutableLiveData<Boolean>()
-    val onCancelClick: MutableLiveData<Boolean>
-        get() = _onCancelClick
-
-    private var _instructionMessage = MutableLiveData<String>()
-    val instructionMessage: MutableLiveData<String>
-        get() = _instructionMessage
+    private var _instructionMessageLiveData = MutableLiveData<String>(app.getString(R.string.text_add_shoe_message))
+    val instructionMessage: LiveData<String>
+        get() = _instructionMessageLiveData
 
     init {
-        _instructionMessage.value = app.getString(R.string.text_add_shoe_message)
+
     }
 
     val isSaveButtonEnabledStateFlow: StateFlow<Boolean> = combine(
@@ -56,29 +56,25 @@ class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
     }.stateIn(viewModelScope, SharingStarted.Lazily, false)
 
     fun onSaveClick() {
-
-        if (_shoeNameStateFlow.value.isEmpty()) {
-            showToastInt.value = R.string.text_msg_please_enter_shoe_name
-        } else if (_shoeCompanyStateFlow.value.isEmpty()) {
-            showToastInt.value = R.string.text_msg_please_enter_shoe_company
-        } else if (_shoeSizeStateFlow.value.isEmpty()) {
-            showToastInt.value = R.string.please_enter_shoe_size
-        } else if (_shoeDescriptionStateFlow.value.isEmpty()) {
-            showToastInt.value = R.string.text_please_enter_shoe_description
-        } else {
-            val shoeModel = ShoeModel(
-                _shoeNameStateFlow.value,
-                _shoeSizeStateFlow.value.toDouble(),
-                _shoeCompanyStateFlow.value,
-                _shoeDescriptionStateFlow.value
-            )
-            _onProcessSaveShoe.value = shoeModel
+        when {
+            _shoeNameStateFlow.value.isEmpty() -> showToastInt.value = R.string.text_msg_please_enter_shoe_name
+            _shoeCompanyStateFlow.value.isEmpty() -> showToastInt.value = R.string.text_msg_please_enter_shoe_company
+            _shoeSizeStateFlow.value.isEmpty() -> showToastInt.value = R.string.please_enter_shoe_size
+            _shoeDescriptionStateFlow.value.isEmpty() -> showToastInt.value = R.string.text_please_enter_shoe_description
+            else -> {
+                val shoeModel = ShoeModel(
+                    _shoeNameStateFlow.value,
+                    _shoeSizeStateFlow.value.toDouble(),
+                    _shoeCompanyStateFlow.value,
+                    _shoeDescriptionStateFlow.value
+                )
+                _onProcessSaveShoeSingleLiveEvent.value = shoeModel
+            }
         }
-
     }
 
     fun onCancelClick() {
-        _onCancelClick.value = true
+        _onCancelClickSingleLiveEvent.value = true
     }
 
     fun onNameTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {

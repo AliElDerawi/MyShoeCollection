@@ -12,42 +12,38 @@ import kotlinx.coroutines.flow.StateFlow
 
 class LoginViewModel(val app: Application) : BaseViewModel(app) {
 
-    private val _completeLoginLiveData = SingleLiveEvent<Boolean>()
+    private var _completeLoginSingleLiveEvent = SingleLiveEvent<Boolean>()
     val completeLoginLiveData: LiveData<Boolean>
-        get() = _completeLoginLiveData
+        get() = _completeLoginSingleLiveEvent
 
-    private val _emailStateFlow = MutableStateFlow("")
+    private var _emailStateFlow = MutableStateFlow("")
     val emailStateFlow: StateFlow<String>
         get() = _emailStateFlow
 
-    private val _passwordStateFlow = MutableStateFlow("")
+    private var _passwordStateFlow = MutableStateFlow("")
     val passwordStateFlow: StateFlow<String>
         get() = _passwordStateFlow
 
-    private val _onCreateAccountClick = SingleLiveEvent<Boolean>()
-    val onCreateAccountClick: LiveData<Boolean>
-        get() = _onCreateAccountClick
+    private var _onCreateAccountClickSingleLiveEvent = SingleLiveEvent<Boolean>()
+    val onCreateAccountClickLiveData: LiveData<Boolean>
+        get() = _onCreateAccountClickSingleLiveEvent
 
-    private val _showEmailError = SingleLiveEvent<Int>()
-    val showEmailError: LiveData<Int>
-        get() = _showEmailError
+    private var _showEmailErrorSingleLiveEvent = SingleLiveEvent<Int>()
+    val showEmailErrorLiveData: LiveData<Int>
+        get() = _showEmailErrorSingleLiveEvent
 
-    private val _showPasswordError = SingleLiveEvent<Int>()
-    val showPasswordError: LiveData<Int>
-        get() = _showPasswordError
+    private var _showPasswordErrorSingleLiveEvent = SingleLiveEvent<Int>()
+    val showPasswordErrorLiveData: LiveData<Int>
+        get() = _showPasswordErrorSingleLiveEvent
 
 
     fun login() {
-        if (_emailStateFlow.value.isEmpty()) {
-            _showEmailError.value = R.string.text_msg_please_enter_email
-        } else if (!_emailStateFlow.value.isValidEmail()) {
-            _showEmailError.value = R.string.text_msg_enter_valid_email_address
-        } else if (_passwordStateFlow.value.isEmpty()) {
-            _showPasswordError.value = R.string.text_msg_please_enter_password
-        } else if (!checkIfUserExist(_emailStateFlow.value, _passwordStateFlow.value)) {
-            _showPasswordError.value = R.string.text_msg_invalid_email_or_password
-        } else {
-            _completeLoginLiveData.value = true
+        when {
+            _emailStateFlow.value.isEmpty() -> _showEmailErrorSingleLiveEvent.value = R.string.text_msg_please_enter_email
+            !_emailStateFlow.value.isValidEmail() -> _showEmailErrorSingleLiveEvent.value = R.string.text_msg_enter_valid_email_address
+            _passwordStateFlow.value.isEmpty() -> _showPasswordErrorSingleLiveEvent.value = R.string.text_msg_please_enter_password
+            !checkIfUserExist(_emailStateFlow.value, _passwordStateFlow.value) -> _showPasswordErrorSingleLiveEvent.value = R.string.text_msg_invalid_email_or_password
+            else -> _completeLoginSingleLiveEvent.value = true
         }
     }
 
@@ -60,7 +56,7 @@ class LoginViewModel(val app: Application) : BaseViewModel(app) {
     }
 
     fun onCreateAccountClick() {
-        _onCreateAccountClick.value = true
+        _onCreateAccountClickSingleLiveEvent.value = true
     }
 
 }

@@ -13,59 +13,50 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class MainViewModel(val app: Application) : BaseViewModel(app) {
 
 
-    private val _hideToolbar = MutableLiveData<Boolean>()
+    private var _hideToolbarLiveData = MutableLiveData<Boolean>()
+    val hideToolbarLiveData: LiveData<Boolean>
+        get() = _hideToolbarLiveData
 
-    val hideToolbar: LiveData<Boolean>
-        get() = _hideToolbar
+    private var _toolbarTitleLiveData = MutableLiveData<String>()
+    val toolbarTitleLiveData: LiveData<String>
+        get() = _toolbarTitleLiveData
 
-    private val _toolbarTitle = MutableLiveData<String>()
+    private var _shoeListStateFlow = MutableStateFlow<MutableList<ShoeModel>>(mutableListOf())
+    val shoeListStateFlow: StateFlow<MutableList<ShoeModel>>
+        get() = _shoeListStateFlow
 
-    val toolbarTitle: LiveData<String>
-        get() = _toolbarTitle
-
-    private var _shoeList = MutableStateFlow<MutableList<ShoeModel>>(mutableListOf())
-
-    val shoeList: StateFlow<MutableList<ShoeModel>>
-        get() = _shoeList
-
-    private val _showUpButton = MutableLiveData<Boolean>()
-    val showUpButton: LiveData<Boolean>
-        get() = _showUpButton
+    private var _showUpButtonLiveData = MutableLiveData<Boolean>()
+    val showUpButtonLiveData: LiveData<Boolean>
+        get() = _showUpButtonLiveData
 
     val isNewUserFlow: Flow<Boolean> = app.dataStore.data.map { preferences ->
         preferences[AppSharedData.PREF_IS_NEW_USER] ?: true
     }
-
 
     init {
 
     }
 
     fun setHideToolbar(hideToolbar: Boolean) {
-        _hideToolbar.value = hideToolbar
+        _hideToolbarLiveData.value = hideToolbar
     }
 
-
     fun setToolbarTitle(title: String) {
-        _toolbarTitle.value = title
+        _toolbarTitleLiveData.value = title
     }
 
     fun showUpButton(show: Boolean) {
-        _showUpButton.value = show
+        _showUpButtonLiveData.value = show
     }
 
     fun addShoe(shoe: ShoeModel) {
-        _shoeList.value.add(shoe)
+        _shoeListStateFlow.value.add(shoe)
     }
 
     fun updateNewUserValidation(isNewUser: Boolean) {

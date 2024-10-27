@@ -22,28 +22,17 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WelcomeFragment : BaseFragment() {
 
-
     private lateinit var mBinding: FragmentWelcomeBinding
-
     private val mSharedViewModel: MainViewModel by inject()
     override val mViewModel: WelcomeViewModel by viewModel()
-
     private lateinit var mActivity: FragmentActivity
-
     private lateinit var mLifecycleOwner: LifecycleOwner
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is FragmentActivity) {
             mActivity = context
         }
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -53,28 +42,19 @@ class WelcomeFragment : BaseFragment() {
         mBinding = FragmentWelcomeBinding.inflate(inflater, container, false)
         mSharedViewModel.setHideToolbar(true)
         mBinding.welcomeFragment = this
-        mBinding.lifecycleOwner = this
         mLifecycleOwner = viewLifecycleOwner
+        mBinding.lifecycleOwner = mLifecycleOwner
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initListeners()
-        initViewModelObserver()
-    }
-
-
-    private fun initListeners() {
-
-    }
-
-    private fun initViewModelObserver() {
-
     }
 
     fun onNextCardClick() {
-        mSharedViewModel.navigationCommand.value = NavigationCommand.To(WelcomeFragmentDirections.actionWelcomeFragmentToInstructionsFragment2())
+        mSharedViewModel.navigationCommand.value = NavigationCommand.To(
+            WelcomeFragmentDirections.actionWelcomeFragmentToInstructionsFragment2()
+        )
     }
 
 

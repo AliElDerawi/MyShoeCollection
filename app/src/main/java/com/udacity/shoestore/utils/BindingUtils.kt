@@ -33,36 +33,27 @@ fun ImageView.setImageSrc(imageId: Int) {
 
 @BindingAdapter("recyclerData")
 fun <T : Any> RecyclerView.setData(list: MutableList<T>?) {
-
     if (adapter == null) {
-
-        adapter as? BaseRecyclerViewAdapter<T>
-        this.adapter = adapter
+        this.adapter = adapter as? BaseRecyclerViewAdapter<T>
     }
     (adapter as? BaseRecyclerViewAdapter<T>)?.submitList(list)
 }
 
-@BindingAdapter("viewPagerData","circleIndicator")
+@BindingAdapter("viewPagerData", "circleIndicator")
 fun <T : Any> ViewPager2.setData(list: MutableList<T>?, circleIndicator: CircleIndicator3) {
-
     if (adapter == null) {
-
-        adapter as? BaseRecyclerViewAdapter<T>
-        this.adapter = adapter
+        this.adapter = adapter as? BaseRecyclerViewAdapter<T>
     }
     (adapter as? BaseRecyclerViewAdapter<T>)?.submitList(list)
     currentItem = 0
     circleIndicator.setViewPager(this)
-
 }
 
 @BindingAdapter("config")
 fun <T : Any> CircularProgressBar.setConfig(list: MutableList<T>?) {
-
     list?.let {
-        progressMax = list.size.toFloat()
+        progressMax = it.size.toFloat()
         progress = 1F
     }
-
 }
 

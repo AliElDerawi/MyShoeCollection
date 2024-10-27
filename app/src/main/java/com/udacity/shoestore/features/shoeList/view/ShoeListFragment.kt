@@ -26,32 +26,23 @@ import com.udacity.shoestore.features.shoeList.viewModel.ShoeListViewModel
 import com.udacity.shoestore.models.ShoeModel
 import com.udacity.shoestore.utils.AppSharedData
 import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
+import com.udacity.shoestore.utils.AppSharedMethods.setLoginStatus
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ShoeListFragment : BaseFragment() {
 
-
     private lateinit var mBinding: FragmentShoeListBinding
-
     private val mSharedViewModel: MainViewModel by inject()
     override val mViewModel: ShoeListViewModel by viewModel()
-
     private lateinit var mActivity: FragmentActivity
     private lateinit var mLifecycleOwner: LifecycleOwner
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is FragmentActivity) {
             mActivity = context
         }
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -62,13 +53,12 @@ class ShoeListFragment : BaseFragment() {
         mSharedViewModel.setHideToolbar(false)
         mLifecycleOwner = viewLifecycleOwner
         mBinding.sharedViewModel = mSharedViewModel
-        mBinding.lifecycleOwner = this
+        mBinding.lifecycleOwner = mLifecycleOwner
         mBinding.shoeListFragment = this
         mSharedViewModel.setToolbarTitle(mActivity.getString(R.string.text_bookmarked_shoes))
         mSharedViewModel.showUpButton(false)
         return mBinding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -79,14 +69,12 @@ class ShoeListFragment : BaseFragment() {
     }
 
     private fun setupRecyclerView() {
-
         mBinding.shoesListRecyclerView.adapter =
             ItemBookmarkShoeAdapter(ShoeModel.getShoeModelCallback()) { shoeModel ->
                 mSharedViewModel.showToast.value =
                     "Handling Click in Generic List Adapter: ${shoeModel.name}"
             }
     }
-
 
     private fun initMenu() {
 
@@ -98,9 +86,7 @@ class ShoeListFragment : BaseFragment() {
         // the menu should be visible
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-
                 menuInflater.inflate(R.menu.overflow_menu, menu)
-
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -110,11 +96,10 @@ class ShoeListFragment : BaseFragment() {
 
                 if (menuItem.itemId == R.id.loginFragment) {
                     mSharedViewModel.setHideToolbar(true)
-                    getSharedPreference().edit {
-                        putBoolean(AppSharedData.PREF_IS_LOGIN, false)
-                    }
-                    mSharedViewModel.navigationCommand.value =
-                        NavigationCommand.To(ShoeListFragmentDirections.actionShoesListFragmentToLoginFragment())
+                    setLoginStatus(false)
+                    mSharedViewModel.navigationCommand.value = NavigationCommand.To(
+                        ShoeListFragmentDirections.actionShoesListFragmentToLoginFragment()
+                    )
                 }
                 return true
 
@@ -123,8 +108,9 @@ class ShoeListFragment : BaseFragment() {
     }
 
     fun onAddShoeClick() {
-        mSharedViewModel.navigationCommand.value =
-            NavigationCommand.To(ShoeListFragmentDirections.actionShoesListFragmentToShoeDetailFragment())
+        mSharedViewModel.navigationCommand.value = NavigationCommand.To(
+            ShoeListFragmentDirections.actionShoesListFragmentToShoeDetailFragment()
+        )
     }
 
 //

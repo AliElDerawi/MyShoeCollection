@@ -1,7 +1,7 @@
 package com.udacity.shoestore.features.createAccount.viewModel
 
 import android.app.Application
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseViewModel
@@ -15,30 +15,30 @@ import kotlinx.coroutines.flow.stateIn
 
 class CreateAccountViewModel(val app: Application) : BaseViewModel(app) {
 
-    private val _completeCreateAccountLiveData = SingleLiveEvent<Boolean>()
-    val completeCreateAccountLiveData: MutableLiveData<Boolean>
-        get() = _completeCreateAccountLiveData
+    private var _completeCreateAccountSingleLiveEvent = SingleLiveEvent<Boolean>()
+    val completeCreateAccountLiveData: LiveData<Boolean>
+        get() = _completeCreateAccountSingleLiveEvent
 
-    private val _emailStateFlow = MutableStateFlow("")
+    private var _emailStateStateFlow = MutableStateFlow("")
     val emailStateFlow: StateFlow<String>
-        get() = _emailStateFlow
+        get() = _emailStateStateFlow
 
-    private val _passwordStateFlow = MutableStateFlow("")
+    private var _passwordStateFlow = MutableStateFlow("")
     val passwordStateFlow: StateFlow<String>
         get() = _passwordStateFlow
 
-    private val _confirmPasswordStateFlow = MutableStateFlow("")
+    private var _confirmPasswordStateFlow = MutableStateFlow("")
     val confirmPasswordStateFlow: StateFlow<String>
         get() = _confirmPasswordStateFlow
 
-    val isCreateAccountButtonEnabled: StateFlow<Boolean> = combine(
-        _emailStateFlow, _passwordStateFlow, _confirmPasswordStateFlow
+    val isCreateAccountButtonEnabledStateFlow: StateFlow<Boolean> = combine(
+        _emailStateStateFlow, _passwordStateFlow, _confirmPasswordStateFlow
     ) { email, password, confirmPassword ->
         email.isNotEmpty() && email.isValidEmail() && password.isNotEmpty() && confirmPassword.isNotEmpty() && password == confirmPassword
     }.stateIn(viewModelScope, SharingStarted.Lazily, false)
 
     fun onEmailTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        _emailStateFlow.value = s.toString()
+        _emailStateStateFlow.value = s.toString()
     }
 
     fun onPasswordTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -49,21 +49,15 @@ class CreateAccountViewModel(val app: Application) : BaseViewModel(app) {
         _confirmPasswordStateFlow.value = s.toString()
     }
 
-
     fun createAccount(
     ) {
-        if (_emailStateFlow.value.isEmpty()) {
-            showToastInt.value = R.string.text_msg_please_enter_email
-        } else if (!_emailStateFlow.value.isValidEmail()) {
-            showToastInt.value = R.string.text_msg_enter_valid_email_address
-        } else if (_passwordStateFlow.value.isEmpty()) {
-            showToastInt.value = R.string.text_msg_please_enter_password
-        } else if (_confirmPasswordStateFlow.value.isEmpty()) {
-            showToastInt.value = R.string.text_msg_please_enter_confirm_password
-        } else if (_passwordStateFlow.value != _confirmPasswordStateFlow.value) {
-            showToastInt.value = R.string.text_msg_password_mismatch
-        } else {
-            _completeCreateAccountLiveData.value = true
+        when {
+            _emailStateStateFlow.value.isEmpty() -> showToastInt.value = R.string.text_msg_please_enter_email
+            !_emailStateStateFlow.value.isValidEmail() -> showToastInt.value = R.string.text_msg_enter_valid_email_address
+            _passwordStateFlow.value.isEmpty() -> showToastInt.value = R.string.text_msg_please_enter_password
+            _confirmPasswordStateFlow.value.isEmpty() -> showToastInt.value = R.string.text_msg_please_enter_confirm_password
+            _passwordStateFlow.value != _confirmPasswordStateFlow.value -> showToastInt.value = R.string.text_msg_password_mismatch
+            else -> _completeCreateAccountSingleLiveEvent.value = true
         }
     }
 }
