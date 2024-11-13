@@ -39,21 +39,21 @@ fun <T : Any> RecyclerView.setData(list: MutableList<T>?) {
     (adapter as? BaseRecyclerViewAdapter<T>)?.submitList(list)
 }
 
-@BindingAdapter("viewPagerData", "circleIndicator")
-fun <T : Any> ViewPager2.setData(list: MutableList<T>?, circleIndicator: CircleIndicator3) {
+@BindingAdapter("viewPagerData", "circleIndicator" , "currentProgress")
+fun <T : Any> ViewPager2.setData(list: MutableList<T>?, circleIndicator: CircleIndicator3, currentProgress: Int?) {
     if (adapter == null) {
         this.adapter = adapter as? BaseRecyclerViewAdapter<T>
     }
     (adapter as? BaseRecyclerViewAdapter<T>)?.submitList(list)
-    currentItem = 0
+    currentItem = if (currentProgress == -1) 0 else currentProgress?:0
     circleIndicator.setViewPager(this)
 }
 
-@BindingAdapter("config")
-fun <T : Any> CircularProgressBar.setConfig(list: MutableList<T>?) {
+@BindingAdapter("config","currentProgress")
+fun <T : Any> CircularProgressBar.setConfig(list: MutableList<T>?, currentProgress: Int?) {
     list?.let {
         progressMax = it.size.toFloat()
-        progress = 1F
+        progress = if (currentProgress == -1) 0f else currentProgress?.plus(1)!!.toFloat()
     }
 }
 

@@ -18,6 +18,7 @@ import com.udacity.shoestore.features.onBoarding.viewModel.InstructionsViewModel
 import com.udacity.shoestore.models.InstructionModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class InstructionsFragment : BaseFragment() {
@@ -69,8 +70,7 @@ class InstructionsFragment : BaseFragment() {
 
         with(mBinding) {
             mViewModel.currentPageLiveData.observe(mLifecycleOwner) {
-                pageCircleProgressBar.progress = (it + 1).toFloat()
-                boardingViewPager.currentItem = it
+                Timber.d("currentPageLiveData: $it")
                 if (it == mViewModel.lastPageStateFlow.value) {
                     showCompleteButton()
                 } else {
@@ -96,7 +96,7 @@ class InstructionsFragment : BaseFragment() {
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                mViewModel.onPageChange(position)
+                    mViewModel.onPageChange(position)
             }
         })
     }

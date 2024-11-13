@@ -9,11 +9,11 @@ import com.udacity.shoestore.utils.AppSharedMethods.getInstruction
 import com.udacity.shoestore.utils.SingleLiveEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import timber.log.Timber
 
 class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
 
-
-    private var _currentPageLiveData = MutableLiveData<Int>(0)
+    private var _currentPageLiveData = MutableLiveData<Int>(-1)
     val currentPageLiveData: LiveData<Int>
         get() = _currentPageLiveData
 
@@ -42,6 +42,10 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
     }
 
     fun onPageChange(position: Int) {
+        if (position == 0 && currentPageLiveData.value != -1) {
+            return
+        }
+        Timber.d("onPageChange: $position")
         _currentPageLiveData.value = position
     }
 
@@ -56,6 +60,5 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
     fun onSkipClick() {
         _goNextScreenSingleLiveEvent.value = true
     }
-
 
 }
