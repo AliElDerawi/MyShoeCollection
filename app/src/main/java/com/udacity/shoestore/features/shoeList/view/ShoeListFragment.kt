@@ -49,14 +49,17 @@ class ShoeListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        mBinding = FragmentShoeListBinding.inflate(inflater, container, false)
-        mSharedViewModel.setHideToolbar(false)
-        mLifecycleOwner = viewLifecycleOwner
-        mBinding.sharedViewModel = mSharedViewModel
-        mBinding.lifecycleOwner = mLifecycleOwner
-        mBinding.shoeListFragment = this
-        mSharedViewModel.setToolbarTitle(mActivity.getString(R.string.text_bookmarked_shoes))
-        mSharedViewModel.showUpButton(false)
+        mBinding = FragmentShoeListBinding.inflate(inflater, container, false).apply {
+            mLifecycleOwner = viewLifecycleOwner
+            lifecycleOwner = mLifecycleOwner
+            sharedViewModel = mSharedViewModel
+            shoeListFragment = this@ShoeListFragment
+        }
+        mSharedViewModel.apply {
+            setHideToolbar(false)
+            setToolbarTitle(getString(R.string.text_bookmarked_shoes))
+            showUpButton(false)
+        }
         return mBinding.root
     }
 
@@ -90,10 +93,8 @@ class ShoeListFragment : BaseFragment() {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-
                 // TODO Comment : We can use NavigationUI.onNavDestinationSelected() to handle the navigation
 //                return NavigationUI.onNavDestinationSelected(menuItem, requireView().findNavController())
-
                 if (menuItem.itemId == R.id.loginFragment) {
                     mSharedViewModel.setHideToolbar(true)
                     setLoginStatus(false)
@@ -102,7 +103,6 @@ class ShoeListFragment : BaseFragment() {
                     )
                 }
                 return true
-
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
@@ -120,6 +120,5 @@ class ShoeListFragment : BaseFragment() {
 //        binding.shoe = shoeModel
 //        binding.executePendingBindings()
 //    }
-
 
 }

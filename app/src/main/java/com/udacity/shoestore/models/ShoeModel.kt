@@ -13,7 +13,6 @@ data class ShoeModel(
     val images: List<String> = mutableListOf()
 ) : Parcelable {
 
-
     companion object{
         fun getShoeModelCallback(): GenericModelCallBack<ShoeModel> {
             return GenericModelCallBack(_areItemsTheSame = { oldItem, newItem ->

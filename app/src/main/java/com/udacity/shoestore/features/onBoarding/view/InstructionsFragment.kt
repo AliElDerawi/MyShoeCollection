@@ -40,11 +40,12 @@ class InstructionsFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        mBinding = FragmentInstructionsBinding.inflate(inflater, container, false)
+        mBinding = FragmentInstructionsBinding.inflate(inflater, container, false).apply {
+            mLifecycleOwner = viewLifecycleOwner
+            lifecycleOwner = mLifecycleOwner
+            viewModel = mViewModel
+        }
         mSharedViewModel.setHideToolbar(true)
-        mLifecycleOwner = viewLifecycleOwner
-        mBinding.lifecycleOwner = mLifecycleOwner
-        mBinding.viewModel = mViewModel
         return mBinding.root
     }
 
@@ -67,28 +68,28 @@ class InstructionsFragment : BaseFragment() {
 
 
     private fun initViewModelObserver() {
-
-        with(mBinding) {
-            mViewModel.currentPageLiveData.observe(mLifecycleOwner) {
+        with(mViewModel) {
+            currentPageLiveData.observe(mLifecycleOwner) {
                 Timber.d("currentPageLiveData: $it")
-                if (it == mViewModel.lastPageStateFlow.value) {
+                if (it == lastPageStateFlow.value) {
                     showCompleteButton()
                 } else {
                     hideCompleteButton()
                 }
             }
 
-            mViewModel.goNextScreenLiveData.observe(mLifecycleOwner) {
+            goNextScreenLiveData.observe(mLifecycleOwner) {
                 if (it) {
-                    mSharedViewModel.updateNewUserValidation(false)
-                    mSharedViewModel.navigationCommand.value =
-                        NavigationCommand.To(
-                            InstructionsFragmentDirections.actionInstructionsFragmentToShoesListFragment()
-                        )
+                    mSharedViewModel.apply {
+                        updateNewUserValidation(false)
+                        navigationCommand.value =
+                            NavigationCommand.To(
+                                InstructionsFragmentDirections.actionInstructionsFragmentToShoesListFragment()
+                            )
+                    }
                 }
             }
         }
-
     }
 
     private fun initBoardingViewPagerListener() {

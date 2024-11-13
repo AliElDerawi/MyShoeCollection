@@ -42,7 +42,6 @@ object AppSharedMethods {
         mToast!!.show()
     }
 
-
     fun EditText.isEmpty(): Boolean {
         return this.text.toString().isEmpty()
     }

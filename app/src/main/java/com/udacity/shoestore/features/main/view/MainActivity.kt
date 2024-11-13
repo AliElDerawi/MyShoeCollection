@@ -25,12 +25,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        setSupportActionBar(mBinding.mainToolbar)
-        mBinding.mainToolbar.setTitle(null)
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        mNavController = navHostFragment.navController
+        mBinding = DataBindingUtil.setContentView<ActivityMainBinding?>(this, R.layout.activity_main).apply {
+            lifecycleOwner = this@MainActivity
+            setSupportActionBar(mainToolbar)
+            mainToolbar.setTitle(null)
+        }
+        mNavController =
+            (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
         mAppBarConfiguration = AppBarConfiguration(mNavController.graph)
 
         if (savedInstanceState == null) {
@@ -50,17 +51,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModelObservers() {
-        with(mBinding) {
-            mMainViewModel.hideToolbarLiveData.observe(this@MainActivity) {
-                mainToolbar.visibility = if (it) View.GONE else View.VISIBLE
+        with(mMainViewModel) {
+            hideToolbarLiveData.observe(this@MainActivity) {
+                mBinding.mainToolbar.visibility = if (it) View.GONE else View.VISIBLE
             }
-            mMainViewModel.toolbarTitleLiveData.observe(this@MainActivity) {
-                textViewToolbarTitle.text = it
+            toolbarTitleLiveData.observe(this@MainActivity) {
+                mBinding.textViewToolbarTitle.text = it
             }
-            mMainViewModel.showUpButtonLiveData.observe(this@MainActivity) {
+            showUpButtonLiveData.observe(this@MainActivity) {
                 supportActionBar?.setDisplayHomeAsUpEnabled(it)
             }
-            mMainViewModel.navigationCommand.observe(this@MainActivity) { command ->
+            navigationCommand.observe(this@MainActivity) { command ->
                 Timber.d("initViewModelObserver:command: $command")
                 when (command) {
                     is NavigationCommand.To -> mNavController.navigate(command.directions)
@@ -70,9 +71,6 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
             }
-        }
-
-        with(mMainViewModel) {
             showToast.observe(this@MainActivity) {
                 AppSharedMethods.showToast(it)
             }

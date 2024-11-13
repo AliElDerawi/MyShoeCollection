@@ -9,10 +9,7 @@ object AppSharedData {
     const val PREF_USER_PASSWORD = "USER_PASSWORD"
     const val PREF_IS_LOGIN = "IS_LOGIN"
 
-
     const val MY_USER_PREFERENCES = "USER_PREFERENCES"
-
     val PREF_IS_NEW_USER = booleanPreferencesKey("IS_NEW_USER")
-
 
 }

@@ -30,7 +30,6 @@ fun ImageView.setImageSrc(imageId: Int) {
     setImageResource(imageId)
 }
 
-
 @BindingAdapter("recyclerData")
 fun <T : Any> RecyclerView.setData(list: MutableList<T>?) {
     if (adapter == null) {

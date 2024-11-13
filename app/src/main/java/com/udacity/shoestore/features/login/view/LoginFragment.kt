@@ -43,11 +43,12 @@ class LoginFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        mBinding = FragmentLoginBinding.inflate(inflater, container, false)
+        mBinding = FragmentLoginBinding.inflate(inflater, container, false).apply {
+            mLifecycleOwner = viewLifecycleOwner
+            lifecycleOwner = mLifecycleOwner
+            loginViewModel = mViewModel
+        }
         mSharedViewModel.setHideToolbar(true)
-        mBinding.loginViewModel = mViewModel
-        mLifecycleOwner = viewLifecycleOwner
-        mBinding.lifecycleOwner = mLifecycleOwner
         return mBinding.root
     }
 
@@ -57,12 +58,11 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun initViewModelObserver() {
-
-        with(mBinding) {
-            mViewModel.completeLoginLiveData.observe(mLifecycleOwner) { redirect ->
+        with(mViewModel) {
+            completeLoginLiveData.observe(mLifecycleOwner) { redirect ->
                 if (redirect) {
                     setLoginStatus(true)
-                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                    lifecycleScope.launch(Dispatchers.IO) {
                         val action = if (mSharedViewModel.isNewUserFlow.first()) {
                             NavigationCommand.To(
                                 LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
@@ -74,11 +74,10 @@ class LoginFragment : BaseFragment() {
                         }
                         mSharedViewModel.navigationCommand.postValue(action)
                     }
-
                 }
             }
 
-            mViewModel.onCreateAccountClickLiveData.observe(mLifecycleOwner) {
+            onCreateAccountClickLiveData.observe(mLifecycleOwner) {
                 if (it) {
                     mSharedViewModel.navigationCommand.value =
                         NavigationCommand.To(
@@ -87,13 +86,13 @@ class LoginFragment : BaseFragment() {
                 }
             }
 
-            mViewModel.showEmailErrorLiveData.observe(mLifecycleOwner) {
-                emailTextInputEditText.error = mActivity.getString(it)
-                mViewModel.showToastInt.value = it
+            showEmailErrorLiveData.observe(mLifecycleOwner) {
+                mBinding.emailTextInputEditText.error = mActivity.getString(it)
+                showToastInt.value = it
             }
 
-            mViewModel.showPasswordErrorLiveData.observe(mLifecycleOwner) {
-                mViewModel.showToastInt.value = it
+            showPasswordErrorLiveData.observe(mLifecycleOwner) {
+                showToastInt.value = it
             }
         }
     }

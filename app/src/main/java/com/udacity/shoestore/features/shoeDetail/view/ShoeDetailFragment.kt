@@ -43,12 +43,15 @@ class ShoeDetailFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        mBinding = FragmentShoeDetailBinding.inflate(inflater, container, false)
-        mSharedViewModel.setHideToolbar(false)
-        mSharedViewModel.showUpButton(true)
-        mLifecycleOwner = viewLifecycleOwner
-        mBinding.lifecycleOwner = mLifecycleOwner
-        mBinding.shoeDetailViewModel = mViewModel
+        mBinding = FragmentShoeDetailBinding.inflate(inflater, container, false).apply {
+            mLifecycleOwner = viewLifecycleOwner
+            lifecycleOwner = mLifecycleOwner
+            shoeDetailViewModel = mViewModel
+        }
+        mSharedViewModel.apply {
+            setHideToolbar(false)
+            showUpButton(true)
+        }
         initViewModelObserver()
         return mBinding.root
     }
@@ -58,16 +61,15 @@ class ShoeDetailFragment : BaseFragment() {
     }
 
     private fun initViewModelObserver() {
-
-        with(mBinding) {
-            mViewModel.onProcessSaveShoeLiveData.observe(mLifecycleOwner) {
+        with(mViewModel) {
+            onProcessSaveShoeLiveData.observe(mLifecycleOwner) {
                 it?.let {
                     mSharedViewModel.addShoe(it)
                     mSharedViewModel.navigationCommand.value = NavigationCommand.Back
                 }
             }
 
-            mViewModel.onCancelClickMutableLiveData.observe(mLifecycleOwner) {
+            onCancelClickMutableLiveData.observe(mLifecycleOwner) {
                 if (it) {
                     mSharedViewModel.navigationCommand.value = NavigationCommand.Back
                 }
@@ -75,8 +77,8 @@ class ShoeDetailFragment : BaseFragment() {
 
             lifecycleScope.launch {
                 lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    mViewModel.isSaveButtonEnabledStateFlow.collect { isEnabled ->
-                        saveButton.setButtonStyle(isEnabled)
+                    isSaveButtonEnabledStateFlow.collect { isEnabled ->
+                        mBinding.saveButton.setButtonStyle(isEnabled)
                     }
                 }
             }

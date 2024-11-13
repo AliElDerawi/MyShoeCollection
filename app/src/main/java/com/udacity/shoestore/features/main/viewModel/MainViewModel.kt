@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(val app: Application) : BaseViewModel(app) {
 
-
     private var _hideToolbarLiveData = MutableLiveData<Boolean>()
     val hideToolbarLiveData: LiveData<Boolean>
         get() = _hideToolbarLiveData
