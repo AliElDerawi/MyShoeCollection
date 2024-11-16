@@ -62,7 +62,6 @@
                     android:hint="@string/text_shoe_name"
                     android:paddingStart="@dimen/dim_2_dp"
                     android:paddingEnd="@dimen/dim_2_dp"
-                    android:textColorHint="@color/colorBlack"
                     app:boxBackgroundColor="@color/colorTrans"
                     app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
                     app:boxCornerRadiusBottomEnd="0dp"
@@ -72,23 +71,16 @@
                     app:boxStrokeColor="@color/colorTrans"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:counterOverflowTextColor="@color/colorBlack"
-                    app:hintTextAppearance="@style/TextInputLayoutHintText"
-                    app:hintTextColor="@color/colorBlack"
-                    app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
-                    app:placeholderTextColor="@color/colorDark31">
+                    app:counterOverflowTextColor="@color/colorBlack">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/shoe_name_textInputEditText"
+                        style="@style/EditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:onTextChanged="@{(text, start, before, count) -> shoeDetailViewModel.onNameTextChanged(text,start,before,count)}"
-                        android:textColor="@color/colorDark1C"
-                        android:textCursorDrawable="@color/colorDark31"
-                        android:textSize="@dimen/text_small"
-                        android:theme="@style/regularFont"
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
@@ -117,7 +109,6 @@
                     android:hint="@string/text_company"
                     android:paddingStart="@dimen/dim_2_dp"
                     android:paddingEnd="@dimen/dim_2_dp"
-                    android:textColorHint="@color/colorBlack"
                     app:boxBackgroundColor="@color/colorTrans"
                     app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
                     app:boxCornerRadiusBottomEnd="0dp"
@@ -127,23 +118,16 @@
                     app:boxStrokeColor="@color/colorTrans"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:counterOverflowTextColor="@color/colorBlack"
-                    app:hintTextAppearance="@style/TextInputLayoutHintText"
-                    app:hintTextColor="@color/colorBlack"
-                    app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
-                    app:placeholderTextColor="@color/colorDark31">
+                    app:counterOverflowTextColor="@color/colorBlack">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/shoe_company_textInputEditText"
+                        style="@style/EditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:onTextChanged="@{(text, start, before, count) -> shoeDetailViewModel.onCompanyTextChanged(text,start,before,count)}"
-                        android:textColor="@color/colorDark1C"
-                        android:textCursorDrawable="@color/colorDark31"
-                        android:textSize="@dimen/text_small"
-                        android:theme="@style/regularFont"
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
@@ -172,7 +156,6 @@
                     android:hint="@string/text_shoe_size"
                     android:paddingStart="@dimen/dim_2_dp"
                     android:paddingEnd="@dimen/dim_2_dp"
-                    android:textColorHint="@color/colorBlack"
                     app:boxBackgroundColor="@color/colorTrans"
                     app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
                     app:boxCornerRadiusBottomEnd="0dp"
@@ -182,23 +165,16 @@
                     app:boxStrokeColor="@color/colorTrans"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:counterOverflowTextColor="@color/colorBlack"
-                    app:hintTextAppearance="@style/TextInputLayoutHintText"
-                    app:hintTextColor="@color/colorBlack"
-                    app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
-                    app:placeholderTextColor="@color/colorDark31">
+                    app:counterOverflowTextColor="@color/colorBlack">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/shoe_size_textInputEditText"
+                        style="@style/EditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
                         android:onTextChanged="@{(text, start, before, count) -> shoeDetailViewModel.onSizeTextChanged(text,start,before,count)}"
-                        android:textColor="@color/colorDark1C"
-                        android:textCursorDrawable="@color/colorDark31"
-                        android:textSize="@dimen/text_small"
-                        android:theme="@style/regularFont"
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
@@ -233,7 +209,6 @@
                         android:hint="@string/text_hint_description"
                         android:paddingStart="@dimen/dim_2_dp"
                         android:paddingEnd="@dimen/dim_2_dp"
-                        android:textColorHint="@color/colorBlack"
                         app:boxBackgroundColor="@color/colorTrans"
                         app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
                         app:boxCornerRadiusBottomEnd="0dp"
@@ -243,23 +218,16 @@
                         app:boxStrokeColor="@color/colorTrans"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        app:counterOverflowTextColor="@color/colorBlack"
-                        app:hintTextAppearance="@style/TextInputLayoutHintText"
-                        app:hintTextColor="@color/colorBlack"
-                        app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
-                        app:placeholderTextColor="@color/colorDark31">
+                        app:counterOverflowTextColor="@color/colorBlack">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/shoe_description_textInputEditText"
+                            style="@style/EditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:imeOptions="actionDone"
                             android:inputType="textMultiLine"
                             android:onTextChanged="@{(text, start, before, count) -> shoeDetailViewModel.onDescriptionTextChanged(text,start,before,count)}"
-                            android:textColor="@color/colorDark1C"
-                            android:textCursorDrawable="@color/colorDark31"
-                            android:textSize="@dimen/text_small"
-                            android:theme="@style/regularFont"
                             tools:text="@string/text_placeholder_email"
                             tools:textAlignment="viewStart" />
 
@@ -279,9 +247,6 @@
                 android:layout_marginEnd="@dimen/margin_btnView"
                 android:layout_marginBottom="@dimen/dim_10_dp"
                 android:backgroundTint="@color/colorGrayF2"
-                android:elevation="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
                 android:onClick="@{() -> shoeDetailViewModel.onSaveClick()}"
                 android:text="@string/text_save"
                 android:textColor="@color/colorBlack"
@@ -301,9 +266,6 @@
                 android:layout_marginEnd="@dimen/margin_btnView"
                 android:layout_marginBottom="@dimen/margin_left_right"
                 android:backgroundTint="@color/colorGrayF2"
-                android:elevation="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
                 android:onClick="@{() -> shoeDetailViewModel.onCancelClick()}"
                 android:text="@string/text_cancel"
                 android:textColor="@color/colorBlack"

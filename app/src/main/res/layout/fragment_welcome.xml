@@ -59,7 +59,7 @@
                 android:layout_marginTop="@dimen/margin_left_right"
                 android:gravity="center"
                 android:text="@string/text_welcome_title"
-                android:theme="@style/TitleStyle"
+                style="@style/TitleStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/logo_imageView" />
@@ -72,7 +72,7 @@
                 android:gravity="center"
                 android:lineSpacingMultiplier="0.7"
                 android:text="@string/text_welcome_message"
-                android:theme="@style/BodyStyle"
+                style="@style/BodyStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_textView" />
@@ -105,7 +105,7 @@
                     android:gravity="center"
                     android:text="@string/text_next"
                     android:textColor="@color/colorWhite"
-                    android:theme="@style/BodyStyle" />
+                    style="@style/BodyStyle" />
 
             </androidx.cardview.widget.CardView>
 

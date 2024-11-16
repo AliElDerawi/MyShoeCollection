@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_left_right"
-                android:theme="@style/TitleStyle"
+                style="@style/TitleStyle"
                 app:text="@{shoe.title}"
                 tools:text="@string/app_name" />
 
@@ -58,7 +58,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:lineSpacingMultiplier="0.7"
-                android:theme="@style/BodyStyle"
+                style="@style/BodyStyle"
                 app:text="@{shoe.description}"
                 tools:text="@string/app_name" />
 

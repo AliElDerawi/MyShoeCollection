@@ -57,8 +57,7 @@
                 android:paddingStart="@dimen/margin_btnView"
                 android:paddingEnd="@dimen/margin_btnView"
                 android:text="@string/text_register_new_account"
-                android:textColor="@color/colorDark1C"
-                android:theme="@style/TitleStyle"
+                style="@style/TitleStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/logo_cardView" />
@@ -74,7 +73,7 @@
                 android:paddingEnd="@dimen/margin_btnView"
                 android:text="@string/text_msg_please_enter_info_to_register_account"
                 android:textColor="@color/colorBlack63"
-                android:theme="@style/BodyStyle"
+                style="@style/BodyStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_textView" />
@@ -100,7 +99,6 @@
                     android:hint="@string/text_hint_email"
                     android:paddingStart="@dimen/dim_2_dp"
                     android:paddingEnd="@dimen/dim_2_dp"
-                    android:textColorHint="@color/colorBlack"
                     app:boxBackgroundColor="@color/colorTrans"
                     app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
                     app:boxCornerRadiusBottomEnd="0dp"
@@ -110,23 +108,17 @@
                     app:boxStrokeColor="@color/colorTrans"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:counterOverflowTextColor="@color/colorBlack"
-                    app:hintTextAppearance="@style/TextInputLayoutHintText"
-                    app:hintTextColor="@color/colorBlack"
-                    app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
-                    app:placeholderTextColor="@color/colorDark31">
+                    app:counterOverflowTextColor="@color/colorBlack">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email_textInputEditText"
+                        style="@style/EditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onEmailTextChanged(text,start,before,count)}"
-                        android:textColor="@color/colorDark1C"
                         android:textCursorDrawable="@color/colorDark31"
-                        android:textSize="@dimen/text_small"
-                        android:theme="@style/regularFont"
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
@@ -155,7 +147,6 @@
                     android:hint="@string/text_hint_password"
                     android:paddingStart="@dimen/dim_2_dp"
                     android:paddingEnd="@dimen/dim_2_dp"
-                    android:textColorHint="@color/colorBlack"
                     app:boxBackgroundColor="@color/colorTrans"
                     app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
                     app:boxCornerRadiusBottomEnd="0dp"
@@ -166,25 +157,18 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
                     app:counterOverflowTextColor="@color/colorBlack"
-                    app:hintTextAppearance="@style/TextInputLayoutHintText"
-                    app:hintTextColor="@color/colorBlack"
                     app:passwordToggleDrawable="@drawable/bg_password_status"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/colorDark1C"
-                    app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
-                    app:placeholderTextColor="@color/colorDark31">
+                    app:passwordToggleTint="@color/colorDark1C">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password_textInputEditText"
+                        style="@style/EditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:imeOptions="actionNext"
                         android:inputType="textPassword"
                         android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onPasswordTextChanged(text,start,before,count)}"
-                        android:textColor="@color/colorDark1C"
-                        android:textCursorDrawable="@color/colorDark31"
-                        android:textSize="@dimen/text_small"
-                        android:theme="@style/regularFont"
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
@@ -213,7 +197,6 @@
                     android:hint="@string/text_confirm_password"
                     android:paddingStart="@dimen/dim_2_dp"
                     android:paddingEnd="@dimen/dim_2_dp"
-                    android:textColorHint="@color/colorBlack"
                     app:boxBackgroundColor="@color/colorTrans"
                     app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
                     app:boxCornerRadiusBottomEnd="0dp"
@@ -224,25 +207,18 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
                     app:counterOverflowTextColor="@color/colorBlack"
-                    app:hintTextAppearance="@style/TextInputLayoutHintText"
-                    app:hintTextColor="@color/colorBlack"
                     app:passwordToggleDrawable="@drawable/bg_password_status"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/colorDark1C"
-                    app:placeholderTextAppearance="@style/EditTextInputLayoutHintText"
-                    app:placeholderTextColor="@color/colorDark31">
+                    app:passwordToggleTint="@color/colorDark1C">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/confirm_password_textInputEditText"
+                        style="@style/EditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:onTextChanged="@{(text, start, before, count) -> createAccountViewModel.onConfirmPasswordTextChanged(text,start,before,count)}"
-                        android:textColor="@color/colorDark1C"
-                        android:textCursorDrawable="@color/colorDark31"
-                        android:textSize="@dimen/text_small"
-                        android:theme="@style/regularFont"
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
@@ -260,9 +236,6 @@
                 android:layout_marginEnd="@dimen/margin_btnView"
                 android:layout_marginBottom="@dimen/margin_left_right"
                 android:backgroundTint="@color/colorGrayF2"
-                android:elevation="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
                 android:onClick="@{() -> createAccountViewModel.createAccount()}"
                 android:text="@string/text_create_account"
                 android:textColor="@color/colorBlack"
