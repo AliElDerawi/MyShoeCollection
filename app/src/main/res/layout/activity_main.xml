@@ -21,9 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="null">
-
+                app:popupTheme="@style/AppTheme.PopupOverlay">
 
                 <TextView
                     android:id="@+id/textView_toolbar_title"
@@ -36,9 +34,7 @@
                     android:theme="@style/boldFont"
                     tools:text="@string/app_name" />
 
-
             </androidx.appcompat.widget.Toolbar>
-
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -51,8 +47,6 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:navGraph="@navigation/main_navigation" />
 
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 </layout>

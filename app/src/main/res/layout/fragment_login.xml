@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/margin_left_right">
 
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/logo_cardView"
                 android:layout_width="100dp"
@@ -39,15 +38,14 @@
                 app:strokeWidth="0dp">
 
                 <ImageView
-                    android:contentDescription="@string/text_description_app_logo"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
+                    android:contentDescription="@string/text_description_app_logo"
                     app:srcCompat="@drawable/ic_shoe"
                     app:tint="@color/colorAccent" />
 
             </com.google.android.material.card.MaterialCardView>
-
 
             <TextView
                 android:id="@+id/title_textView"
@@ -80,7 +78,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_textView" />
 
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardView_email"
                 android:layout_width="match_parent"
@@ -94,13 +91,12 @@
                 app:strokeColor="@color/colorUnSelectedEditText"
                 app:strokeWidth="1dp">
 
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/email_textInputLayout"
                     style="@style/CustomFontTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/hint_email"
+                    android:hint="@string/text_hint_email"
                     android:paddingStart="@dimen/dim_2_dp"
                     android:paddingEnd="@dimen/dim_2_dp"
                     android:textColorHint="@color/colorBlack"
@@ -133,12 +129,9 @@
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
-
                 </com.google.android.material.textfield.TextInputLayout>
 
-
             </com.google.android.material.card.MaterialCardView>
-
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/password_cardView"
@@ -153,13 +146,12 @@
                 app:strokeColor="@color/colorUnSelectedEditText"
                 app:strokeWidth="@dimen/dim_1_dp">
 
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/password_textInputLayout"
                     style="@style/CustomFontTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/hint_password"
+                    android:hint="@string/text_hint_password"
                     android:paddingStart="@dimen/dim_2_dp"
                     android:paddingEnd="@dimen/dim_2_dp"
                     android:textColorHint="@color/colorBlack"
@@ -195,12 +187,9 @@
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
-
                 </com.google.android.material.textfield.TextInputLayout>
 
-
             </com.google.android.material.card.MaterialCardView>
-
 
             <Button
                 android:id="@+id/login_button"
@@ -241,11 +230,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/login_button"
                 app:strokeWidth="0dp" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </ScrollView>
-
 
 </layout>

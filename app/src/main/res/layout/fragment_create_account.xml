@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <data>
 
         <variable
@@ -11,7 +10,6 @@
             type="com.udacity.shoestore.features.createAccount.viewModel.CreateAccountViewModel" />
 
     </data>
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,7 +22,6 @@
             android:paddingBottom="@dimen/margin_left_right">
 
             <!--  I used constraintLayout, but LinearLayout could be use here, since there's no nested viewgroup      -->
-
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/logo_cardView"
@@ -49,7 +46,6 @@
                     app:tint="@color/colorAccent" />
 
             </com.google.android.material.card.MaterialCardView>
-
 
             <TextView
                 android:id="@+id/title_textView"
@@ -83,7 +79,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_textView" />
 
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/email_cardView"
                 android:layout_width="match_parent"
@@ -97,13 +92,12 @@
                 app:strokeColor="@color/colorUnSelectedEditText"
                 app:strokeWidth="@dimen/dim_1_dp">
 
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/email_textInputLayout"
                     style="@style/CustomFontTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/hint_email"
+                    android:hint="@string/text_hint_email"
                     android:paddingStart="@dimen/dim_2_dp"
                     android:paddingEnd="@dimen/dim_2_dp"
                     android:textColorHint="@color/colorBlack"
@@ -136,12 +130,9 @@
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
-
                 </com.google.android.material.textfield.TextInputLayout>
 
-
             </com.google.android.material.card.MaterialCardView>
-
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/password_cardView"
@@ -156,13 +147,12 @@
                 app:strokeColor="@color/colorUnSelectedEditText"
                 app:strokeWidth="@dimen/dim_1_dp">
 
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/password_textInputLayout"
                     style="@style/CustomFontTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/hint_password"
+                    android:hint="@string/text_hint_password"
                     android:paddingStart="@dimen/dim_2_dp"
                     android:paddingEnd="@dimen/dim_2_dp"
                     android:textColorHint="@color/colorBlack"
@@ -198,9 +188,7 @@
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
-
                 </com.google.android.material.textfield.TextInputLayout>
-
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -216,7 +204,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/password_cardView"
                 app:strokeColor="@color/colorUnSelectedEditText"
                 app:strokeWidth="@dimen/dim_1_dp">
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/confirm_password_textInputLayout"
@@ -259,12 +246,9 @@
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
-
                 </com.google.android.material.textfield.TextInputLayout>
 
-
             </com.google.android.material.card.MaterialCardView>
-
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/create_account_button"
@@ -287,11 +271,8 @@
                 app:strokeColor="@color/colorGray63"
                 app:strokeWidth="@dimen/dim_1_dp" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </ScrollView>
-
 
 </layout>

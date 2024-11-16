@@ -27,8 +27,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView<ActivityMainBinding?>(this, R.layout.activity_main).apply {
             lifecycleOwner = this@MainActivity
-            setSupportActionBar(mainToolbar)
-            mainToolbar.setTitle(null)
+            setSupportActionBar(mainToolbar).apply {
+                title = null
+            }
         }
         mNavController =
             (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController

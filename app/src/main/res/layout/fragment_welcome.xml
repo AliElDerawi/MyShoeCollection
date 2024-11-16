@@ -11,16 +11,13 @@
 
     </data>
 
-
     <!--  constraintLayout should be use here, to prevent using relative layout or nested linearLayout to achieve view relation and positions   -->
-
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         tools:context=".features.onBoarding.view.OnBoardingActivity">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -46,7 +43,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <ImageView
                 android:id="@+id/logo_imageView"
                 android:layout_width="match_parent"
@@ -55,7 +51,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/skip_textView"
                 app:srcCompat="@drawable/ic_shoe"
                 app:tint="@color/colorAccent" />
-
 
             <TextView
                 android:id="@+id/title_textView"
@@ -68,7 +63,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/logo_imageView" />
-
 
             <TextView
                 android:id="@+id/message_textView"
@@ -101,7 +95,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/message_textView"
                 app:layout_constraintVertical_bias="1">
 
-
                 <TextView
                     android:id="@+id/next_progress_textView"
                     android:layout_width="match_parent"
@@ -114,13 +107,10 @@
                     android:textColor="@color/colorWhite"
                     android:theme="@style/BodyStyle" />
 
-
             </androidx.cardview.widget.CardView>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
 
 </layout>

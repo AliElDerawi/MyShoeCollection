@@ -11,9 +11,7 @@
 
     </data>
 
-
     <!--  ConstraintLayout is used here as a main ViewGroup to prevent nested LinearLayout   -->
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,15 +37,11 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:contentDescription="@string/text_bookmarked_shoe_image"
+                android:contentDescription="@string/text_description_bookmarked_shoe_image"
                 app:srcCompat="@drawable/ic_shoe"
                 app:tint="@color/colorAccent" />
 
         </com.google.android.material.card.MaterialCardView>
-
-
-        <!--  I could use LineaLayout for Shoe Detail here  -->
-
 
         <TextView
             android:id="@+id/name_textView"

@@ -12,6 +12,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity
             android:name=".features.main.view.MainActivity"
             android:exported="true"
@@ -21,5 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
+
 </manifest>

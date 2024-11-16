@@ -40,18 +40,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/boarding_viewPager"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:circleIndicator="@{boardingScreenCircleIndicator}"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:currentProgress="@{viewModel.currentPageLiveData}"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/skip_textView"
                 app:viewPagerData="@{viewModel.instructionListStateFlow}" />
-
 
             <me.relex.circleindicator.CircleIndicator3
                 android:id="@+id/boarding_screen_circleIndicator"
@@ -64,14 +62,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/boarding_viewPager" />
 
-
             <com.mikhaellopez.circularprogressbar.CircularProgressBar
                 android:id="@+id/page_circleProgressBar"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginTop="@dimen/margin_top_view"
                 app:config="@{viewModel.instructionListStateFlow}"
-                app:currentProgress="@{viewModel.currentPageLiveData}"
                 app:cpb_background_progressbar_color="@color/colorUnSelectedAccent"
                 app:cpb_background_progressbar_width="@dimen/dim_1_dp"
                 app:cpb_progress_direction="to_right"
@@ -79,6 +75,7 @@
                 app:cpb_progressbar_color="@color/colorAccent"
                 app:cpb_progressbar_width="@dimen/dim_6_dp"
                 app:cpb_round_border="false"
+                app:currentProgress="@{viewModel.currentPageLiveData}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +96,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-
                 <TextView
                     android:id="@+id/next_progress_textView"
                     android:layout_width="match_parent"
@@ -112,14 +108,10 @@
                     android:textColor="@color/colorWhite"
                     android:theme="@style/BodyStyle" />
 
-
             </androidx.cardview.widget.CardView>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.core.widget.NestedScrollView>
-
 
 </layout>

@@ -59,7 +59,7 @@ class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
         when {
             _shoeNameStateFlow.value.isEmpty() -> showToastInt.value = R.string.text_msg_please_enter_shoe_name
             _shoeCompanyStateFlow.value.isEmpty() -> showToastInt.value = R.string.text_msg_please_enter_shoe_company
-            _shoeSizeStateFlow.value.isEmpty() -> showToastInt.value = R.string.please_enter_shoe_size
+            _shoeSizeStateFlow.value.isEmpty() -> showToastInt.value = R.string.text_msg_please_enter_shoe_size
             _shoeDescriptionStateFlow.value.isEmpty() -> showToastInt.value = R.string.text_please_enter_shoe_description
             else -> {
                 val shoeModel = ShoeModel(

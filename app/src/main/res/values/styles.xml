@@ -4,22 +4,19 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
 
-
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorDark1C</item>
 
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorAccent</item>
         <item name="colorSecondaryVariant">@color/colorAccent</item>
         <item name="colorOnSecondary">@color/colorWhite</item>
-
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:windowDisablePreview">true</item>
         <!--        <item name="android:fitsSystemWindows">true</item>-->
-
 
     </style>
 
@@ -28,17 +25,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
 
     <style name="TitleStyle">
         <item name="android:textColor">@color/colorDark1C</item>
         <item name="android:textSize">24sp</item>
         <item name="android:fontFamily">@font/cairo_semi_bold</item>
     </style>
-
 
     <style name="BodyStyle">
         <item name="android:textColor">@color/colorDark1C</item>
@@ -72,7 +66,6 @@
         <item name="android:insetTop">0dp</item>
     </style>
 
-
     <style name="boldFont">
         <item name="android:fontFamily">@font/cairo_bold</item>
     </style>
@@ -88,6 +81,5 @@
     <style name="lightFont">
         <item name="android:fontFamily">@font/cairo_light</item>
     </style>
-
 
 </resources>

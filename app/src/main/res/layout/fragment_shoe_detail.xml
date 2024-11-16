@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <data>
 
         <variable
@@ -11,7 +10,6 @@
             type="com.udacity.shoestore.features.shoeDetail.viewModel.ShoeDetailViewModel" />
 
     </data>
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,7 +22,6 @@
             android:paddingBottom="@dimen/margin_left_right">
 
             <!--  I used constraintLayout, but LinearLayout could be use here, since there's no nested viewgroup      -->
-
 
             <TextView
                 android:id="@+id/subTitle_textView"
@@ -44,7 +41,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/text_add_shoe_message" />
 
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/email_cardView"
                 android:layout_width="match_parent"
@@ -57,7 +53,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/subTitle_textView"
                 app:strokeColor="@color/colorUnSelectedEditText"
                 app:strokeWidth="@dimen/dim_1_dp">
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/email_textInputLayout"
@@ -97,12 +92,9 @@
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
-
                 </com.google.android.material.textfield.TextInputLayout>
 
-
             </com.google.android.material.card.MaterialCardView>
-
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/company_cardView"
@@ -116,7 +108,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/email_cardView"
                 app:strokeColor="@color/colorUnSelectedEditText"
                 app:strokeWidth="@dimen/dim_1_dp">
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/password_textInputLayout"
@@ -156,9 +147,7 @@
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
-
                 </com.google.android.material.textfield.TextInputLayout>
-
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -174,7 +163,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/company_cardView"
                 app:strokeColor="@color/colorUnSelectedEditText"
                 app:strokeWidth="@dimen/dim_1_dp">
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/shoe_size_textInputLayout"
@@ -214,12 +202,9 @@
                         tools:text="@string/text_placeholder_email"
                         tools:textAlignment="viewStart" />
 
-
                 </com.google.android.material.textfield.TextInputLayout>
 
-
             </com.google.android.material.card.MaterialCardView>
-
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/description_cardView"
@@ -239,7 +224,6 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
-
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/description_textInputLayout"
@@ -279,15 +263,11 @@
                             tools:text="@string/text_placeholder_email"
                             tools:textAlignment="viewStart" />
 
-
                     </com.google.android.material.textfield.TextInputLayout>
-
 
                 </FrameLayout>
 
-
             </com.google.android.material.card.MaterialCardView>
-
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/save_button"
@@ -311,7 +291,6 @@
                 app:strokeColor="@color/colorGray63"
                 app:strokeWidth="@dimen/dim_1_dp" />
 
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_button"
                 style="@style/buttonStyleNew"
@@ -332,11 +311,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/save_button"
                 app:strokeWidth="0dp" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </ScrollView>
-
 
 </layout>
