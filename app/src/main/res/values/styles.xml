@@ -6,7 +6,7 @@
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimary</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/colorWhite</item>
         <item name="colorOnPrimary">@color/colorDark1C</item>
 
         <!-- Secondary brand color. -->
@@ -28,6 +28,11 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
 
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="navigationIconTint">@color/colorBlack</item>
+    </style>
+
     <style name="TitleStyle">
         <item name="android:textColor">@color/colorDark1C</item>
         <item name="android:textSize">24sp</item>
@@ -35,9 +40,9 @@
     </style>
 
     <style name="ToolbarTitleStyle">
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorDark1C</item>
         <item name="android:textSize">@dimen/text_sub_title</item>
-        <item name="android:fontFamily">@font/cairo_bold</item>
+        <item name="android:fontFamily">@font/cairo_semi_bold</item>
     </style>
 
     <style name="BodyStyle">
