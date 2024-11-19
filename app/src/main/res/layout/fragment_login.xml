@@ -25,17 +25,14 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/logo_cardView"
+                style="@style/logoMaterialCardViewStyle"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="@dimen/margin_left_right"
-                app:cardBackgroundColor="@color/colorWhite"
-                app:cardCornerRadius="@dimen/dim_30_dp"
-                app:cardElevation="@dimen/dim_4_dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/colorWhite"
-                app:strokeWidth="0dp">
+                app:strokeColor="@color/colorWhite">
 
                 <ImageView
                     android:layout_width="80dp"
@@ -49,6 +46,7 @@
 
             <TextView
                 android:id="@+id/title_textView"
+                style="@style/TitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -57,13 +55,13 @@
                 android:paddingStart="@dimen/margin_btnView"
                 android:paddingEnd="@dimen/margin_btnView"
                 android:text="@string/text_sign_in_now"
-                style="@style/TitleStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/logo_cardView" />
 
             <TextView
                 android:id="@+id/subTitle_textView"
+                style="@style/BodyStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_btnView"
@@ -73,7 +71,6 @@
                 android:paddingEnd="@dimen/margin_btnView"
                 android:text="@string/text_one_step_right_service"
                 android:textColor="@color/colorBlack63"
-                style="@style/BodyStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_textView" />
@@ -98,16 +95,7 @@
                     android:layout_height="match_parent"
                     android:hint="@string/text_hint_email"
                     android:paddingStart="@dimen/dim_2_dp"
-                    android:paddingEnd="@dimen/dim_2_dp"
-                    app:boxBackgroundColor="@color/colorTrans"
-                    app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
-                    app:boxCornerRadiusBottomEnd="0dp"
-                    app:boxCornerRadiusBottomStart="0dp"
-                    app:boxCornerRadiusTopEnd="0dp"
-                    app:boxCornerRadiusTopStart="0dp"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:counterOverflowTextColor="@color/colorBlack">
+                    android:paddingEnd="@dimen/dim_2_dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email_textInputEditText"
@@ -145,18 +133,7 @@
                     android:hint="@string/text_hint_password"
                     android:paddingStart="@dimen/dim_2_dp"
                     android:paddingEnd="@dimen/dim_2_dp"
-                    app:boxBackgroundColor="@color/colorTrans"
-                    app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
-                    app:boxCornerRadiusBottomEnd="0dp"
-                    app:boxCornerRadiusBottomStart="0dp"
-                    app:boxCornerRadiusTopEnd="0dp"
-                    app:boxCornerRadiusTopStart="0dp"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:counterOverflowTextColor="@color/colorBlack"
-                    app:passwordToggleDrawable="@drawable/bg_password_status"
-                    app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/colorDark1C">
+                    app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password_textInputEditText"

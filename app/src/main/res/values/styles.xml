@@ -26,7 +26,6 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light">
         <item name="android:background">@color/colorWhite</item>
@@ -54,6 +53,18 @@
     <style name="CustomFontTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="hintTextAppearance">@style/TextInputLayoutHintText</item>
         <item name="android:textColorHint">@color/colorBlack</item>
+        <item name="boxBackgroundColor">@color/colorTrans</item>
+        <item name="boxCollapsedPaddingTop">@dimen/dim_7_dp</item>
+        <item name="boxCornerRadiusBottomEnd">0dp</item>
+        <item name="boxCornerRadiusBottomStart">0dp</item>
+        <item name="boxCornerRadiusTopEnd">0dp</item>
+        <item name="boxCornerRadiusTopStart">0dp</item>
+        <item name="boxStrokeColor">@color/colorTrans</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="counterOverflowTextColor">@color/colorBlack</item>
+        <item name="passwordToggleDrawable">@drawable/bg_password_status</item>
+        <item name="passwordToggleTint">@color/colorDark1C</item>
     </style>
 
     <style name="TextInputLayoutHintText" parent="TextAppearance.Design.Hint">
@@ -83,6 +94,21 @@
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="logoMaterialCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">@dimen/dim_4_dp</item>
+        <item name="cardBackgroundColor">@color/colorWhite</item>
+        <item name="cardCornerRadius">@dimen/dim_30_dp</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
+    <style name="editTextBorderMaterCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@color/colorWhite</item>
+        <item name="cardCornerRadius">@dimen/dim_edittext_corner</item>
+        <item name="strokeColor">@color/colorUnSelectedEditText</item>
+        <item name="strokeWidth">@dimen/dim_1_dp</item>
     </style>
 
     <style name="boldFont">

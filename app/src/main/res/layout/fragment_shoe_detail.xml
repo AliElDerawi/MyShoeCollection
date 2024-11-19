@@ -61,17 +61,7 @@
                     android:layout_height="match_parent"
                     android:hint="@string/text_shoe_name"
                     android:paddingStart="@dimen/dim_2_dp"
-                    android:paddingEnd="@dimen/dim_2_dp"
-                    app:boxBackgroundColor="@color/colorTrans"
-                    app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
-                    app:boxCornerRadiusBottomEnd="0dp"
-                    app:boxCornerRadiusBottomStart="0dp"
-                    app:boxCornerRadiusTopEnd="0dp"
-                    app:boxCornerRadiusTopStart="0dp"
-                    app:boxStrokeColor="@color/colorTrans"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:counterOverflowTextColor="@color/colorBlack">
+                    android:paddingEnd="@dimen/dim_2_dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/shoe_name_textInputEditText"
@@ -108,17 +98,7 @@
                     android:layout_height="match_parent"
                     android:hint="@string/text_company"
                     android:paddingStart="@dimen/dim_2_dp"
-                    android:paddingEnd="@dimen/dim_2_dp"
-                    app:boxBackgroundColor="@color/colorTrans"
-                    app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
-                    app:boxCornerRadiusBottomEnd="0dp"
-                    app:boxCornerRadiusBottomStart="0dp"
-                    app:boxCornerRadiusTopEnd="0dp"
-                    app:boxCornerRadiusTopStart="0dp"
-                    app:boxStrokeColor="@color/colorTrans"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:counterOverflowTextColor="@color/colorBlack">
+                    android:paddingEnd="@dimen/dim_2_dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/shoe_company_textInputEditText"
@@ -155,17 +135,7 @@
                     android:layout_height="match_parent"
                     android:hint="@string/text_shoe_size"
                     android:paddingStart="@dimen/dim_2_dp"
-                    android:paddingEnd="@dimen/dim_2_dp"
-                    app:boxBackgroundColor="@color/colorTrans"
-                    app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
-                    app:boxCornerRadiusBottomEnd="0dp"
-                    app:boxCornerRadiusBottomStart="0dp"
-                    app:boxCornerRadiusTopEnd="0dp"
-                    app:boxCornerRadiusTopStart="0dp"
-                    app:boxStrokeColor="@color/colorTrans"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:counterOverflowTextColor="@color/colorBlack">
+                    android:paddingEnd="@dimen/dim_2_dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/shoe_size_textInputEditText"
@@ -208,17 +178,7 @@
                         android:layout_height="match_parent"
                         android:hint="@string/text_hint_description"
                         android:paddingStart="@dimen/dim_2_dp"
-                        android:paddingEnd="@dimen/dim_2_dp"
-                        app:boxBackgroundColor="@color/colorTrans"
-                        app:boxCollapsedPaddingTop="@dimen/dim_7_dp"
-                        app:boxCornerRadiusBottomEnd="0dp"
-                        app:boxCornerRadiusBottomStart="0dp"
-                        app:boxCornerRadiusTopEnd="0dp"
-                        app:boxCornerRadiusTopStart="0dp"
-                        app:boxStrokeColor="@color/colorTrans"
-                        app:boxStrokeWidth="0dp"
-                        app:boxStrokeWidthFocused="0dp"
-                        app:counterOverflowTextColor="@color/colorBlack">
+                        android:paddingEnd="@dimen/dim_2_dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/shoe_description_textInputEditText"
