@@ -1,24 +1,38 @@
 package com.udacity.shoestore.utils
 
+import android.app.ActionBar
 import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
+import android.graphics.Color
+import android.os.Build
 import android.util.Patterns
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowInsets
+import android.view.WindowInsetsController
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.udacity.shoestore.R
 import com.udacity.shoestore.models.InstructionModel
-
 
 object AppSharedMethods {
 
@@ -156,4 +170,49 @@ object AppSharedMethods {
             putBoolean(AppSharedData.PREF_IS_LOGIN, true)
         }
     }
+
+    fun View.applyWindowsPadding() {
+        ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+    }
+
+    fun Activity.setStatusBarColor(color: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // Set the listener to customize the status bar area
+            window.decorView.apply {
+                setOnApplyWindowInsetsListener { v, insets ->
+                    val statusBarInsets = insets.getInsets(WindowInsets.Type.statusBars())
+                    // Create a view for the status bar background
+                    val statusBarBackground = View(this@setStatusBarColor).apply {
+                        setBackgroundColor(color)
+                        layoutParams = ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            statusBarInsets.top // Height matches the status bar inset
+                        )
+                    }
+                    // Add the view to the decorView
+                    (this as ViewGroup).apply {
+                        if (statusBarBackground.parent == null) {
+                            addView(statusBarBackground)
+                        }
+                    }
+                    insets
+                }
+                requestApplyInsets()
+            }
+            // Request insets to trigger the listener
+        } else {
+            // Fallback for older versions
+            window.statusBarColor = color
+        }
+    }
+
+    fun Toolbar.setMenuColor(color: Int) {
+        overflowIcon?.setTint(context.getCompatColor(color))
+    }
+
+
 }
