@@ -13,8 +13,9 @@ import com.udacity.shoestore.features.shoeDetail.viewModel.ShoeDetailViewModel
 import com.udacity.shoestore.features.shoeList.viewModel.ShoeListViewModel
 import com.udacity.shoestore.features.welcome.viewModel.WelcomeViewModel
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
+import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import timber.log.Timber
 
@@ -41,13 +42,13 @@ class ShoeStoreApp : MultiDexApplication() {
 
         val myModule = module {
             //Declare a ViewModel - be later inject into Fragment with dedicated injector using by viewModel()
-            viewModel { LoginViewModel(get()) }
-            viewModel { CreateAccountViewModel(get()) }
-            viewModel { InstructionsViewModel(get()) }
-            viewModel { ShoeDetailViewModel(get()) }
-            viewModel { WelcomeViewModel(get()) }
-            viewModel { ShoeListViewModel(get()) }
-            single { MainViewModel(get()) }
+            viewModelOf(::LoginViewModel)
+            viewModelOf(::CreateAccountViewModel)
+            viewModelOf(::InstructionsViewModel)
+            viewModelOf(::ShoeDetailViewModel)
+            viewModelOf(::WelcomeViewModel)
+            viewModelOf(::ShoeListViewModel)
+            singleOf(::MainViewModel)
         }
 
         startKoin {

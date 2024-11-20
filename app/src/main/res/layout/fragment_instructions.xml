@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <data>
 
         <variable
@@ -26,7 +25,6 @@
 
             <!--  constraintLayout should be use here, to prevent using relative layout or nested linearLayout to achieve view relation and positions   -->
 
-
             <TextView
                 android:id="@+id/skip_textView"
                 android:layout_width="wrap_content"
@@ -38,21 +36,20 @@
                 android:textAllCaps="true"
                 android:textColor="@color/colorGrayB2"
                 android:textSize="@dimen/text_small_extra"
-                android:theme="@style/BodyStyle"
+                style="@style/BodyStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/boarding_viewPager"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:circleIndicator="@{boardingScreenCircleIndicator}"
+                app:currentProgress="@{viewModel.currentPageLiveData}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/skip_textView"
                 app:viewPagerData="@{viewModel.instructionListStateFlow}" />
-
 
             <me.relex.circleindicator.CircleIndicator3
                 android:id="@+id/boarding_screen_circleIndicator"
@@ -64,7 +61,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/boarding_viewPager" />
-
 
             <com.mikhaellopez.circularprogressbar.CircularProgressBar
                 android:id="@+id/page_circleProgressBar"
@@ -79,6 +75,7 @@
                 app:cpb_progressbar_color="@color/colorAccent"
                 app:cpb_progressbar_width="@dimen/dim_6_dp"
                 app:cpb_round_border="false"
+                app:currentProgress="@{viewModel.currentPageLiveData}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +96,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-
                 <TextView
                     android:id="@+id/next_progress_textView"
                     android:layout_width="match_parent"
@@ -110,16 +106,12 @@
                     android:gravity="center"
                     android:text="@string/text_next"
                     android:textColor="@color/colorWhite"
-                    android:theme="@style/BodyStyle" />
-
+                    style="@style/BodyStyle" />
 
             </androidx.cardview.widget.CardView>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.core.widget.NestedScrollView>
-
 
 </layout>

@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <data>
 
         <variable
@@ -12,15 +11,12 @@
 
     </data>
 
-
     <!--  There's no need to use constraint or linear layout here, FrameLayout can do the trick      -->
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".features.shoeList.view.ShoeListFragment">
-
 
         <ScrollView
             android:layout_width="0dp"
@@ -39,12 +35,9 @@
                 android:paddingStart="@dimen/margin_small"
                 android:paddingEnd="@dimen/margin_small">
 
-
             </LinearLayout>
 
-
         </ScrollView>
-
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_shoe_fab"
@@ -52,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/margin_top_view"
-            android:contentDescription="@string/text_add_shoe_button"
+            android:contentDescription="@string/text_description_add_shoe_button"
             android:onClick="@{() -> shoeListFragment.onAddShoeClick()}"
             android:src="@android:drawable/ic_input_add"
             app:layout_constraintBottom_toBottomOf="parent"

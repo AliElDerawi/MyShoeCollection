@@ -39,11 +39,12 @@ class WelcomeFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        mBinding = FragmentWelcomeBinding.inflate(inflater, container, false)
+        mBinding = FragmentWelcomeBinding.inflate(inflater, container, false).apply {
+            welcomeFragment = this@WelcomeFragment
+            mLifecycleOwner = viewLifecycleOwner
+            lifecycleOwner = mLifecycleOwner
+        }
         mSharedViewModel.setHideToolbar(true)
-        mBinding.welcomeFragment = this
-        mLifecycleOwner = viewLifecycleOwner
-        mBinding.lifecycleOwner = mLifecycleOwner
         return mBinding.root
     }
 
@@ -56,6 +57,5 @@ class WelcomeFragment : BaseFragment() {
             WelcomeFragmentDirections.actionWelcomeFragmentToInstructionsFragment2()
         )
     }
-
 
 }

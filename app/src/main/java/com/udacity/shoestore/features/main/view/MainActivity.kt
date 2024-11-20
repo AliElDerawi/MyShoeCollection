@@ -3,6 +3,7 @@ package com.udacity.shoestore.features.main.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.enableEdgeToEdge
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -13,6 +14,10 @@ import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.ActivityMainBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.utils.AppSharedMethods
+import com.udacity.shoestore.utils.AppSharedMethods.applyWindowsPadding
+import com.udacity.shoestore.utils.AppSharedMethods.getCompatColor
+import com.udacity.shoestore.utils.AppSharedMethods.setMenuColor
+import com.udacity.shoestore.utils.AppSharedMethods.setStatusBarColor
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -25,12 +30,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        setSupportActionBar(mBinding.mainToolbar)
-        mBinding.mainToolbar.setTitle(null)
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        mNavController = navHostFragment.navController
+        enableEdgeToEdge()
+        mBinding =
+            DataBindingUtil.setContentView<ActivityMainBinding?>(this, R.layout.activity_main)
+                .apply {
+                    lifecycleOwner = this@MainActivity
+                    mainConstraintLayout.applyWindowsPadding()
+                    setSupportActionBar(mainToolbar).apply {
+                        title = null
+                    }
+                    mainToolbar.setMenuColor(R.color.colorBlack)
+                }
+        setStatusBarColor(getCompatColor(R.color.colorWhite))
+        mNavController =
+            (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
         mAppBarConfiguration = AppBarConfiguration(mNavController.graph)
 
         if (savedInstanceState == null) {
@@ -50,17 +63,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModelObservers() {
-        with(mBinding) {
-            mMainViewModel.hideToolbarLiveData.observe(this@MainActivity) {
-                mainToolbar.visibility = if (it) View.GONE else View.VISIBLE
+        with(mMainViewModel) {
+            hideToolbarLiveData.observe(this@MainActivity) {
+                mBinding.mainToolbar.visibility = if (it) View.GONE else View.VISIBLE
             }
-            mMainViewModel.toolbarTitleLiveData.observe(this@MainActivity) {
-                textViewToolbarTitle.text = it
+            toolbarTitleLiveData.observe(this@MainActivity) {
+                mBinding.titleToolbarTextView.text = it
             }
-            mMainViewModel.showUpButtonLiveData.observe(this@MainActivity) {
+            showUpButtonLiveData.observe(this@MainActivity) {
                 supportActionBar?.setDisplayHomeAsUpEnabled(it)
             }
-            mMainViewModel.navigationCommand.observe(this@MainActivity) { command ->
+            navigationCommand.observe(this@MainActivity) { command ->
                 Timber.d("initViewModelObserver:command: $command")
                 when (command) {
                     is NavigationCommand.To -> mNavController.navigate(command.directions)
@@ -70,9 +83,6 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
             }
-        }
-
-        with(mMainViewModel) {
             showToast.observe(this@MainActivity) {
                 AppSharedMethods.showToast(it)
             }

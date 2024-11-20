@@ -43,22 +43,18 @@ class CreateAccountFragment : BaseFragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-
         mBinding = FragmentCreateAccountBinding.inflate(inflater, container, false)
+            .apply {
+                mLifecycleOwner = viewLifecycleOwner
+                lifecycleOwner = mLifecycleOwner
+                createAccountViewModel = mViewModel
+            }
         mSharedViewModel.setHideToolbar(true)
-        mLifecycleOwner = viewLifecycleOwner
-        mBinding.lifecycleOwner = mLifecycleOwner
-        mBinding.createAccountViewModel = mViewModel
         return mBinding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,13 +63,12 @@ class CreateAccountFragment : BaseFragment() {
     }
 
     private fun initViewModelObserver() {
-
-        with(mBinding) {
-            mViewModel.completeCreateAccountLiveData.observe(mLifecycleOwner) { redirect ->
+        with(mViewModel) {
+            completeCreateAccountLiveData.observe(mLifecycleOwner) { redirect ->
                 if (redirect) {
                     createAccountAndLogin(
-                        emailTextInputEditText.text.toString(),
-                        passwordTextInputEditText.text.toString()
+                        mBinding.emailTextInputEditText.text.toString(),
+                        mBinding.passwordTextInputEditText.text.toString()
                     )
                     mSharedViewModel.navigationCommand.value = NavigationCommand.To(
                         CreateAccountFragmentDirections.actionCreateAccountFragmentToWelcomeFragment()
@@ -83,13 +78,12 @@ class CreateAccountFragment : BaseFragment() {
 
             lifecycleScope.launch {
                 lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    mViewModel.isCreateAccountButtonEnabledStateFlow.collect { isEnabled ->
-                        createAccountButton.setButtonStyle(isEnabled)
+                    isCreateAccountButtonEnabledStateFlow.collect { isEnabled ->
+                        mBinding.createAccountButton.setButtonStyle(isEnabled)
                     }
                 }
             }
         }
-
     }
 
 }

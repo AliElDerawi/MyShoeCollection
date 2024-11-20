@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/main_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -16,29 +16,23 @@
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/main_toolbar"
+                style="@style/AppTheme.PopupOverlay"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="null">
-
+                app:popupTheme="@style/AppTheme.PopupOverlay">
 
                 <TextView
-                    android:id="@+id/textView_toolbar_title"
+                    android:id="@+id/title_toolbar_textView"
+                    style="@style/ToolbarTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="?actionBarSize"
                     android:layout_gravity="center"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/text_sub_title"
-                    android:theme="@style/boldFont"
                     tools:text="@string/app_name" />
 
-
-            </androidx.appcompat.widget.Toolbar>
-
+            </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -51,8 +45,6 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:navGraph="@navigation/main_navigation" />
 
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 </layout>

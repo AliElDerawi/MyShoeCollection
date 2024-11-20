@@ -18,6 +18,7 @@ import com.udacity.shoestore.features.onBoarding.viewModel.InstructionsViewModel
 import com.udacity.shoestore.models.InstructionModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class InstructionsFragment : BaseFragment() {
@@ -39,11 +40,12 @@ class InstructionsFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        mBinding = FragmentInstructionsBinding.inflate(inflater, container, false)
+        mBinding = FragmentInstructionsBinding.inflate(inflater, container, false).apply {
+            mLifecycleOwner = viewLifecycleOwner
+            lifecycleOwner = mLifecycleOwner
+            viewModel = mViewModel
+        }
         mSharedViewModel.setHideToolbar(true)
-        mLifecycleOwner = viewLifecycleOwner
-        mBinding.lifecycleOwner = mLifecycleOwner
-        mBinding.viewModel = mViewModel
         return mBinding.root
     }
 
@@ -66,29 +68,28 @@ class InstructionsFragment : BaseFragment() {
 
 
     private fun initViewModelObserver() {
-
-        with(mBinding) {
-            mViewModel.currentPageLiveData.observe(mLifecycleOwner) {
-                pageCircleProgressBar.progress = (it + 1).toFloat()
-                boardingViewPager.currentItem = it
-                if (it == mViewModel.lastPageStateFlow.value) {
+        with(mViewModel) {
+            currentPageLiveData.observe(mLifecycleOwner) {
+                Timber.d("currentPageLiveData: $it")
+                if (it == lastPageStateFlow.value) {
                     showCompleteButton()
                 } else {
                     hideCompleteButton()
                 }
             }
 
-            mViewModel.goNextScreenLiveData.observe(mLifecycleOwner) {
+            goNextScreenLiveData.observe(mLifecycleOwner) {
                 if (it) {
-                    mSharedViewModel.updateNewUserValidation(false)
-                    mSharedViewModel.navigationCommand.value =
-                        NavigationCommand.To(
-                            InstructionsFragmentDirections.actionInstructionsFragmentToShoesListFragment()
-                        )
+                    mSharedViewModel.apply {
+                        updateNewUserValidation(false)
+                        navigationCommand.value =
+                            NavigationCommand.To(
+                                InstructionsFragmentDirections.actionInstructionsFragmentToShoesListFragment()
+                            )
+                    }
                 }
             }
         }
-
     }
 
     private fun initBoardingViewPagerListener() {
@@ -96,7 +97,7 @@ class InstructionsFragment : BaseFragment() {
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                mViewModel.onPageChange(position)
+                    mViewModel.onPageChange(position)
             }
         })
     }

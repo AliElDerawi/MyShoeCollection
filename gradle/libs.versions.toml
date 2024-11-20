@@ -1,16 +1,16 @@
 [versions]
 kotlinVersion = '2.0.21'
 glideVersion = '4.15.1'
-koinVersion = '3.4.0'
-coreVersion = '1.13.1'
+koinVersion = '4.0.0'
+coreVersion = '1.15.0'
 appCompatVersion = '1.7.0'
-constraintLayoutVersion = '2.1.4'
+constraintLayoutVersion = '2.2.0'
 materialVersion = '1.12.0'
-navigationVersion = '2.8.3'
-safeArgsVersion = '2.8.3'
+navigationVersion = '2.8.4'
+safeArgsVersion = '2.8.4'
 recyclerViewVersion = '1.3.2'
 recyclerViewSelectionVersion = '1.1.0'
-gradleToolsVersion = '8.6.1'
+gradleToolsVersion = "8.7.2"
 multidexVersion = '2.0.1'
 timberVersion = '5.0.1'
 circularIndicatorVersion = '2.1.6'
@@ -36,14 +36,12 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 glide-compiler = { group = "com.github.bumptech.glide", name = "ksp", version.ref = "glideVersion" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koinVersion" }
-koin-androidx = { group = "io.insert-koin", name = "koin-androidx", version.ref = "koinVersion" }
 koin-compat = { group = "io.insert-koin", name = "koin-android-compat", version.ref = "koinVersion" }
 koin-workmanager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koinVersion" }
 koin-navigation = { group = "io.insert-koin", name = "koin-androidx-navigation", version.ref = "koinVersion" }
 constraintLayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintLayoutVersion" }
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationVersion" }
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationVersion" }
-#safeArgs = { group = "androidx.navigation", name = "navigation-safe-args-gradle-plugin", version.ref = "safeArgsVersion" }
 recyclerView = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerViewVersion" }
 recyclerViewSelection = { group = "androidx.recyclerview", name = "recyclerview-selection", version.ref = "recyclerViewSelectionVersion" }
 multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidexVersion" }
@@ -51,7 +49,6 @@ timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "tim
 security-crypto-ktx = { group = "androidx.security", name = "security-crypto-ktx", version.ref = "securityCryptoVersion" }
 dataStore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStoreVersion" }
 splashScreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreenVersion" }
-
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradleToolsVersion" }

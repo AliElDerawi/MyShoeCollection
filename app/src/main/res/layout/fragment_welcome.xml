@@ -11,16 +11,13 @@
 
     </data>
 
-
     <!--  constraintLayout should be use here, to prevent using relative layout or nested linearLayout to achieve view relation and positions   -->
-
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         tools:context=".features.onBoarding.view.OnBoardingActivity">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,6 +30,7 @@
 
             <TextView
                 android:id="@+id/skip_textView"
+                style="@style/BodyStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cairo_bold"
@@ -41,11 +39,9 @@
                 android:textAllCaps="true"
                 android:textColor="@color/colorGrayB2"
                 android:textSize="@dimen/text_small_extra"
-                android:theme="@style/BodyStyle"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <ImageView
                 android:id="@+id/logo_imageView"
@@ -56,29 +52,27 @@
                 app:srcCompat="@drawable/ic_shoe"
                 app:tint="@color/colorAccent" />
 
-
             <TextView
                 android:id="@+id/title_textView"
+                style="@style/TitleStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_left_right"
                 android:gravity="center"
                 android:text="@string/text_welcome_title"
-                android:theme="@style/TitleStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/logo_imageView" />
 
-
             <TextView
                 android:id="@+id/message_textView"
+                style="@style/BodyStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dim_10_dp"
                 android:gravity="center"
                 android:lineSpacingMultiplier="0.7"
                 android:text="@string/text_welcome_message"
-                android:theme="@style/BodyStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_textView" />
@@ -101,9 +95,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/message_textView"
                 app:layout_constraintVertical_bias="1">
 
-
                 <TextView
                     android:id="@+id/next_progress_textView"
+                    style="@style/BodyStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -111,16 +105,12 @@
                     android:fontFamily="@font/cairo_bold"
                     android:gravity="center"
                     android:text="@string/text_next"
-                    android:textColor="@color/colorWhite"
-                    android:theme="@style/BodyStyle" />
-
+                    android:textColor="@color/colorWhite" />
 
             </androidx.cardview.widget.CardView>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
 
 </layout>
