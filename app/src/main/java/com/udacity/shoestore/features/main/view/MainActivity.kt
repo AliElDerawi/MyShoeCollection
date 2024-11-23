@@ -17,7 +17,7 @@ import com.udacity.shoestore.utils.AppSharedMethods
 import com.udacity.shoestore.utils.AppSharedMethods.applyWindowsPadding
 import com.udacity.shoestore.utils.AppSharedMethods.getCompatColor
 import com.udacity.shoestore.utils.AppSharedMethods.setMenuColor
-import com.udacity.shoestore.utils.AppSharedMethods.setStatusBarColor
+import com.udacity.shoestore.utils.AppSharedMethods.setStatusBarColorAndStyle
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -35,13 +35,13 @@ class MainActivity : AppCompatActivity() {
             DataBindingUtil.setContentView<ActivityMainBinding?>(this, R.layout.activity_main)
                 .apply {
                     lifecycleOwner = this@MainActivity
-                    mainConstraintLayout.applyWindowsPadding()
+                    root.applyWindowsPadding()
                     setSupportActionBar(mainToolbar).apply {
                         title = null
                     }
+                    setStatusBarColorAndStyle(getCompatColor(R.color.colorWhite))
                     mainToolbar.setMenuColor(R.color.colorBlack)
                 }
-        setStatusBarColor(getCompatColor(R.color.colorWhite))
         mNavController =
             (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
         mAppBarConfiguration = AppBarConfiguration(mNavController.graph)
