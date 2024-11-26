@@ -23,6 +23,8 @@ MyShoe Collection is an app designed to help users catalog and bookmark their fa
 - [Project Rubric](https://docs.google.com/document/d/1n1vvMoQ_cv2E9NDcej7WDQMTqsY096dTPyh7Alkb1_0/edit?usp=sharing): View the project rubric.
 - [Android Kotlin Developer Nanodegree Program](https://www.udacity.com/course/android-kotlin-developer-nanodegree--nd940): Learn more about the full program and its related projects.
 
+#### **Note**: Many improvements and features in this project are not included in the Project Rubric as it was initially a project for the Udacity Nanodegree Program.
+
 ## Installation Guide
 
 This project does not require any special installation setup. Follow these steps:
