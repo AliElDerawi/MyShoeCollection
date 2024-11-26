@@ -10,7 +10,7 @@ MyShoe Collection is an app designed to help users catalog and bookmark their fa
 - **SharedViewModel for State Management**: Allows users to create their own bookmarked shoe list and saves data inside SharedViewModel.
 - **Orientation Support**: Supports landscape and portrait modes without data loss or reloading, ensuring a seamless user experience.
 - **Simplified Layouts**: Implements simplified layouts using ConstraintLayout, LinearLayout, or FrameLayout to maintain a consistent UI.
-- **Reactive UI with DataBindingAdapter**: Integrates DataBindingAdapter for reactive and clean UI components.
+- **Reactive UI**: Integrates DataBindingAdapter for reactive and clean UI components.
 - **Dependency Injection with Koin**: Implements Koin for effective dependency management, improving code maintainability.
 - **Dynamic Forms using Kotlin Flow**: Uses Kotlin Flow for dynamic filling forms, enabling responsive and interactive UIs.
 - **Single Activity Architecture**: Features a single activity with multiple fragments to ensure modular navigation and state retention.
