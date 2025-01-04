@@ -40,6 +40,10 @@ jobs:
           restore-keys: |
             gradle-
 
+      # Step 5: Grant executable permissions to the gradlew script
+      - name: Grant execute permission for Gradlew
+        run: chmod +x ./gradlew
+
       # Step 5: Build the project
       - name: Build with Gradle
         run: ./gradlew assembleDebug
