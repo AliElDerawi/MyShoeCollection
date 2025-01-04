@@ -1,4 +1,4 @@
-# MyShoe Collection
+# MyShoe Collection [![Build Status][ci-image]][ci]
 
 MyShoe Collection is an app designed to help users catalog and bookmark their favorite shoes, providing a simple and organized way to save and manage a personalized shoe collection. Managing personal shoe collections can be cumbersome, especially for shoe enthusiasts. MyShoe Collection simplifies this process by offering a centralized platform for managing and viewing shoes efficiently. This project is part of the **Udacity Android Kotlin Developer Nanodegree Program**.
 
@@ -107,3 +107,6 @@ Check my **[GitHub profile](https://github.com/AliElDerawi)**.
 ## License
 
 This project is open-source and licensed under the Apache 2.0 License. The LICENSE file in this repository provides more details.
+
+[ci-image]: https://img.shields.io/github/actions/workflow/status/AliElDerawi/MyShoeCollection/android-kotlin-ci.yml?branch=master&label=Build%20Status&logo=github
+[ci]: https://github.com/AliElDerawi/MyShoeCollection/actions?query=workflow%3ABuild+branch%3Amaster
