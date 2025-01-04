@@ -25,9 +25,6 @@ jobs:
       # Step 3: Set up Android SDK
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
-        with:
-          api-level: 35
-          build-tools: '35.0.0'
 
       # Step 4: Cache Gradle dependencies
       - name: Cache Gradle dependencies
