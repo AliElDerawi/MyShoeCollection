@@ -33,7 +33,7 @@
                 android:lineSpacingMultiplier="0.7"
                 android:paddingStart="@dimen/margin_btnView"
                 android:paddingEnd="@dimen/margin_btnView"
-                android:text="@{shoeDetailViewModel.instructionMessage}"
+                android:text="@{shoeDetailViewModel.instructionMessageLiveData}"
                 android:textColor="@color/colorDark31"
                 android:theme="@style/BodyStyle"
                 app:layout_constraintEnd_toEndOf="parent"

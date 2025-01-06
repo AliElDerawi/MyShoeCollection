@@ -22,7 +22,7 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
         get() = _lastPageStateFlow
 
     private var _goNextScreenSingleLiveEvent = SingleLiveEvent<Boolean>()
-    val goNextScreenSingleLiveData: LiveData<Boolean>
+    val goNextScreenSingleLiveEvent: LiveData<Boolean>
         get() = _goNextScreenSingleLiveEvent
 
     private var _instructionListStateFlow = MutableStateFlow<MutableList<InstructionModel>>(mutableListOf())
