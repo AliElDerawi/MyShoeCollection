@@ -31,6 +31,7 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
 
     init {
         _instructionListStateFlow.value.addAll(app.getInstruction())
+        setLastPage(instructionListStateFlow.value.size - 1)
     }
 
     private fun incrementPage() {
