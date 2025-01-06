@@ -10,7 +10,7 @@ data class ShoeModel(
     var size: Double,
     var company: String,
     var description: String,
-    val images: List<String> = mutableListOf()
+    var images: List<String> = mutableListOf()
 ) : Parcelable {
 
     companion object{
