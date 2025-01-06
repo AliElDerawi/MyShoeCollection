@@ -5,7 +5,7 @@ import com.udacity.shoestore.data.GenericModelCallBack
 data class InstructionModel(
     val title: String,
     val description: String,
-    var drawable: Int
+    val drawable: Int
 ) {
 
     companion object{

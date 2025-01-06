@@ -33,30 +33,20 @@ object AppSharedMethods {
 
     private var mToast: Toast? = null
 
-    fun Activity.showToast(message: String, duration: Int = Toast.LENGTH_LONG) {
-        mToast?.cancel()
-        mToast = Toast.makeText(ShoeStoreApp.getApp().applicationContext, message, duration)
-        mToast!!.show()
-    }
-
     fun showToast(message: String, duration: Int = Toast.LENGTH_LONG) {
         mToast?.cancel()
         mToast = Toast.makeText(ShoeStoreApp.getApp().applicationContext, message, duration)
         mToast!!.show()
     }
 
-    fun showToast(message: Int, duration: Int = Toast.LENGTH_LONG) {
+    fun Activity.showToast(message: Int, duration: Int = Toast.LENGTH_LONG) {
         mToast?.cancel()
-        mToast = Toast.makeText(ShoeStoreApp.getApp().applicationContext, message, duration)
+        mToast = Toast.makeText(ShoeStoreApp.getApp().applicationContext, getString(message), duration)
         mToast!!.show()
     }
 
     fun EditText.isEmpty(): Boolean {
         return this.text.toString().isEmpty()
-    }
-
-    fun EditText.isValidEmail(): Boolean {
-        return !this.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(this.text.toString()).matches()
     }
 
     fun String.isValidEmail(): Boolean {
@@ -251,7 +241,7 @@ object AppSharedMethods {
     fun NavController.validateStartDestination(){
         val navGraph = navInflater.inflate(R.navigation.main_navigation).apply {
             setStartDestination(
-                if (AppSharedMethods.isLogin()) {
+                if (isLogin()) {
                     R.id.shoesListFragment
                 } else {
                     R.id.loginFragment
