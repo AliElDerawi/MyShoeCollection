@@ -34,15 +34,15 @@ class ShoeDetailViewModel(val app: Application) : BaseViewModel(app) {
         get() = _shoeDescriptionStateFlow
 
     private var _onProcessSaveShoeSingleLiveEvent = SingleLiveEvent<ShoeModel>()
-    val onProcessSaveShoeLiveData: LiveData<ShoeModel>
+    val onProcessSaveShoeSingleLiveEvent: LiveData<ShoeModel>
         get() = _onProcessSaveShoeSingleLiveEvent
 
     private var _onCancelClickSingleLiveEvent = SingleLiveEvent<Boolean>()
-    val onCancelClickMutableLiveData: LiveData<Boolean>
+    val onCancelClickSingleLiveEvent: LiveData<Boolean>
         get() = _onCancelClickSingleLiveEvent
 
     private var _instructionMessageLiveData = MutableLiveData<String>(app.getString(R.string.text_add_shoe_message))
-    val instructionMessage: LiveData<String>
+    val instructionMessageLiveData: LiveData<String>
         get() = _instructionMessageLiveData
 
     init {

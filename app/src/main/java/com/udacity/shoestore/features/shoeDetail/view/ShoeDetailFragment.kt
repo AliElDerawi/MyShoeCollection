@@ -10,14 +10,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseFragment
 import com.udacity.shoestore.data.NavigationCommand
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.shoeDetail.viewModel.ShoeDetailViewModel
-import com.udacity.shoestore.utils.AppSharedMethods.getCompatColor
-import com.udacity.shoestore.utils.AppSharedMethods.getCompatColorStateList
 import com.udacity.shoestore.utils.AppSharedMethods.setButtonStyle
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -62,14 +59,14 @@ class ShoeDetailFragment : BaseFragment() {
 
     private fun initViewModelObserver() {
         with(mViewModel) {
-            onProcessSaveShoeLiveData.observe(mLifecycleOwner) {
+            onProcessSaveShoeSingleLiveEvent.observe(mLifecycleOwner) {
                 it?.let {
                     mSharedViewModel.addShoe(it)
                     mSharedViewModel.navigationCommand.value = NavigationCommand.Back
                 }
             }
 
-            onCancelClickMutableLiveData.observe(mLifecycleOwner) {
+            onCancelClickSingleLiveEvent.observe(mLifecycleOwner) {
                 if (it) {
                     mSharedViewModel.navigationCommand.value = NavigationCommand.Back
                 }

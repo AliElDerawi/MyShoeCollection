@@ -76,7 +76,7 @@ class InstructionsFragment : BaseFragment() {
                 }
             }
 
-            goNextScreenSingleLiveData.observe(mLifecycleOwner) {
+            goNextScreenSingleLiveEvent.observe(mLifecycleOwner) {
                 if (it) {
                     mSharedViewModel.apply {
                         updateNewUserValidation(false)
