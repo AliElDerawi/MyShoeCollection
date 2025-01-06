@@ -18,6 +18,7 @@ import com.udacity.shoestore.utils.AppSharedMethods.applyWindowsPadding
 import com.udacity.shoestore.utils.AppSharedMethods.getCompatColor
 import com.udacity.shoestore.utils.AppSharedMethods.setMenuColor
 import com.udacity.shoestore.utils.AppSharedMethods.setStatusBarColorAndStyle
+import com.udacity.shoestore.utils.AppSharedMethods.validateStartDestination
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -47,16 +48,7 @@ class MainActivity : AppCompatActivity() {
         mAppBarConfiguration = AppBarConfiguration(mNavController.graph)
 
         if (savedInstanceState == null) {
-            val navGraph = mNavController.navInflater.inflate(R.navigation.main_navigation).apply {
-                setStartDestination(
-                    if (AppSharedMethods.isLogin()) {
-                        R.id.shoesListFragment
-                    } else {
-                        R.id.loginFragment
-                    }
-                )
-            }
-            mNavController.graph = navGraph
+            mNavController.validateStartDestination()
         }
 
         initViewModelObservers()

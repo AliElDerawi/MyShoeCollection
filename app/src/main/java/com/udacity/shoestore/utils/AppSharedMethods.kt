@@ -1,6 +1,5 @@
 package com.udacity.shoestore.utils
 
-import android.app.ActionBar
 import android.app.Activity
 import android.app.Application
 import android.content.Context
@@ -11,23 +10,18 @@ import android.os.Build
 import android.util.Patterns
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.view.WindowInsets
 import android.view.WindowInsetsController
-import android.view.WindowManager
-import android.widget.Button
 import android.widget.EditText
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.NavController
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.bumptech.glide.Glide
@@ -254,5 +248,17 @@ object AppSharedMethods {
         overflowIcon?.setTint(context.getCompatColor(color))
     }
 
+    fun NavController.validateStartDestination(){
+        val navGraph = navInflater.inflate(R.navigation.main_navigation).apply {
+            setStartDestination(
+                if (AppSharedMethods.isLogin()) {
+                    R.id.shoesListFragment
+                } else {
+                    R.id.loginFragment
+                }
+            )
+        }
+        graph = navGraph
+    }
 
 }
