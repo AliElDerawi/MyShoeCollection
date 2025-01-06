@@ -43,9 +43,6 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
     }
 
     fun onPageChange(position: Int) {
-        if (position == 0 && currentPageLiveData.value != -1) {
-            return
-        }
         Timber.d("onPageChange: $position")
         _currentPageLiveData.value = position
     }
