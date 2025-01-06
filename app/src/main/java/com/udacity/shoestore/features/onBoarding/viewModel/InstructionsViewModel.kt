@@ -22,7 +22,7 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
         get() = _lastPageStateFlow
 
     private var _goNextScreenSingleLiveEvent = SingleLiveEvent<Boolean>()
-    val goNextScreenLiveData: LiveData<Boolean>
+    val goNextScreenSingleLiveData: LiveData<Boolean>
         get() = _goNextScreenSingleLiveEvent
 
     private var _instructionListStateFlow = MutableStateFlow<MutableList<InstructionModel>>(mutableListOf())
@@ -31,6 +31,7 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
 
     init {
         _instructionListStateFlow.value.addAll(app.getInstruction())
+        setLastPage(instructionListStateFlow.value.size - 1)
     }
 
     private fun incrementPage() {
@@ -42,9 +43,6 @@ class InstructionsViewModel(val app: Application) : BaseViewModel(app) {
     }
 
     fun onPageChange(position: Int) {
-        if (position == 0 && currentPageLiveData.value != -1) {
-            return
-        }
         Timber.d("onPageChange: $position")
         _currentPageLiveData.value = position
     }

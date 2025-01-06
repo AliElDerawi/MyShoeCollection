@@ -58,12 +58,10 @@ class InstructionsFragment : BaseFragment() {
 
     private fun initViewPager() {
 
-        with(mBinding) {
-            boardingViewPager.adapter = OnBoardingAdapter(InstructionModel.getInstructionCallBack())
-            mViewModel.setLastPage(mViewModel.instructionListStateFlow.value.size - 1)
-        }
-
+        mBinding.boardingViewPager.adapter =
+            OnBoardingAdapter(InstructionModel.getInstructionCallBack())
         initBoardingViewPagerListener()
+
     }
 
 
@@ -78,7 +76,7 @@ class InstructionsFragment : BaseFragment() {
                 }
             }
 
-            goNextScreenLiveData.observe(mLifecycleOwner) {
+            goNextScreenSingleLiveData.observe(mLifecycleOwner) {
                 if (it) {
                     mSharedViewModel.apply {
                         updateNewUserValidation(false)
@@ -97,7 +95,7 @@ class InstructionsFragment : BaseFragment() {
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                    mViewModel.onPageChange(position)
+                mViewModel.onPageChange(position)
             }
         })
     }
