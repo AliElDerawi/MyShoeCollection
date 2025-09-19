@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import com.udacity.shoestore.data.BaseFragment
 import com.udacity.shoestore.databinding.FragmentPlaceholderBinding
 import com.udacity.shoestore.features.main.viewModel.MainViewModel
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class PlaceHolderFragment : BaseFragment() {
-    override val mViewModel: MainViewModel by inject()
+    override val mViewModel: MainViewModel by activityViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

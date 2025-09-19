@@ -16,7 +16,7 @@ import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.onBoarding.adapter.OnBoardingAdapter
 import com.udacity.shoestore.features.onBoarding.viewModel.InstructionsViewModel
 import com.udacity.shoestore.models.InstructionModel
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -24,7 +24,7 @@ import timber.log.Timber
 class InstructionsFragment : BaseFragment() {
 
     private lateinit var mBinding: FragmentInstructionsBinding
-    private val mSharedViewModel: MainViewModel by inject()
+    private val mSharedViewModel: MainViewModel by activityViewModel()
     override val mViewModel: InstructionsViewModel by viewModel()
     private lateinit var mActivity: FragmentActivity
     private lateinit var mLifecycleOwner: LifecycleOwner

@@ -17,14 +17,14 @@ import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.shoeDetail.viewModel.ShoeDetailViewModel
 import com.udacity.shoestore.utils.AppSharedMethods.setButtonStyle
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ShoeDetailFragment : BaseFragment() {
 
     private lateinit var mBinding: FragmentShoeDetailBinding
-    private val mSharedViewModel: MainViewModel by inject()
+    private val mSharedViewModel: MainViewModel by activityViewModel()
     override val mViewModel: ShoeDetailViewModel by viewModel()
     private lateinit var mActivity: FragmentActivity
     private lateinit var mLifecycleOwner: LifecycleOwner

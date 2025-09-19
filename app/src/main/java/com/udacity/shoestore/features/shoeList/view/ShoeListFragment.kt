@@ -8,14 +8,11 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.edit
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.R
 import com.udacity.shoestore.data.BaseFragment
 import com.udacity.shoestore.data.NavigationCommand
@@ -24,16 +21,14 @@ import com.udacity.shoestore.features.main.viewModel.MainViewModel
 import com.udacity.shoestore.features.shoeList.adapter.ItemBookmarkShoeAdapter
 import com.udacity.shoestore.features.shoeList.viewModel.ShoeListViewModel
 import com.udacity.shoestore.models.ShoeModel
-import com.udacity.shoestore.utils.AppSharedData
-import com.udacity.shoestore.utils.AppSharedMethods.getSharedPreference
 import com.udacity.shoestore.utils.AppSharedMethods.setLoginStatus
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ShoeListFragment : BaseFragment() {
 
     private lateinit var mBinding: FragmentShoeListBinding
-    private val mSharedViewModel: MainViewModel by inject()
+    private val mSharedViewModel: MainViewModel by activityViewModel()
     override val mViewModel: ShoeListViewModel by viewModel()
     private lateinit var mActivity: FragmentActivity
     private lateinit var mLifecycleOwner: LifecycleOwner
