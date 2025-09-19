@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace 'com.udacity.shoestore'
-    compileSdk 35
+    compileSdkVersion 35
 
     defaultConfig {
         applicationId "com.udacity.shoestore"
