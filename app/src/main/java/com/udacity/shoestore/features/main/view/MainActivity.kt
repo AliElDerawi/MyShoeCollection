@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         mBinding =
-            DataBindingUtil.setContentView<ActivityMainBinding?>(this, R.layout.activity_main)
+            DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
                 .apply {
                     lifecycleOwner = this@MainActivity
                     root.applyWindowsPadding()
