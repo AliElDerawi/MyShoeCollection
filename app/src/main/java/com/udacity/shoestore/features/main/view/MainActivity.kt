@@ -19,12 +19,13 @@ import com.udacity.shoestore.utils.AppSharedMethods.getCompatColor
 import com.udacity.shoestore.utils.AppSharedMethods.setMenuColor
 import com.udacity.shoestore.utils.AppSharedMethods.setStatusBarColorAndStyle
 import com.udacity.shoestore.utils.AppSharedMethods.validateStartDestination
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import kotlin.getValue
 
 class MainActivity : AppCompatActivity() {
 
-    private val mMainViewModel: MainViewModel by inject()
+    private val mMainViewModel: MainViewModel by viewModel()
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mNavController: NavController
     private lateinit var mAppBarConfiguration: AppBarConfiguration
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         mBinding =
-            DataBindingUtil.setContentView<ActivityMainBinding?>(this, R.layout.activity_main)
+            DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
                 .apply {
                     lifecycleOwner = this@MainActivity
                     root.applyWindowsPadding()

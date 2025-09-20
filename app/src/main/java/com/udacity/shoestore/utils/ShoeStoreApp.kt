@@ -48,7 +48,7 @@ class ShoeStoreApp : MultiDexApplication() {
             viewModelOf(::ShoeDetailViewModel)
             viewModelOf(::WelcomeViewModel)
             viewModelOf(::ShoeListViewModel)
-            singleOf(::MainViewModel)
+            viewModelOf(::MainViewModel)
         }
 
         startKoin {
