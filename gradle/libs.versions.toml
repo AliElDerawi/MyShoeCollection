@@ -1,6 +1,6 @@
 [versions]
 kotlinVersion = '2.2.20'
-glideVersion = '4.15.1'
+glideVersion = '5.0.5'
 koinVersion = '4.0.0'
 coreVersion = '1.16.0'
 appCompatVersion = '1.7.1'
